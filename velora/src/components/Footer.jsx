@@ -32,58 +32,58 @@ export default function Footer() {
           <div className="footer__brand">
             <Brand light />
             <p className="footer__mission">
-              A premium FiveM roleplay city — built for stories, run by the people who play in it.
+              یک شهر رول‌پلی حرفه‌ای فایوام — ساخته‌شده برای داستان، اداره‌شده به دست همان کسانی که در آن بازی می‌کنند.
             </p>
             <div className="footer__socials">
-              <a href="https://discord.gg/riaroleplay" target="_blank" rel="noreferrer" aria-label="Discord">
+              <a href="https://discord.gg/riaroleplay" target="_blank" rel="noreferrer" aria-label="دیسکورد">
                 <MessageCircle size={16} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube">
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="یوتیوب">
                 <Youtube size={16} />
               </a>
-              <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok">
+              <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="تیک‌تاک">
                 <Music2 size={16} />
               </a>
             </div>
           </div>
 
           <div>
-            <p className="footer__title">Categories</p>
+            <p className="footer__title">دسته‌بندی‌ها</p>
             <div className="footer__links">
-              <Link to="/listings?type=Careers">Careers</Link>
-              <Link to="/listings?type=Businesses">Businesses</Link>
-              <Link to="/listings?type=Vehicles">Vehicles</Link>
-              <Link to="/listings?type=Crime%20%26%20Heists">Crime &amp; Heists</Link>
-              <Link to="/store">RIA Roleplay Store</Link>
+              <Link to="/listings?type=Careers">مشاغل</Link>
+              <Link to="/listings?type=Businesses">کسب‌وکارها</Link>
+              <Link to="/listings?type=Vehicles">خودروها</Link>
+              <Link to="/listings?type=Crime%20%26%20Heists">جرم و سرقت</Link>
+              <Link to="/store">فروشگاه ریا رول‌پلی</Link>
             </div>
           </div>
 
           <div>
-            <p className="footer__title">Quick Links</p>
+            <p className="footer__title">دسترسی سریع</p>
             <div className="footer__links">
-              <Link to="/">Home</Link>
-              <Link to="/listings">Features</Link>
-              <Link to="/projects">Roadmap</Link>
-              <Link to="/agents">Staff</Link>
-              <Link to="/about">About</Link>
-              <Link to="/contact">Contact</Link>
+              <Link to="/">خانه</Link>
+              <Link to="/listings">امکانات</Link>
+              <Link to="/projects">نقشه راه</Link>
+              <Link to="/agents">تیم مدیریت</Link>
+              <Link to="/about">درباره ما</Link>
+              <Link to="/contact">تماس</Link>
             </div>
           </div>
 
           <div className="footer__news">
-            <p className="footer__title">Stay Informed</p>
-            <p>Server news, patch notes and event announcements, once a month.</p>
+            <p className="footer__title">با ما به‌روز بمانید</p>
+            <p>خبرهای سرور، یادداشت به‌روزرسانی‌ها و اعلان رویدادها، ماهی یک بار.</p>
             <form className="footer__subscribe" onSubmit={subscribe}>
               <input
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="Your email address"
-                aria-label="Email address"
+                placeholder="نشانی ایمیل شما"
+                aria-label="نشانی ایمیل"
                 required
               />
               <button type="submit" disabled={busy}>
-                {busy ? '…' : 'Subscribe'}
+                {busy ? '…' : 'عضویت'}
               </button>
             </form>
             <ul className="footer__contact">
@@ -99,7 +99,7 @@ export default function Footer() {
               <li>
                 <ArrowUpRight size={14} style={{ marginTop: 4 }} />
                 <Link to="/book-visit" style={{ borderBottom: '1px solid rgba(247,245,237,.3)' }}>
-                  Apply for whitelist
+                  درخواست وایت‌لیست
                 </Link>
               </li>
             </ul>
@@ -107,11 +107,11 @@ export default function Footer() {
         </div>
 
         <div className="footer__legal">
-          <span>© {new Date().getFullYear()} Ria Roleplay. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} ریا رول‌پلی. تمامی حقوق محفوظ است.</span>
           <div className="footer__legal-links">
-            <Link to="/legal/privacy">Privacy Policy</Link>
-            <Link to="/legal/terms">Terms &amp; Conditions</Link>
-            <Link to="/legal/tebex">Store &amp; Payment Terms</Link>
+            <Link to="/legal/privacy">سیاست حفظ حریم خصوصی</Link>
+            <Link to="/legal/terms">قوانین و شرایط</Link>
+            <Link to="/legal/tebex">قوانین فروشگاه و پرداخت</Link>
           </div>
         </div>
       </div>

@@ -8,16 +8,14 @@ export default function NotFound() {
         <span className="empty-state__icon">
           <Compass size={22} />
         </span>
-        <h3>This address does not exist</h3>
-        <p>
-          The page you are looking for has moved or was never here. The city, however, is very much open.
-        </p>
+        <h3>این نشانی وجود ندارد</h3>
+        <p>صفحه‌ای که دنبالش هستید جابه‌جا شده یا هرگز اینجا نبوده است. اما شهر کاملاً باز است.</p>
         <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link to="/" className="btn btn--sm">
-            Return home
+            بازگشت به خانه
           </Link>
           <Link to="/listings" className="btn btn--outline btn--sm">
-            Browse features
+            مرور امکانات
           </Link>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function Favorites() {
       <div className="shell">
         <div className="loading-row">
           <span className="loading-row__bar" />
-          Loading your list
+          در حال بارگذاری فهرست شما
         </div>
       </div>
     );
@@ -30,16 +30,16 @@ export default function Favorites() {
       <div className="page-head">
         <div className="shell page-head__inner">
           <div>
-            <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Saved features</span>
+            <nav className="crumbs" aria-label="مسیر صفحه">
+              <Link to="/">خانه</Link> <span>/</span> <span>امکانات ذخیره‌شده</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Saved Features</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>امکانات ذخیره‌شده</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              A private list, visible only to you. {ids.length} feature{ids.length === 1 ? '' : 's'} saved.
+              فهرستی خصوصی، تنها برای شما. {ids.length} امکان ذخیره شده است.
             </p>
           </div>
           <Link to="/listings" className="btn btn--outline">
-            Browse the city
+            مرور شهر
           </Link>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function Favorites() {
         {loadingProperties && (
           <div className="loading-row">
             <span className="loading-row__bar" />
-            Loading features
+            در حال بارگذاری امکانات
           </div>
         )}
 
@@ -57,10 +57,10 @@ export default function Favorites() {
             <span className="empty-state__icon">
               <Heart size={20} />
             </span>
-            <h3>Nothing saved yet</h3>
-            <p>Tap the heart on any feature to keep it here for later.</p>
+            <h3>هنوز چیزی ذخیره نکرده‌اید</h3>
+            <p>با زدن قلب روی هر امکان، آن را برای بعد اینجا نگه دارید.</p>
             <Link to="/listings" className="btn btn--sm">
-              Explore features
+              مرور امکانات
             </Link>
           </div>
         )}

@@ -2,75 +2,75 @@ import { Link, useParams } from 'react-router-dom';
 
 const CONTENT = {
   privacy: {
-    title: 'Privacy Policy',
+    title: 'سیاست حفظ حریم خصوصی',
     intro:
-      'Ria Roleplay collects only the information required to answer a ticket, review a whitelist application or deliver a store purchase. This policy explains what we hold and why.',
+      'ریا رول‌پلی تنها اطلاعاتی را جمع‌آوری می‌کند که برای پاسخ به تیکت، بررسی درخواست وایت‌لیست یا تحویل خرید فروشگاه لازم است. این سیاست توضیح می‌دهد چه اطلاعاتی نگه می‌داریم و چرا.',
     sections: [
       {
-        heading: 'What we collect',
-        body: 'Name, email address, telephone or Discord handle and the features you have saved or applied for. For RIA ROLEPLAY store purchases we also hold your FiveM identifier, so that entitlements can be delivered to the correct player.',
+        heading: 'چه اطلاعاتی جمع‌آوری می‌کنیم',
+        body: 'نام، نشانی ایمیل، شماره تماس یا نام کاربری دیسکورد و امکاناتی که ذخیره کرده یا برای آن درخواست داده‌اید. برای خریدهای فروشگاه ریا رول‌پلی، شناسه فایوام شما را هم نگه می‌داریم تا مزایا به بازیکن درست تحویل داده شود.',
       },
       {
-        heading: 'How it is used',
-        body: 'To respond to enquiries, schedule whitelist interviews, keep a private list for your account, and — for store purchases — to deliver the package you bought and to keep a transaction record. We do not sell your data.',
+        heading: 'این اطلاعات چگونه استفاده می‌شود',
+        body: 'برای پاسخ به پرسش‌ها، هماهنگی مصاحبه وایت‌لیست، نگه‌داشتن فهرست خصوصی حساب شما و — در مورد خریدهای فروشگاه — تحویل پکیجی که خریده‌اید و نگه‌داشتن سابقه تراکنش. ما داده‌های شما را نمی‌فروشیم.',
       },
       {
-        heading: 'Payments',
-        body: 'Payments for RIA ROLEPLAY packages are processed entirely by Tebex. Card details are entered on Tebex’s hosted checkout and are never transmitted to, or stored by, this website.',
+        heading: 'پرداخت‌ها',
+        body: 'پرداخت پکیج‌های ریا رول‌پلی به‌طور کامل توسط Tebex انجام می‌شود. اطلاعات کارت در صفحه میزبانی‌شده Tebex وارد می‌شود و هرگز به این وب‌سایت ارسال یا در آن ذخیره نمی‌گردد.',
       },
       {
-        heading: 'Your rights',
-        body: 'You may request a copy of the data held about you, ask for it to be corrected, or ask for your account to be deleted. Write to support@riaroleplay.com and we will respond within 30 days.',
+        heading: 'حقوق شما',
+        body: 'می‌توانید نسخه‌ای از داده‌های نگه‌داری‌شده درباره خود را درخواست کنید، اصلاح آن را بخواهید یا حذف حساب خود را تقاضا کنید. به نشانی support@riaroleplay.com بنویسید تا حداکثر تا ۳۰ روز پاسخ دهیم.',
       },
     ],
   },
   terms: {
-    title: 'Terms & Conditions',
+    title: 'قوانین و شرایط',
     intro:
-      'These terms govern use of this website, the Ria Roleplay FiveM server and the community services offered here.',
+      'این قوانین استفاده از این وب‌سایت، سرور فایوام ریا رول‌پلی و خدمات انجمنی ارائه‌شده در آن را مشخص می‌کند.',
     sections: [
       {
-        heading: 'Server information',
-        body: 'Feature descriptions, payouts, session lengths and availability are provided in good faith for guidance. Systems change between updates and nothing on this site constitutes a guarantee of access, earnings or uptime.',
+        heading: 'اطلاعات سرور',
+        body: 'توضیح امکانات، درآمدها، مدت سشن‌ها و دسترسی‌ها با حسن نیت و برای راهنمایی ارائه شده‌اند. سیستم‌ها بین به‌روزرسانی‌ها تغییر می‌کنند و هیچ بخشی از این سایت تضمینی برای دسترسی، درآمد یا آپ‌تایم نیست.',
       },
       {
-        heading: 'Whitelist applications',
-        body: 'Applications are reviewed by staff and followed by a voice interview. A submitted application is not confirmation of whitelist, and access may be withheld or withdrawn under the community rules.',
+        heading: 'درخواست‌های وایت‌لیست',
+        body: 'درخواست‌ها توسط تیم بررسی و پس از آن یک مصاحبه صوتی انجام می‌شود. ثبت درخواست به معنای تأیید وایت‌لیست نیست و دسترسی می‌تواند بر اساس قوانین انجمن داده نشود یا لغو شود.',
       },
       {
-        heading: 'Accounts',
-        body: 'You are responsible for keeping your account credentials confidential. Saved features and application history are private to your account.',
+        heading: 'حساب‌های کاربری',
+        body: 'شما مسئول محرمانه نگه‌داشتن اطلاعات ورود خود هستید. امکانات ذخیره‌شده و سابقه درخواست‌ها خصوصی و متعلق به حساب شماست.',
       },
       {
-        heading: 'Liability',
-        body: 'Nothing on this site constitutes legal or financial advice. Server access is a licence to play under the community rules and can be withdrawn independently of any purchase.',
+        heading: 'مسئولیت',
+        body: 'هیچ بخشی از این سایت مشاوره حقوقی یا مالی محسوب نمی‌شود. دسترسی به سرور مجوزی برای بازی تحت قوانین انجمن است و می‌تواند مستقل از هر خریدی لغو شود.',
       },
     ],
   },
   tebex: {
-    title: 'Store & Payment Terms',
+    title: 'قوانین فروشگاه و پرداخت',
     intro:
-      'The RIA ROLEPLAY store sells memberships, priority access and cosmetic packages for a FiveM community. All real-money payments are processed by Tebex as the authorised payment provider.',
+      'فروشگاه ریا رول‌پلی عضویت‌ها، دسترسی اولویت‌دار و پکیج‌های ظاهری را برای یک انجمن فایوام عرضه می‌کند. همه پرداخت‌های واقعی توسط Tebex به‌عنوان ارائه‌دهنده مجاز پرداخت انجام می‌شود.',
     sections: [
       {
-        heading: 'Authorised payment provider',
-        body: 'Checkout is hosted by Tebex. We never collect, see or store card details. Payment confirmation is only accepted after Tebex notifies our server and the transaction is re-verified server-side.',
+        heading: 'ارائه‌دهنده مجاز پرداخت',
+        body: 'تسویه حساب در صفحه میزبانی‌شده Tebex انجام می‌شود. ما هرگز اطلاعات کارت را جمع‌آوری، مشاهده یا ذخیره نمی‌کنیم. تأیید پرداخت تنها زمانی پذیرفته می‌شود که Tebex به سرور ما اطلاع دهد و تراکنش دوباره در سمت سرور بررسی شود.',
       },
       {
-        heading: 'What is sold',
-        body: 'Memberships, priority queue access, cosmetic items and community benefits only. We do not sell in-game currency, randomised rewards, loot boxes or gambling mechanics, and nothing purchased can be cashed out or transferred for real-world value.',
+        heading: 'چه چیزی فروخته می‌شود',
+        body: 'تنها عضویت، دسترسی اولویت‌دار به صف، اقلام ظاهری و مزایای انجمنی. ما ارز درون‌بازی، جایزه تصادفی، جعبه شانس یا مکانیک قمار نمی‌فروشیم و هیچ خریداری‌شده‌ای قابل نقد کردن یا تبدیل به ارزش واقعی نیست.',
       },
       {
-        heading: 'Delivery',
-        body: 'Packages are delivered automatically to the FiveM identifier supplied at checkout. If an automatic delivery fails it is recorded as pending and reviewed by an administrator, usually within 24 hours. Duplicate deliveries are prevented by a unique record per purchased line.',
+        heading: 'تحویل',
+        body: 'پکیج‌ها به‌صورت خودکار به شناسه فایوام ارائه‌شده در زمان پرداخت تحویل می‌شوند. اگر تحویل خودکار ناموفق باشد، به‌صورت «در انتظار» ثبت و توسط یک مدیر — معمولاً تا ۲۴ ساعت — بررسی می‌شود. تحویل تکراری با یک رکورد یکتا برای هر خط خریداری‌شده جلوگیری می‌شود.',
       },
       {
-        heading: 'Refunds and chargebacks',
-        body: 'Refund requests are handled under the Tebex Acceptable Use Policy. Because benefits are delivered instantly, refunds are considered case by case where a package has not been consumed. Fraudulent chargebacks result in entitlement removal and account suspension.',
+        heading: 'بازگشت وجه و برداشت وجه',
+        body: 'درخواست‌های بازگشت وجه بر اساس سیاست پذیرش استفاده Tebex بررسی می‌شود. چون مزایا فوراً تحویل می‌شوند، بازگشت وجه برای پکیجی که استفاده نشده باشد مورد به مورد بررسی می‌شود. برداشت وجه متقلبانه به حذف مزایا و تعلیق حساب منجر می‌شود.',
       },
       {
-        heading: 'Compliance',
-        body: 'Sales operate under the Cfx.re Platform License Agreement, the Rockstar Creator Platform License Agreement and the Tebex Acceptable Use Policy. Server access may be withdrawn for breaches of the community rules, independent of any purchase.',
+        heading: 'رعایت قوانین',
+        body: 'فروش تحت توافق‌نامه مجوز پلتفرم Cfx.re، توافق‌نامه مجوز پلتفرم سازندگان Rockstar و سیاست پذیرش استفاده Tebex انجام می‌شود. دسترسی به سرور می‌تواند در صورت نقض قوانین انجمن، مستقل از هر خریدی، لغو شود.',
       },
     ],
   },
@@ -82,8 +82,8 @@ export default function Legal() {
 
   return (
     <div className="shell legal-page">
-      <nav className="crumbs" aria-label="Breadcrumb">
-        <Link to="/">Home</Link> <span>/</span> <span>{page.title}</span>
+      <nav className="crumbs" aria-label="مسیر صفحه">
+        <Link to="/">خانه</Link> <span>/</span> <span>{page.title}</span>
       </nav>
       <h1 style={{ marginTop: '0.8rem' }}>{page.title}</h1>
       <p className="lede" style={{ marginTop: '0.8rem' }}>
@@ -96,7 +96,7 @@ export default function Legal() {
         </section>
       ))}
       <p className="form-note" style={{ marginTop: '2rem' }}>
-        Last updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}. Questions:{' '}
+        آخرین به‌روزرسانی {new Date().toLocaleDateString('fa-IR', { month: 'long', year: 'numeric' })}. پرسش‌ها:{' '}
         <a href="mailto:support@riaroleplay.com" style={{ color: 'var(--emerald)' }}>
           support@riaroleplay.com
         </a>

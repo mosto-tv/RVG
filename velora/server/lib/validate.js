@@ -22,7 +22,7 @@ export const toCents = (value) => {
 /** Collects field errors so the client can highlight each input. */
 export class ValidationError extends Error {
   constructor(fields) {
-    super('Please check the highlighted fields.');
+    super('لطفاً فیلدهای مشخص‌شده را بررسی کنید.');
     this.status = 422;
     this.code = 'VALIDATION_ERROR';
     this.fields = fields;

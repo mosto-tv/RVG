@@ -2,40 +2,44 @@ import { BadgeCheck, Headset, TrendingUp, Code2, Lock, Gem, ShieldCheck, KeyRoun
 
 export const VALUES = [
   {
-    title: 'Verified Community',
-    text: 'Every applicant is reviewed by hand, so the people you meet are here to roleplay — not to troll.',
+    title: 'انجمن تأیید‌شده',
+    text: 'هر متقاضی به‌صورت دستی بررسی می‌شود؛ پس آدم‌هایی که می‌بینید برای رول‌پلی آمده‌اند، نه برای خرابکاری.',
     icon: BadgeCheck,
   },
   {
-    title: 'Expert Staff',
-    text: 'An experienced team online across time zones, with clear escalation and real accountability.',
+    title: 'تیم متخصص',
+    text: 'تیمی باتجربه در همه مناطق زمانی آنلاین است، با مسیر مشخص برای پیگیری و پاسخگویی واقعی.',
     icon: Headset,
   },
   {
-    title: 'Balanced Economy',
-    text: 'Prices, wages and payouts tuned so a night of honest work still means something.',
+    title: 'اقتصاد متعادل',
+    text: 'قیمت‌ها، دستمزدها و درآمدها طوری تنظیم شده‌اند که یک شب کار صادقانه هم ارزش داشته باشد.',
     icon: TrendingUp,
   },
   {
-    title: 'Custom Scripts',
-    text: 'Purpose-built systems for jobs, businesses and crime — not a stock framework with a new logo.',
+    title: 'اسکریپت‌های اختصاصی',
+    text: 'سیستم‌هایی که از پایه برای این شهر نوشته شده‌اند — نه یک فریم‌ورک آماده با لوگوی عوض‌شده.',
     icon: Code2,
   },
   {
-    title: 'Secure & Monitored',
-    text: 'Anti-cheat, logging and active moderation on every session, around the clock.',
+    title: 'امن و پایش‌شده',
+    text: 'ضدتقلب، ثبت گزارش و نظارت فعال در هر سشن، در تمام ساعات شبانه‌روز.',
     icon: Lock,
   },
   {
-    title: 'Bespoke Roleplay',
-    text: 'Story-first design: fewer scripted set pieces, more room for the character you want to play.',
+    title: 'رول‌پلی سفارشی',
+    text: 'طراحی داستان‌محور: صحنه‌های از پیش نوشته‌شده کمتر، فضای بیشتر برای شخصیتی که می‌خواهید بازی کنید.',
     icon: Gem,
   },
 ];
 
 export const EXTRA_VALUES = [
-  { title: 'Fair Play', text: 'No pay-to-win. Store purchases never grant in-game advantage.', icon: ShieldCheck },
-  { title: 'Private Whitelist', text: 'Applications reviewed privately, with a direct line to staff.', icon: KeyRound },
+  {
+    title: 'بازی عادلانه',
+    text: 'بدون پرداخت برای برتری. خرید از فروشگاه هرگز مزیت درون‌بازی نمی‌دهد.',
+    icon: ShieldCheck,
+  },
+  { title: 'وایت‌لیست خصوصی', text: 'درخواست‌ها خصوصی بررسی می‌شوند، با خط ارتباطی مستقیم با تیم.', icon: KeyRound },
 ];
 
 export function ValueList({ items = VALUES }) {

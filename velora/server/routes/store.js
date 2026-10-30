@@ -61,7 +61,7 @@ storeRouter.get('/products', (req, res) => {
 storeRouter.get('/products/:slug', (req, res) => {
   const row = one('SELECT * FROM store_products WHERE slug = ?', req.params.slug);
   if (!row || !row.visible) {
-    return res.status(404).json({ error: 'That package is not available.', code: 'NOT_FOUND' });
+    return res.status(404).json({ error: 'این پکیج در دسترس نیست.', code: 'NOT_FOUND' });
   }
   res.json({ product: toProduct(row) });
 });
@@ -76,26 +76,26 @@ const publicOrder = (order) => {
 
 storeRouter.get('/orders/:reference', (req, res) => {
   const order = one('SELECT * FROM orders WHERE reference = ?', req.params.reference);
-  if (!order) return res.status(404).json({ error: 'Order not found.', code: 'NOT_FOUND' });
+  if (!order) return res.status(404).json({ error: 'سفارش پیدا نشد.', code: 'NOT_FOUND' });
 
   const token = String(req.query.token || req.headers['x-order-token'] || '');
   const isOwner = req.user && order.user_id === req.user.id;
   const isAdmin = req.user?.role === 'admin';
   if (!isOwner && !isAdmin && (!token || token !== order.access_token)) {
-    return res.status(403).json({ error: 'This order needs the checkout link it was created with.', code: 'FORBIDDEN' });
+    return res.status(403).json({ error: 'این سفارش نیازمند همان لینک تسویه‌ای است که با آن ساخته شده.', code: 'FORBIDDEN' });
   }
   res.json({ order: publicOrder(order) });
 });
 
 storeRouter.post('/orders/:reference/cancel', (req, res) => {
   const order = one('SELECT * FROM orders WHERE reference = ?', req.params.reference);
-  if (!order) return res.status(404).json({ error: 'Order not found.', code: 'NOT_FOUND' });
+  if (!order) return res.status(404).json({ error: 'سفارش پیدا نشد.', code: 'NOT_FOUND' });
   const token = String(req.body?.token || '');
   if (token !== order.access_token) {
-    return res.status(403).json({ error: 'Not permitted.', code: 'FORBIDDEN' });
+    return res.status(403).json({ error: 'مجاز نیست.', code: 'FORBIDDEN' });
   }
   if (order.status === 'paid') {
-    return res.status(409).json({ error: 'This order is already paid.', code: 'ALREADY_PAID' });
+    return res.status(409).json({ error: 'این سفارش قبلاً پرداخت شده است.', code: 'ALREADY_PAID' });
   }
   run("UPDATE orders SET status = 'cancelled' WHERE id = ?", order.id);
   res.json({ ok: true, status: 'cancelled' });
@@ -105,23 +105,23 @@ storeRouter.post('/checkout', async (req, res, next) => {
   try {
     const status = tebexStatus();
     const rawItems = Array.isArray(req.body?.items) ? req.body.items : [];
-    if (!rawItems.length) throw new ValidationError({ items: 'Select at least one package.' });
+    if (!rawItems.length) throw new ValidationError({ items: 'حداقل یک پکیج انتخاب کنید.' });
 
     const fields = {};
     const email = String(req.body?.email || req.user?.email || '')
       .trim()
       .toLowerCase();
     const playerIdentifier = String(req.body?.playerIdentifier || req.user?.fivem_id || '').trim();
-    if (!isEmail(email)) fields.email = 'Enter the email your Tebex receipt should go to.';
+    if (!isEmail(email)) fields.email = 'ایمیلی را وارد کنید که رسید Tebex به آن ارسال شود.';
     if (!isFiveMIdentifier(playerIdentifier)) {
-      fields.playerIdentifier = 'Enter your FiveM identifier, for example license:1a2b3c...';
+      fields.playerIdentifier = 'شناسه فایوام خود را وارد کنید، مثلاً license:1a2b3c...';
     }
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     const selected = [];
     for (const raw of rawItems) {
       const row = one('SELECT * FROM store_products WHERE slug = ? AND visible = 1', String(raw?.slug || ''));
-      if (!row) throw new ValidationError({ items: 'One of the selected packages is no longer available.' });
+      if (!row) throw new ValidationError({ items: 'یکی از پکیج‌های انتخاب‌شده دیگر موجود نیست.' });
       const quantity = Math.min(Math.max(Number.parseInt(raw?.quantity, 10) || 1, 1), 5);
       selected.push({ row, quantity, product: toProduct(row) });
     }
@@ -130,7 +130,7 @@ storeRouter.post('/checkout', async (req, res, next) => {
     // unconfigured store stops here instead of faking a checkout.
     if (!status.configured) {
       return res.status(503).json({
-        error: 'Tebex is not connected yet. The store administrator must add the RIA ROLEPLAY Tebex credentials.',
+        error: 'Tebex هنوز متصل نشده است. مدیر فروشگاه باید اطلاعات Tebex ریا رول‌پلی را اضافه کند.',
         code: 'TEBEX_NOT_CONFIGURED',
         missing: status.missing,
       });
@@ -139,7 +139,7 @@ storeRouter.post('/checkout', async (req, res, next) => {
     const unlinked = selected.filter(({ row }) => !row.tebex_package_id);
     if (unlinked.length) {
       return res.status(409).json({
-        error: 'Some packages are not linked to Tebex yet. Run a package synchronisation in the admin panel.',
+        error: 'برخی پکیج‌ها هنوز به Tebex متصل نشده‌اند. در پنل مدیریت همگام‌سازی پکیج‌ها را اجرا کنید.',
         code: 'PACKAGES_NOT_LINKED',
         packages: unlinked.map(({ product }) => product.name),
       });

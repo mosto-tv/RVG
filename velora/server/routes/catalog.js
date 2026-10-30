@@ -105,7 +105,7 @@ catalogRouter.get('/properties', (req, res) => {
 catalogRouter.get('/properties/:id', (req, res) => {
   const property = properties.find((p) => p.id === req.params.id);
   if (!property) {
-    return res.status(404).json({ error: 'That feature is not live right now.', code: 'NOT_FOUND' });
+    return res.status(404).json({ error: 'این امکان در حال حاضر فعال نیست.', code: 'NOT_FOUND' });
   }
   const related = properties
     .filter((p) => p.id !== property.id && (p.city === property.city || p.type === property.type))
@@ -132,7 +132,7 @@ catalogRouter.get('/projects', (req, res) => {
 
 catalogRouter.get('/projects/:slug', (req, res) => {
   const project = projects.find((p) => p.slug === req.params.slug);
-  if (!project) return res.status(404).json({ error: 'Project not found.', code: 'NOT_FOUND' });
+  if (!project) return res.status(404).json({ error: 'پروژه پیدا نشد.', code: 'NOT_FOUND' });
   res.json({ project });
 });
 

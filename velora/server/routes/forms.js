@@ -17,18 +17,18 @@ formsRouter.post('/bookings', (req, res, next) => {
     const time = clean(req.body?.time, 20);
     const message = clean(req.body?.message, 1200);
 
-    if (name.length < 2) fields.name = 'Please enter your full name.';
-    if (!isEmail(email)) fields.email = 'Enter a valid email address.';
-    if (phone.replace(/\D/g, '').length < 7) fields.phone = 'Enter a reachable phone number.';
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) fields.date = 'Choose a preferred date.';
-    if (!time) fields.time = 'Choose a preferred time.';
+    if (name.length < 2) fields.name = 'نام و نام خانوادگی خود را وارد کنید.';
+    if (!isEmail(email)) fields.email = 'یک نشانی ایمیل معتبر وارد کنید.';
+    if (phone.replace(/\D/g, '').length < 7) fields.phone = 'شماره‌ای وارد کنید که در دسترس باشد.';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) fields.date = 'تاریخ مورد نظر را انتخاب کنید.';
+    if (!time) fields.time = 'ساعت مورد نظر را انتخاب کنید.';
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     const chosen = new Date(`${date}T00:00:00`);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (Number.isNaN(chosen.getTime()) || chosen < today) {
-      throw new ValidationError({ date: 'Choose a date from today onward.' });
+      throw new ValidationError({ date: 'تاریخی از امروز به بعد انتخاب کنید.' });
     }
 
     const result = run(
@@ -48,7 +48,7 @@ formsRouter.post('/bookings', (req, res, next) => {
     res.status(201).json({
       ok: true,
       reference: `APP-${String(result.lastInsertRowid).padStart(5, '0')}`,
-      message: 'Your application has been received. Our staff team will confirm within one business day.',
+      message: 'درخواست شما دریافت شد. تیم مدیریت حداکثر تا یک روز کاری آن را تأیید می‌کند.',
     });
   } catch (err) {
     next(err);
@@ -64,9 +64,9 @@ formsRouter.post('/contact', (req, res, next) => {
     const subject = clean(req.body?.subject, 140);
     const message = clean(req.body?.message, 2000);
 
-    if (name.length < 2) fields.name = 'Please enter your name.';
-    if (!isEmail(email)) fields.email = 'Enter a valid email address.';
-    if (message.length < 12) fields.message = 'Tell us a little more (12 characters minimum).';
+    if (name.length < 2) fields.name = 'نام خود را وارد کنید.';
+    if (!isEmail(email)) fields.email = 'یک نشانی ایمیل معتبر وارد کنید.';
+    if (message.length < 12) fields.message = 'کمی بیشتر توضیح دهید (حداقل ۱۲ کاراکتر).';
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     run(
@@ -77,7 +77,7 @@ formsRouter.post('/contact', (req, res, next) => {
       subject || null,
       message,
     );
-    res.status(201).json({ ok: true, message: 'Thank you \u2014 your message has reached our staff team.' });
+    res.status(201).json({ ok: true, message: 'پیام شما دریافت شد و به تیم مدیریت رسید.' });
   } catch (err) {
     next(err);
   }
@@ -86,13 +86,13 @@ formsRouter.post('/contact', (req, res, next) => {
 formsRouter.post('/newsletter', (req, res, next) => {
   try {
     const email = clean(req.body?.email, 160).toLowerCase();
-    if (!isEmail(email)) throw new ValidationError({ email: 'Enter a valid email address.' });
+    if (!isEmail(email)) throw new ValidationError({ email: 'یک نشانی ایمیل معتبر وارد کنید.' });
     const existing = one('SELECT email FROM newsletter WHERE email = ?', email);
     if (existing) {
-      return res.json({ ok: true, alreadySubscribed: true, message: 'You are already on the list.' });
+      return res.json({ ok: true, alreadySubscribed: true, message: 'شما قبلاً در این فهرست ثبت شده‌اید.' });
     }
     run('INSERT INTO newsletter (email) VALUES (?)', email);
-    res.status(201).json({ ok: true, message: 'You are on the list. Server news arrives monthly.' });
+    res.status(201).json({ ok: true, message: 'ثبت شد. خبرهای سرور ماهانه ارسال می‌شود.' });
   } catch (err) {
     next(err);
   }
@@ -110,7 +110,7 @@ formsRouter.get('/favorites', requireAuth, (req, res) => {
 formsRouter.post('/favorites', requireAuth, (req, res, next) => {
   try {
     const propertyId = clean(req.body?.propertyId, 90);
-    if (!propertyId) throw new ValidationError({ propertyId: 'Missing property.' });
+    if (!propertyId) throw new ValidationError({ propertyId: 'امکان انتخاب نشده است.' });
     run('INSERT OR IGNORE INTO favorites (user_id, property_id) VALUES (?, ?)', req.user.id, propertyId);
     const ids = all('SELECT property_id FROM favorites WHERE user_id = ?', req.user.id).map((r) => r.property_id);
     res.status(201).json({ ids });

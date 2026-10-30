@@ -28,7 +28,7 @@ export default function Modal({ open, onClose, children, wide = false, panelClas
       }}
     >
       <div className={`modal__panel${wide ? ' modal__panel--wide' : ''}${panelClass ? ` ${panelClass}` : ''}`}>
-        <button className="modal__close" onClick={onClose} aria-label="Close">
+        <button className="modal__close" onClick={onClose} aria-label="بستن">
           <X size={17} />
         </button>
         {children}

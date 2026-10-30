@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Check, Plus, ShoppingBag } from 'lucide-react';
 import { money } from '../lib/api.js';
+import { storeCategoryLabel } from '../lib/labels.js';
 
 export default function ProductCard({ product, onOpen, onAdd }) {
   return (
@@ -9,7 +10,7 @@ export default function ProductCard({ product, onOpen, onAdd }) {
         type="button"
         className="product-card__media"
         onClick={() => onOpen(product)}
-        aria-label={`View ${product.name}`}
+        aria-label={`مشاهده ${product.name}`}
         data-cursor="view"
         style={{ border: 'none', padding: 0, cursor: 'pointer', background: 'none', display: 'block' }}
       >
@@ -23,7 +24,7 @@ export default function ProductCard({ product, onOpen, onAdd }) {
       </button>
 
       <div className="product-card__body">
-        <span className="product-card__category">{product.category}</span>
+        <span className="product-card__category">{storeCategoryLabel(product.category)}</span>
         <h3 className="product-card__name">{product.name}</h3>
         <p className="product-card__tagline">{product.tagline}</p>
 
@@ -41,12 +42,12 @@ export default function ProductCard({ product, onOpen, onAdd }) {
             {product.originalPriceCents ? (
               <span className="price--muted">{money(product.originalPriceCents, product.currency)}</span>
             ) : (
-              <span className="price__note">One-time · Tebex checkout</span>
+              <span className="price__note">پرداخت یک‌باره · تسویه از طریق Tebex</span>
             )}
           </div>
           <div className="product-card__actions">
             <button className="btn btn--sm btn--ria" onClick={() => onAdd(product)}>
-              <Plus size={13} /> Add
+              <Plus size={13} /> افزودن
             </button>
           </div>
         </div>
@@ -57,7 +58,7 @@ export default function ProductCard({ product, onOpen, onAdd }) {
           onClick={() => onOpen(product)}
           style={{ background: 'none', padding: 0, marginTop: '0.4rem' }}
         >
-          <ShoppingBag size={13} /> Package details
+          <ShoppingBag size={13} /> جزئیات پکیج
         </button>
       </div>
     </article>
@@ -65,7 +66,7 @@ export default function ProductCard({ product, onOpen, onAdd }) {
 }
 
 export const ProductLink = ({ product }) => (
-  <Link to={`/store?product=${product.slug}`} className="product-card__name">
+  <Link to={`/store?product=${product.slug}`} className="product-card__category">
     {product.name}
   </Link>
 );

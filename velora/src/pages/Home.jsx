@@ -32,41 +32,41 @@ export default function Home() {
     <>
       <section className="hero" style={{ marginTop: 'calc(var(--header-h) * -1)' }}>
         <div className="hero__media">
-          <img src={HERO_IMAGE} alt="Downtown Los Santos at golden hour" />
+          <img src={HERO_IMAGE} alt="مرکز شهر لس سانتوس در غروب" />
         </div>
         <div className="hero__scrim" />
 
         <div className="shell hero__inner">
           <div className="hero__content">
-            <span className="eyebrow hero__eyebrow">Serious roleplay since 2021</span>
+            <span className="eyebrow hero__eyebrow">رول‌پلی جدی از سال ۲۰۲۱</span>
             <h1>
-              Step Into Another
-              <em>Life In Los Santos</em>
+              قدم به یک
+              <em>زندگی دیگر در لس سانتوس بگذارید</em>
             </h1>
             <p className="hero__lede">
-              A premium FiveM roleplay city built for stories with weight — whitelisted, hand-modded, and
-              running every night.
+              یک شهر رول‌پلی حرفه‌ای فایوام، ساخته‌شده برای داستان‌هایی که وزن دارند — وایت‌لیست‌شده، دست‌ساز و هر شب
+              در حال اجرا.
             </p>
             <div className="hero__actions">
               <Link to="/listings" className="btn btn--gold">
-                Explore Features <ArrowRight size={15} />
+                مشاهده امکانات <ArrowRight size={15} />
               </Link>
               <Link to="/book-visit" className="btn btn--ghost-light">
-                Apply For Whitelist
+                درخواست وایت‌لیست
               </Link>
             </div>
             <div className="hero__stats">
               <div className="hero__stat">
                 <b>4,800</b>
-                <span>Registered citizens</span>
+                <span>شهروند ثبت‌شده</span>
               </div>
               <div className="hero__stat">
                 <b>32</b>
-                <span>Custom scripts</span>
+                <span>اسکریپت اختصاصی</span>
               </div>
               <div className="hero__stat">
                 <b>24/7</b>
-                <span>City uptime</span>
+                <span>آپ‌تایم شهر</span>
               </div>
             </div>
           </div>
@@ -80,12 +80,12 @@ export default function Home() {
       <section className="section section--tight">
         <div className="shell">
           <SectionHead
-            eyebrow="Browse by category"
-            title="Server Categories"
-            lede="Six ways into the city — each opened with a single click."
+            eyebrow="مرور بر اساس دسته‌بندی"
+            title="دسته‌بندی‌های سرور"
+            lede="شش مسیر ورود به شهر — هر کدام با یک کلیک باز می‌شود."
             action={
               <Link to="/listings" className="link-arrow">
-                All features <ArrowRight size={14} />
+                همه امکانات <ArrowRight size={14} />
               </Link>
             }
           />
@@ -99,12 +99,12 @@ export default function Home() {
         <div className="shell home-split">
           <div>
             <SectionHead
-              eyebrow="Selected features"
-              title="Featured Experiences"
-              lede="A short list of the most played systems live on Ria right now."
+              eyebrow="امکانات منتخب"
+              title="تجربه‌های شاخص"
+              lede="فهرست کوتاهی از پرطرفدارترین سیستم‌هایی که همین حالا در ریا فعال هستند."
               action={
                 <Link to="/listings" className="link-arrow">
-                  View all <ArrowRight size={14} />
+                  مشاهده همه <ArrowRight size={14} />
                 </Link>
               }
             />
@@ -112,13 +112,13 @@ export default function Home() {
             {featured.loading && (
               <div className="loading-row">
                 <span className="loading-row__bar" />
-                Loading features
+                در حال بارگذاری امکانات
               </div>
             )}
 
             {featured.error && (
               <div className="form-alert form-alert--error">
-                The feature list could not be loaded. Please refresh, or ask in our Discord.
+                بارگذاری فهرست امکانات ممکن نشد. صفحه را دوباره بارگذاری کنید یا در دیسکورد ما بپرسید.
               </div>
             )}
 
@@ -147,8 +147,8 @@ export default function Home() {
 
           <aside className="home-split__aside">
             <Reveal className="aside-card">
-              <h3 className="aside-card__title">Why Choose Ria Roleplay</h3>
-              <p className="aside-card__lede">Performance, fairness and a city curated by hand.</p>
+              <h3 className="aside-card__title">چرا ریا رول‌پلی؟</h3>
+              <p className="aside-card__lede">کارایی، انصاف و شهری که با دست ساخته و پرداخته شده است.</p>
               <div className="aside-values">
                 {ASIDE_VALUES.map((item) => {
                   const Icon = item.icon;
@@ -166,24 +166,24 @@ export default function Home() {
             </Reveal>
 
             <Reveal className="callout-card" delay={60}>
-              <img src={BANNER_IMAGE} alt="Neon-lit street in Vinewood at night" loading="lazy" />
+              <img src={BANNER_IMAGE} alt="خیابانی در واینوود، غرق در نور نئون" loading="lazy" />
               <div>
-                <h3>Start Your Story Tonight</h3>
-                <p>Custom scripts. Fair economy. A city that answers.</p>
+                <h3>داستان خود را امشب شروع کنید</h3>
+                <p>اسکریپت‌های اختصاصی. اقتصاد منصفانه. شهری که پاسخ می‌دهد.</p>
                 <Link to="/contact" className="btn btn--gold btn--sm">
-                  Join The City
+                  پیوستن به شهر
                 </Link>
               </div>
             </Reveal>
 
             <Reveal className="aside-card" delay={120}>
-              <h3 className="aside-card__title">Meet Our Staff</h3>
-              <p className="aside-card__lede">Three departments. One standard of care.</p>
+              <h3 className="aside-card__title">با تیم ما آشنا شوید</h3>
+              <p className="aside-card__lede">سه بخش. یک استاندارد از مسئولیت.</p>
               {(agents.data?.items || []).map((agent) => (
                 <AgentCard key={agent.slug} agent={agent} compact />
               ))}
               <Link to="/agents" className="link-arrow" style={{ marginTop: '0.9rem' }}>
-                Meet the team <ArrowRight size={13} />
+                آشنایی با تیم <ArrowRight size={13} />
               </Link>
             </Reveal>
           </aside>
@@ -193,19 +193,19 @@ export default function Home() {
       <section className="section section--cream">
         <div className="shell">
           <SectionHead
-            eyebrow="Prime districts"
-            title="Prime Districts"
-            lede="Five districts that define the city — from Vinewood Hills to Paleto Bay."
+            eyebrow="محله‌های شاخص"
+            title="محله‌های شاخص"
+            lede="پنج محله که شهر را تعریف می‌کنند — از واینوود هیلز تا پالتو بی."
             action={
               <Link to="/listings" className="link-arrow">
-                Browse all districts <ArrowRight size={14} />
+                مرور همه محله‌ها <ArrowRight size={14} />
               </Link>
             }
           />
           {locations.loading ? (
             <div className="loading-row">
               <span className="loading-row__bar" />
-              Loading districts
+              در حال بارگذاری محله‌ها
             </div>
           ) : (
             <Reveal>
@@ -218,9 +218,9 @@ export default function Home() {
       <section className="section">
         <div className="shell">
           <SectionHead
-            eyebrow="The Ria standard"
-            title="Why Choose Ria Roleplay"
-            lede="Six commitments that shape every hour you spend in the city."
+            eyebrow="استاندارد ریا"
+            title="چرا ریا رول‌پلی؟"
+            lede="شش تعهد که هر ساعتی را که در شهر می‌گذرانید شکل می‌دهد."
             center
           />
           <Reveal>
@@ -232,15 +232,15 @@ export default function Home() {
       <section className="section section--tight" style={{ paddingTop: 0 }}>
         <div className="shell">
           <Reveal className="cta-banner">
-            <img src={BANNER_IMAGE} alt="Night-time boulevard lights in Vinewood" loading="lazy" />
+            <img src={BANNER_IMAGE} alt="چراغ‌های بلوار در واینوود، شبانه" loading="lazy" />
             <div className="cta-banner__inner">
               <span className="eyebrow" style={{ color: 'var(--gold-soft)' }}>
-                Whitelist open
+                وایت‌لیست باز است
               </span>
-              <h2>Your Story Starts Tonight</h2>
-              <p>Custom scripts. Fair economy. A city that answers.</p>
+              <h2>داستان شما امشب شروع می‌شود</h2>
+              <p>اسکریپت‌های اختصاصی. اقتصاد منصفانه. شهری که پاسخ می‌دهد.</p>
               <Link to="/contact" className="btn btn--gold">
-                Apply Now <ArrowRight size={15} />
+                همین حالا درخواست دهید <ArrowRight size={15} />
               </Link>
             </div>
           </Reveal>
@@ -250,12 +250,12 @@ export default function Home() {
       <section className="section section--cream">
         <div className="shell">
           <SectionHead
-            eyebrow="Your team"
-            title="Meet Our Staff"
-            lede="Senior staff with deep knowledge of every system in the city."
+            eyebrow="تیم شما"
+            title="با تیم ما آشنا شوید"
+            lede="مدیران ارشدی که هر سیستم شهر را از نزدیک می‌شناسند."
             action={
               <Link to="/agents" className="link-arrow">
-                All staff <ArrowRight size={14} />
+                همه اعضای تیم <ArrowRight size={14} />
               </Link>
             }
           />
@@ -271,11 +271,11 @@ export default function Home() {
 
       <section className="final-cta">
         <div className="shell">
-          <span className="eyebrow">Ria Roleplay</span>
-          <h2>Your City Is Waiting</h2>
-          <p>Join thousands of players in a city built for stories worth telling.</p>
+          <span className="eyebrow">ریا رول‌پلی</span>
+          <h2>شهر شما منتظر است</h2>
+          <p>به هزاران بازیکن در شهری بپیوندید که برای داستان‌های شنیدنی ساخته شده است.</p>
           <Link to="/listings" className="btn btn--gold">
-            Get Started <ArrowRight size={15} />
+            شروع کنید <ArrowRight size={15} />
           </Link>
           <div
             style={{
@@ -291,19 +291,19 @@ export default function Home() {
             }}
           >
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <ShieldCheck size={13} /> Verified players
+              <ShieldCheck size={13} /> بازیکنان تأیید‌شده
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Star size={13} /> 4.9 community rating
+              <Star size={13} /> امتیاز ۴.۹ از انجمن
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <TrendingUp size={13} /> 24/7 uptime
+              <TrendingUp size={13} /> آپ‌تایم ۲۴ ساعته
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <CalendarDays size={13} /> Applications in 48h
+              <CalendarDays size={13} /> بررسی درخواست در ۴۸ ساعت
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Sparkles size={13} /> Whitelist access
+              <Sparkles size={13} /> دسترسی وایت‌لیست
             </span>
           </div>
         </div>

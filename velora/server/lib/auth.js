@@ -64,17 +64,17 @@ export const attachUser = (req, _res, next) => {
 
 export const requireAuth = (req, res, next) => {
   if (!req.user) {
-    return res.status(401).json({ error: 'Sign in to continue.', code: 'UNAUTHENTICATED' });
+    return res.status(401).json({ error: 'برای ادامه وارد حساب خود شوید.', code: 'UNAUTHENTICATED' });
   }
   next();
 };
 
 export const requireAdmin = (req, res, next) => {
   if (!req.user) {
-    return res.status(401).json({ error: 'Sign in to continue.', code: 'UNAUTHENTICATED' });
+    return res.status(401).json({ error: 'برای ادامه وارد حساب خود شوید.', code: 'UNAUTHENTICATED' });
   }
   if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Administrator access required.', code: 'FORBIDDEN' });
+    return res.status(403).json({ error: 'دسترسی مدیر لازم است.', code: 'FORBIDDEN' });
   }
   next();
 };

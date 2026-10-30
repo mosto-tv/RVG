@@ -4,6 +4,7 @@ import { ArrowRight, CalendarClock, MapPin, Building2, Ruler } from 'lucide-reac
 import Reveal from '../components/Reveal.jsx';
 import { useFetch } from '../lib/useFetch.js';
 import { priceFmt } from '../lib/api.js';
+import { cityLabel, statusLabel } from '../lib/labels.js';
 
 const STATUS_CLASS = {
   Live: 'status-dot',
@@ -27,14 +28,14 @@ export default function Projects() {
       <header className="banner-head" style={{ marginTop: 'calc(var(--header-h) * -1)', paddingTop: 'var(--header-h)' }}>
         <img
           src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=85"
-          alt="Los Santos skyline at dusk"
+          alt="خط آسمان لس سانتوس در غروب"
         />
         <div className="shell banner-head__inner">
-          <span className="eyebrow">Roadmap</span>
-          <h1>Server Updates</h1>
+          <span className="eyebrow">نقشه راه</span>
+          <h1>به‌روزرسانی‌های سرور</h1>
           <p>
-            Every chapter we have shipped and everything currently in development — from the Uptown Stories season
-            to the Cayo Perico expansion.
+            هر فصلی که منتشر کرده‌ایم و هر چیزی که همین حالا در حال ساخت است — از فصل «داستان‌های آپ‌تاون» تا
+            گسترش کایو پریکو.
           </p>
         </div>
       </header>
@@ -42,7 +43,7 @@ export default function Projects() {
       <section className="section section--tight">
         <div className="shell">
           <div className="section-head" style={{ alignItems: 'center' }}>
-            <div className="pill-tabs" role="tablist" aria-label="Filter updates by status">
+            <div className="pill-tabs" role="tablist" aria-label="فیلتر به‌روزرسانی‌ها بر اساس وضعیت">
               {['All', ...statuses].map((option) => (
                 <button
                   key={option}
@@ -51,17 +52,17 @@ export default function Projects() {
                   className={status === option ? 'is-active' : ''}
                   onClick={() => setStatus(option)}
                 >
-                  {option}
+                  {option === 'All' ? 'همه' : statusLabel(option)}
                 </button>
               ))}
             </div>
-            <span className="form-note">{filtered.length} updates</span>
+            <span className="form-note">{filtered.length} به‌روزرسانی</span>
           </div>
 
           {loading && (
             <div className="loading-row">
               <span className="loading-row__bar" />
-              Loading updates
+              در حال بارگذاری به‌روزرسانی‌ها
             </div>
           )}
 
@@ -70,10 +71,10 @@ export default function Projects() {
               <span className="empty-state__icon">
                 <Building2 size={20} />
               </span>
-              <h3>No updates at this stage</h3>
-              <p>New chapters are added every season. Ask our staff what is being worked on next.</p>
+              <h3>در این مرحله به‌روزرسانی‌ای نیست</h3>
+              <p>هر فصل فصل‌های تازه اضافه می‌شود. از تیم ما بپرسید قدم بعدی چیست.</p>
               <Link to="/contact" className="btn btn--sm">
-                Ask staff
+                پرسش از تیم
               </Link>
             </div>
           )}
@@ -85,22 +86,22 @@ export default function Projects() {
                   <div className="project-card__media">
                     <img src={project.image} alt={project.name} loading="lazy" />
                     <span className="property-card__badges">
-                      <span className="badge badge--emerald">{project.status}</span>
+                      <span className="badge badge--emerald">{statusLabel(project.status)}</span>
                     </span>
                   </div>
                   <div className="project-card__body">
-                    <span className={STATUS_CLASS[project.status] || 'status-dot'}>{project.status}</span>
+                    <span className={STATUS_CLASS[project.status] || 'status-dot'}>{statusLabel(project.status)}</span>
                     <h2 style={{ fontSize: '1.5rem' }}>{project.name}</h2>
                     <span className="property-card__location">
-                      <MapPin size={12} /> {project.city}, {project.country}
+                      <MapPin size={12} /> {cityLabel(project.city)}، {cityLabel(project.country)}
                     </span>
-                    <p className="muted" style={{ fontSize: '0.9rem', lineHeight: 1.7 }}>
+                    <p className="muted" style={{ fontSize: '0.9rem', lineHeight: 1.9 }}>
                       {project.description}
                     </p>
                     <div className="project-card__meta">
-                      <span className="project-card__price">{priceFmt(project.startingPrice)} starter bonus</span>
+                      <span className="project-card__price">{priceFmt(project.startingPrice)} هدیه شروع</span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                        <Building2 size={13} /> {project.units} new features
+                        <Building2 size={13} /> {project.units} امکان جدید
                       </span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
                         <CalendarClock size={13} /> {project.delivery}
@@ -118,10 +119,10 @@ export default function Projects() {
                     )}
                     <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.8rem', flexWrap: 'wrap' }}>
                       <Link to="/contact" className="btn btn--sm">
-                        Release notes
+                        یادداشت انتشار
                       </Link>
                       <Link to="/book-visit" className="btn btn--outline btn--sm">
-                        Join the playtest
+                        پیوستن به تست بازی
                       </Link>
                     </div>
                   </div>
@@ -134,11 +135,11 @@ export default function Projects() {
 
       <section className="final-cta">
         <div className="shell">
-          <span className="eyebrow">Early access</span>
-          <h2>Register for the next chapter</h2>
-          <p>Beta access opens to our Discord community before every release goes live.</p>
+          <span className="eyebrow">دسترسی زودهنگام</span>
+          <h2>برای فصل بعدی ثبت‌نام کنید</h2>
+          <p>دسترسی بتا پیش از هر انتشار، اول به انجمن دیسکورد ما باز می‌شود.</p>
           <Link to="/contact" className="btn btn--gold">
-            Register interest <ArrowRight size={15} />
+            اعلام علاقه‌مندی <ArrowRight size={15} />
           </Link>
         </div>
       </section>

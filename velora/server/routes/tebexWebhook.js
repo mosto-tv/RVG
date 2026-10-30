@@ -53,12 +53,12 @@ tebexWebhookRouter.post('/tebex/webhook', express.raw({ type: '*/*', limit: '1mb
 
   if (!signatureValid) {
     logEvent('Rejected: signature did not match TEBEX_WEBHOOK_SECRET.', false);
-    return res.status(401).json({ error: 'Invalid signature.' });
+    return res.status(401).json({ error: 'امضا نامعتبر است.' });
   }
 
   if (!body) {
     logEvent('Rejected: payload was not valid JSON.');
-    return res.status(400).json({ error: 'Invalid payload.' });
+    return res.status(400).json({ error: 'داده ارسالی نامعتبر است.' });
   }
 
   const order = reference ? one('SELECT * FROM orders WHERE reference = ?', String(reference)) : null;
@@ -78,14 +78,14 @@ tebexWebhookRouter.post('/tebex/webhook', express.raw({ type: '*/*', limit: '1mb
     const { secretKey } = tebexConfig();
     if (!secretKey) {
       logEvent(`Order ${order.reference}: cannot verify payment, TEBEX_SECRET_KEY missing.`);
-      return res.status(503).json({ error: 'Payment verification is not configured.' });
+      return res.status(503).json({ error: 'تأیید پرداخت تنظیم نشده است.' });
     }
     let payment;
     try {
       payment = transactionId ? await fetchTransaction(String(transactionId)) : null;
     } catch (err) {
       logEvent(`Order ${order.reference}: Tebex verification failed (${err.message}). Will retry.`);
-      return res.status(502).json({ error: 'Payment verification unavailable, retry.' });
+      return res.status(502).json({ error: 'تأیید پرداخت در دسترس نیست، دوباره تلاش کنید.' });
     }
     const status = String(payment?.status || '').toLowerCase();
     if (!payment || status !== 'complete') {

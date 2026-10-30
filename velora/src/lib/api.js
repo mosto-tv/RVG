@@ -20,7 +20,7 @@ const request = async (path, { method = 'GET', body, headers } = {}) => {
   });
   const data = await parse(res);
   if (!res.ok) {
-    const error = new Error(data?.error || 'Something went wrong. Please try again.');
+    const error = new Error(data?.error || 'مشکلی پیش آمد. دوباره تلاش کنید.');
     error.status = res.status;
     error.code = data?.code;
     error.fields = data?.fields;
@@ -76,14 +76,14 @@ export const formatDate = (value) => {
   if (!value) return '—';
   const date = new Date(String(value).replace(' ', 'T'));
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  return date.toLocaleDateString('fa-IR', { year: 'numeric', month: 'short', day: 'numeric' });
 };
 
 export const formatDateTime = (value) => {
   if (!value) return '—';
   const date = new Date(String(value).replace(' ', 'T'));
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString('en-US', {
+  return date.toLocaleString('fa-IR', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

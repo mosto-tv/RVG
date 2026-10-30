@@ -23,7 +23,7 @@ export default function SignIn() {
     setBusy(true);
     try {
       await signIn(values);
-      push('Welcome back.', 'success');
+      push('خوش آمدید.', 'success');
       navigate(location.state?.from || '/account');
     } catch (err) {
       setErrors(err.fields || { password: err.message });
@@ -35,23 +35,23 @@ export default function SignIn() {
   return (
     <div className="auth-page">
       <div className="auth-page__media">
-        <img src={IMAGE} alt="Los Santos skyline at golden hour" />
+        <img src={IMAGE} alt="خط آسمان لس سانتوس در نور طلایی" />
         <div className="auth-page__quote">
-          <p>“Three years in and the city still surprises me.”</p>
-          <span>Whitelisted player, Los Santos</span>
+          <p>«سه سال گذشته و این شهر هنوز غافلگیرم می‌کند.»</p>
+          <span>بازیکن وایت‌لیست‌شده، لس سانتوس</span>
         </div>
       </div>
       <div className="auth-page__form">
         <div className="auth-card">
-          <span className="eyebrow">Player access</span>
-          <h1>Sign in</h1>
+          <span className="eyebrow">دسترسی بازیکن</span>
+          <h1>ورود</h1>
           <p className="lede" style={{ marginTop: '-0.4rem' }}>
-            Your saved features, whitelist applications and RIA store purchases in one place.
+            امکانات ذخیره‌شده، درخواست‌های وایت‌لیست و خریدهای فروشگاه ریا، همه در یک جا.
           </p>
           <form onSubmit={submit} noValidate style={{ display: 'grid', gap: '0.9rem' }}>
             <div className="field">
               <label className="field__label" htmlFor="si-email">
-                Email address
+                نشانی ایمیل
               </label>
               <input
                 id="si-email"
@@ -66,7 +66,7 @@ export default function SignIn() {
             </div>
             <div className="field">
               <label className="field__label" htmlFor="si-password">
-                Password
+                گذرواژه
               </label>
               <input
                 id="si-password"
@@ -80,14 +80,14 @@ export default function SignIn() {
               {errors.password && <span className="field__error">{errors.password}</span>}
             </div>
             <button className="btn btn--block" type="submit" disabled={busy}>
-              {busy ? <span className="btn__spinner" /> : <LogIn size={15} />} Sign in
+              {busy ? <span className="btn__spinner" /> : <LogIn size={15} />} ورود
             </button>
           </form>
           <p className="auth-switch">
-            New to Ria? <Link to="/signup">Create an account</Link>
+            تازه به ریا آمده‌اید؟ <Link to="/signup">ساخت حساب کاربری</Link>
           </p>
           <Link to="/store" className="link-arrow" style={{ justifyContent: 'center' }}>
-            RIA store <ArrowRight size={13} />
+            فروشگاه ریا <ArrowRight size={13} />
           </Link>
         </div>
       </div>

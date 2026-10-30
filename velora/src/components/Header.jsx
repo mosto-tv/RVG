@@ -4,18 +4,19 @@ import { Menu, Search, ShoppingBag, User, X, ArrowRight, MapPin } from 'lucide-r
 import { api, priceFmt } from '../lib/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useCart } from '../context/CartContext.jsx';
+import { cityLabel } from '../lib/labels.js';
 
 const NAV = [
-  { to: '/', label: 'Home' },
-  { to: '/listings', label: 'Features' },
-  { to: '/projects', label: 'Roadmap' },
-  { to: '/agents', label: 'Staff' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/', label: 'خانه' },
+  { to: '/listings', label: 'امکانات' },
+  { to: '/projects', label: 'نقشه راه' },
+  { to: '/agents', label: 'تیم مدیریت' },
+  { to: '/about', label: 'درباره ما' },
+  { to: '/contact', label: 'تماس' },
 ];
 
 export const Brand = ({ light = false, onClick }) => (
-  <Link to="/" className={`brand${light ? ' brand--light' : ''}`} onClick={onClick} aria-label="RIA ROLEPLAY home">
+  <Link to="/" className={`brand${light ? ' brand--light' : ''}`} onClick={onClick} aria-label="صفحه اصلی ریا رول‌پلی">
     <span className="brand__main">RIA</span>
     <span className="brand__sub">ROLEPLAY</span>
   </Link>
@@ -100,7 +101,7 @@ export default function Header() {
         <div className="shell header__inner">
           <Brand light={isStore} />
 
-          <nav className="nav" aria-label="Primary">
+          <nav className="nav" aria-label="ناوبری اصلی">
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
@@ -117,7 +118,7 @@ export default function Header() {
             <button
               className="icon-btn"
               onClick={() => setSearchOpen((open) => !open)}
-              aria-label="Search features"
+              aria-label="جستجوی امکانات"
               aria-expanded={searchOpen}
             >
               <Search size={18} />
@@ -125,23 +126,23 @@ export default function Header() {
             <Link
               to={user ? '/account' : '/signin'}
               className="icon-btn"
-              aria-label={user ? 'Your account' : 'Sign in'}
+              aria-label={user ? 'حساب کاربری شما' : 'ورود به حساب'}
             >
               <User size={18} />
             </Link>
             {isStore && (
-              <button className="icon-btn" onClick={cart.openCart} aria-label="Open cart">
+              <button className="icon-btn" onClick={cart.openCart} aria-label="باز کردن سبد خرید">
                 <ShoppingBag size={18} />
                 {cart.count > 0 && <span className="icon-btn__badge">{cart.count}</span>}
               </button>
             )}
             <Link to="/book-visit" className="btn btn--gold btn--sm header__cta">
-              Apply Now
+              درخواست عضویت
             </Link>
             <button
               className="icon-btn hamburger"
               onClick={() => setMenuOpen((open) => !open)}
-              aria-label="Toggle menu"
+              aria-label="منو"
               aria-expanded={menuOpen}
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -158,16 +159,16 @@ export default function Header() {
                   ref={inputRef}
                   value={term}
                   onChange={(event) => setTerm(event.target.value)}
-                  placeholder="Search by district, category or feature name"
-                  aria-label="Search features"
+                  placeholder="جستجو بر اساس محله، دسته‌بندی یا نام امکان"
+                  aria-label="جستجوی امکانات"
                 />
                 <button type="submit" className="btn btn--sm">
-                  Search
+                  جستجو
                 </button>
               </form>
-              {searching && <p className="form-note">Searching the city…</p>}
+              {searching && <p className="form-note">در حال جستجو در شهر…</p>}
               {!searching && term.trim().length >= 2 && results.length === 0 && (
-                <p className="form-note">No features match “{term.trim()}”. Try a district or category.</p>
+                <p className="form-note">هیچ امکانی با «{term.trim()}» پیدا نشد. یک محله یا دسته‌بندی را امتحان کنید.</p>
               )}
               {results.length > 0 && (
                 <div className="search-flyout__results">
@@ -177,17 +178,17 @@ export default function Header() {
                       <span>
                         <span className="search-result__title">{item.title}</span>
                         <span className="search-result__meta">
-                          {item.city} · {priceFmt(item.price)} payout · {item.beds} players
+                          {cityLabel(item.city)} · درآمد {priceFmt(item.price)} · {item.beds} بازیکن
                         </span>
                       </span>
-                      <ArrowRight size={15} style={{ marginLeft: 'auto', color: 'var(--muted)' }} />
+                      <ArrowRight size={15} style={{ marginInlineStart: 'auto', color: 'var(--muted)' }} />
                     </Link>
                   ))}
                 </div>
               )}
               {term.trim().length < 2 && (
                 <p className="form-note">
-                  Try “Vinewood”, “Racing”, “Careers” or a feature name — results update as you type.
+                  «واینوود»، «مسابقات»، «مشاغل» یا نام یک امکان را بنویسید — نتایج هم‌زمان با تایپ به‌روز می‌شود.
                 </p>
               )}
             </div>
@@ -204,22 +205,22 @@ export default function Header() {
             </NavLink>
           ))}
           <NavLink to="/store" className="mobile-nav__link" onClick={() => setMenuOpen(false)}>
-            RIA Store
+            فروشگاه ریا
             <ArrowRight size={18} />
           </NavLink>
           <div className="mobile-nav__footer">
             <Link to="/book-visit" className="btn btn--gold btn--block" onClick={() => setMenuOpen(false)}>
-              Apply Now
+              درخواست عضویت
             </Link>
             <Link
               to={user ? '/account' : '/signin'}
               className="btn btn--outline btn--block"
               onClick={() => setMenuOpen(false)}
             >
-              {user ? 'My Account' : 'Sign In'}
+              {user ? 'حساب من' : 'ورود'}
             </Link>
             <p className="form-note" style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
-              <MapPin size={14} /> Los Santos · Sandy Shores · Paleto Bay · Grapeseed · Cayo Perico
+              <MapPin size={14} /> لس سانتوس · سندی شورز · پالتو بی · گریپ‌سید · کایو پریکو
             </p>
           </div>
         </div>

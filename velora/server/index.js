@@ -53,7 +53,7 @@ app.use('/api/player', playerRouter);
 app.use('/api/admin', adminRouter);
 
 app.use('/api', (_req, res) => {
-  res.status(404).json({ error: 'Endpoint not found.', code: 'NOT_FOUND' });
+  res.status(404).json({ error: 'نقطه پایانی پیدا نشد.', code: 'NOT_FOUND' });
 });
 
 app.use((err, _req, res, _next) => {

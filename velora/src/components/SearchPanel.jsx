@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, MapPin, Gamepad2, Coins, Users } from 'lucide-react';
 import { shortPrice } from '../lib/api.js';
+import { categoryLabel, cityLabel } from '../lib/labels.js';
 
 const LOCATIONS = ['Los Santos', 'Vinewood', 'Vespucci', 'Del Perro', 'Sandy Shores', 'Paleto Bay'];
 const TYPES = ['Careers', 'Businesses', 'Vehicles', 'Crime & Heists', 'Racing', 'Lifestyle'];
@@ -28,10 +29,10 @@ export default function SearchPanel({ compact = false }) {
   };
 
   return (
-    <form className="search-panel" onSubmit={submit} aria-label="Search features">
+    <form className="search-panel" onSubmit={submit} aria-label="جستجوی امکانات">
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-location">
-          <MapPin size={12} /> District
+          <MapPin size={12} /> محله
         </label>
         <select
           id="hero-location"
@@ -39,10 +40,10 @@ export default function SearchPanel({ compact = false }) {
           value={location}
           onChange={(event) => setLocation(event.target.value)}
         >
-          <option value="">All districts</option>
+          <option value="">همه محله‌ها</option>
           {LOCATIONS.map((option) => (
             <option key={option} value={option}>
-              {option}
+              {cityLabel(option)}
             </option>
           ))}
         </select>
@@ -50,7 +51,7 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-type">
-          <Gamepad2 size={12} /> Category
+          <Gamepad2 size={12} /> دسته‌بندی
         </label>
         <select
           id="hero-type"
@@ -58,10 +59,10 @@ export default function SearchPanel({ compact = false }) {
           value={type}
           onChange={(event) => setType(event.target.value)}
         >
-          <option value="">Any category</option>
+          <option value="">همه دسته‌ها</option>
           {TYPES.map((option) => (
             <option key={option} value={option}>
-              {option}
+              {categoryLabel(option)}
             </option>
           ))}
         </select>
@@ -69,11 +70,11 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <span className="search-panel__label">
-          <Coins size={12} /> Payout
+          <Coins size={12} /> درآمد
         </span>
         <div className="budget">
           <span className="budget__value">
-            {shortPrice(minPayout)} – {maxPayout >= MAX_PAYOUT ? 'No limit' : shortPrice(maxPayout)}
+            {shortPrice(minPayout)} – {maxPayout >= MAX_PAYOUT ? 'بدون سقف' : shortPrice(maxPayout)}
           </span>
           <div className="range-row">
             <input
@@ -82,7 +83,7 @@ export default function SearchPanel({ compact = false }) {
               max={MAX_PAYOUT}
               step="500"
               value={minPayout}
-              aria-label="Minimum payout"
+              aria-label="کمترین درآمد"
               onChange={(event) => {
                 const value = Number(event.target.value);
                 setMinPayout(value);
@@ -95,7 +96,7 @@ export default function SearchPanel({ compact = false }) {
               max={MAX_PAYOUT}
               step="500"
               value={maxPayout}
-              aria-label="Maximum payout"
+              aria-label="بیشترین درآمد"
               onChange={(event) => {
                 const value = Number(event.target.value);
                 setMaxPayout(value);
@@ -108,7 +109,7 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-beds">
-          <Users size={12} /> Players
+          <Users size={12} /> بازیکنان
         </label>
         <select
           id="hero-beds"
@@ -118,14 +119,14 @@ export default function SearchPanel({ compact = false }) {
         >
           {PLAYERS.map((option) => (
             <option key={option} value={option}>
-              {option === 'Any' ? 'Any' : `${option} players`}
+              {option === 'Any' ? 'همه' : `${option} بازیکن`}
             </option>
           ))}
         </select>
       </div>
 
       <button type="submit" className={`btn btn--block search-panel__submit${compact ? ' btn--sm' : ''}`}>
-        <Search size={15} /> Search
+        <Search size={15} /> جستجو
       </button>
     </form>
   );

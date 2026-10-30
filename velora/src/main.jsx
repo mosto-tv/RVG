@@ -11,6 +11,7 @@ import './styles/layout.css';
 import './styles/components.css';
 import './styles/pages.css';
 import './styles/store.css';
+import './styles/rtl.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

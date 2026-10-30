@@ -31,13 +31,13 @@ authRouter.post('/signup', (req, res, next) => {
     const password = typeof req.body?.password === 'string' ? req.body.password : '';
     const phone = clean(req.body?.phone, 40);
 
-    if (name.length < 2) fields.name = 'Please enter your full name.';
-    if (!isEmail(email)) fields.email = 'Enter a valid email address.';
-    if (password.length < 8) fields.password = 'Use at least 8 characters.';
+    if (name.length < 2) fields.name = 'نام و نام خانوادگی خود را وارد کنید.';
+    if (!isEmail(email)) fields.email = 'یک نشانی ایمیل معتبر وارد کنید.';
+    if (password.length < 8) fields.password = 'حداقل ۸ کاراکتر استفاده کنید.';
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     if (one('SELECT id FROM users WHERE email = ?', email)) {
-      throw new ValidationError({ email: 'An account with this email already exists.' });
+      throw new ValidationError({ email: 'حسابی با این ایمیل از قبل وجود دارد.' });
     }
 
     const admins = one("SELECT COUNT(*) AS count FROM users WHERE role = 'admin'").count;
@@ -65,13 +65,13 @@ authRouter.post('/signin', (req, res, next) => {
     const email = clean(req.body?.email, 160).toLowerCase();
     const password = typeof req.body?.password === 'string' ? req.body.password : '';
     const fields = {};
-    if (!isEmail(email)) fields.email = 'Enter a valid email address.';
-    if (!password) fields.password = 'Enter your password.';
+    if (!isEmail(email)) fields.email = 'یک نشانی ایمیل معتبر وارد کنید.';
+    if (!password) fields.password = 'گذرواژه خود را وارد کنید.';
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     const user = one('SELECT * FROM users WHERE email = ?', email);
     if (!user || !verifyPassword(password, user.password_hash)) {
-      throw new ValidationError({ password: 'Email or password is incorrect.' });
+      throw new ValidationError({ password: 'ایمیل یا گذرواژه نادرست است.' });
     }
     const token = createSession(user.id);
     res.cookie('velora_session', token, sessionCookieOptions);
@@ -94,7 +94,7 @@ authRouter.patch('/me', requireAuth, (req, res, next) => {
     const fivemId = clean(req.body?.fivemId, 90);
     const fields = {};
     if (fivemId && !/^(license2?|steam|discord|fivem|xbl|live):[A-Za-z0-9:_-]{4,80}$/.test(fivemId)) {
-      fields.fivemId = 'Use the identifier format license:xxxx or discord:xxxx.';
+      fields.fivemId = 'از قالب شناسه license:xxxx یا discord:xxxx استفاده کنید.';
     }
     if (Object.keys(fields).length) throw new ValidationError(fields);
 

@@ -31,9 +31,10 @@ export default function CartDrawer() {
     event.preventDefault();
     setProblem(null);
     const next = {};
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) next.email = 'Enter the email for your Tebex receipt.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
+      next.email = 'ایمیلی را وارد کنید که رسید Tebex به آن ارسال می‌شود.';
     if (!/^(license2?|steam|discord|fivem|xbl|live):[A-Za-z0-9:_-]{4,80}$/.test(playerIdentifier.trim())) {
-      next.playerIdentifier = 'Use your FiveM identifier, e.g. license:1a2b3c4d5e.';
+      next.playerIdentifier = 'شناسه فایوام خود را وارد کنید، مثلاً license:1a2b3c4d5e.';
     }
     setErrors(next);
     if (Object.keys(next).length) return;
@@ -50,7 +51,7 @@ export default function CartDrawer() {
         `velora_order_${data.reference}`,
         JSON.stringify({ token: data.accessToken, at: Date.now() }),
       );
-      push('Opening the official Tebex checkout…', 'info');
+      push('در حال باز کردن درگاه رسمی Tebex…', 'info');
       window.location.assign(data.checkoutUrl);
     } catch (err) {
       setBusy(false);
@@ -66,13 +67,16 @@ export default function CartDrawer() {
   return (
     <>
       <div className="drawer-scrim" onClick={cart.closeCart} aria-hidden="true" />
-      <aside className="cart-drawer" role="dialog" aria-modal="true" aria-label="Your selection">
+      <aside className="cart-drawer" role="dialog" aria-modal="true" aria-label="سبد خرید شما">
         <div className="cart-drawer__head">
           <h2>
-            <ShoppingBag size={18} style={{ verticalAlign: '-3px', marginRight: '0.4rem', color: 'var(--ria-yellow)' }} />
-            Your selection
+            <ShoppingBag
+              size={18}
+              style={{ verticalAlign: '-3px', marginInlineEnd: '0.4rem', color: 'var(--ria-yellow)' }}
+            />
+            سبد خرید شما
           </h2>
-          <button className="icon-btn icon-btn--store" onClick={cart.closeCart} aria-label="Close cart">
+          <button className="icon-btn icon-btn--store" onClick={cart.closeCart} aria-label="بستن سبد خرید">
             <X size={17} />
           </button>
         </div>
@@ -81,8 +85,8 @@ export default function CartDrawer() {
           {cart.items.length === 0 && (
             <div style={{ textAlign: 'center', padding: '2rem 0', color: 'rgba(247,245,237,.55)' }}>
               <ShoppingBag size={26} style={{ marginBottom: '0.6rem' }} />
-              <p style={{ fontSize: '0.9rem' }}>Your selection is empty.</p>
-              <p style={{ fontSize: '0.78rem', marginTop: '0.3rem' }}>Add a package from the store to continue.</p>
+              <p style={{ fontSize: '0.9rem' }}>سبد خرید شما خالی است.</p>
+              <p style={{ fontSize: '0.78rem', marginTop: '0.3rem' }}>برای ادامه، یک پکیج از فروشگاه اضافه کنید.</p>
             </div>
           )}
 
@@ -92,10 +96,14 @@ export default function CartDrawer() {
               <div>
                 <div className="cart-item__name">{item.name}</div>
                 <div className="cart-item__meta">
-                  {money(item.priceCents)} · Qty {item.quantity}
+                  {money(item.priceCents)} · تعداد {item.quantity}
                 </div>
               </div>
-              <button className="cart-item__remove" onClick={() => cart.remove(item.slug)} aria-label={`Remove ${item.name}`}>
+              <button
+                className="cart-item__remove"
+                onClick={() => cart.remove(item.slug)}
+                aria-label={`حذف ${item.name}`}
+              >
                 <Trash2 size={14} />
               </button>
             </div>
@@ -105,7 +113,7 @@ export default function CartDrawer() {
         {cart.items.length > 0 && (
           <div className="cart-drawer__foot">
             <div className="cart-total">
-              <span>Total</span>
+              <span>مجموع</span>
               <b>{money(cart.totalCents)}</b>
             </div>
 
@@ -116,10 +124,10 @@ export default function CartDrawer() {
                   <strong style={{ display: 'block', marginBottom: '0.25rem' }}>{problem.message}</strong>
                   {problem.missing?.length ? (
                     <span>
-                      Required configuration: {problem.missing.map((key) => <code key={key}>{key}</code>)}
+                      تنظیمات لازم: {problem.missing.map((key) => <code key={key}>{key}</code>)}
                     </span>
                   ) : null}
-                  {problem.packages?.length ? <span>Unlinked packages: {problem.packages.join(', ')}</span> : null}
+                  {problem.packages?.length ? <span>پکیج‌های متصل‌نشده: {problem.packages.join('، ')}</span> : null}
                 </div>
               </div>
             )}
@@ -127,7 +135,7 @@ export default function CartDrawer() {
             <form onSubmit={checkout} style={{ display: 'grid', gap: '0.7rem' }}>
               <div className="field">
                 <label className="field__label" htmlFor="cart-email">
-                  Receipt email
+                  ایمیل دریافت رسید
                 </label>
                 <input
                   id="cart-email"
@@ -142,7 +150,7 @@ export default function CartDrawer() {
               </div>
               <div className="field">
                 <label className="field__label" htmlFor="cart-fivem">
-                  FiveM identifier
+                  شناسه فایوام
                 </label>
                 <input
                   id="cart-fivem"
@@ -156,13 +164,13 @@ export default function CartDrawer() {
               </div>
               <button type="submit" className="btn btn--ria btn--block" disabled={busy}>
                 {busy ? <span className="btn__spinner" /> : null}
-                {busy ? 'Opening Tebex' : 'Purchase via Tebex'}
+                {busy ? 'در حال باز کردن Tebex' : 'خرید از طریق Tebex'}
               </button>
             </form>
 
             <p className="cart-legal">
-              You will be redirected to the official RIA ROLEPLAY Tebex checkout. Delivery is automatic once Tebex
-              confirms payment server-side.
+              به درگاه رسمی Tebex سرور ریا رول‌پلی هدایت می‌شوید. پس از تأیید پرداخت در سمت سرور Tebex، تحویل
+              به‌صورت خودکار انجام می‌شود.
             </p>
           </div>
         )}

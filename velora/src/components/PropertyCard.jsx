@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Users, Heart, MapPin, Clock, Trophy, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { priceFmt } from '../lib/api.js';
+import { categoryLabel, cityLabel, statusLabel } from '../lib/labels.js';
 import { useFavorites } from '../context/FavoritesContext.jsx';
 
 export default function PropertyCard({ property, variant = 'default', showFavorite = true }) {
@@ -23,11 +24,11 @@ export default function PropertyCard({ property, variant = 'default', showFavori
   return (
     <article className={className}>
       <Link to={`/listings/${property.id}`} className="property-card__media" aria-label={property.title}>
-        <img src={property.image} alt={`${property.title}, ${property.city}`} loading="lazy" />
+        <img src={property.image} alt={`${property.title}، ${cityLabel(property.city)}`} loading="lazy" />
         <span className="property-card__frame" />
         <span className="property-card__badges">
-          {property.featured && <span className="badge badge--gold">Featured</span>}
-          <span className="badge">{property.type}</span>
+          {property.featured && <span className="badge badge--gold">ویژه</span>}
+          <span className="badge">{categoryLabel(property.type)}</span>
         </span>
       </Link>
 
@@ -35,7 +36,7 @@ export default function PropertyCard({ property, variant = 'default', showFavori
         <button
           className={`fav-btn${saved ? ' is-saved' : ''}`}
           onClick={() => toggle(property.id)}
-          aria-label={saved ? `Remove ${property.title} from saved` : `Save ${property.title}`}
+          aria-label={saved ? `حذف ${property.title} از ذخیره‌شده‌ها` : `ذخیره ${property.title}`}
           aria-pressed={saved}
         >
           <Heart size={16} fill={saved ? 'currentColor' : 'none'} />
@@ -49,7 +50,7 @@ export default function PropertyCard({ property, variant = 'default', showFavori
               <Link to={`/listings/${property.id}`}>{property.title}</Link>
             </h3>
             <span className="property-card__location">
-              <MapPin size={12} /> {property.neighborhood}, {property.city}
+              <MapPin size={12} /> {property.neighborhood}، {cityLabel(property.city)}
             </span>
           </div>
           <span className="property-card__rating">
@@ -61,20 +62,20 @@ export default function PropertyCard({ property, variant = 'default', showFavori
 
         <div className="property-card__meta">
           <span>
-            <Users size={13} /> {property.beds} Players
+            <Users size={13} /> {property.beds} بازیکن
           </span>
           <span>
-            <Clock size={13} /> {property.baths} min
+            <Clock size={13} /> {property.baths} دقیقه
           </span>
           <span>
-            <Trophy size={13} /> {property.size.toLocaleString()} rep
+            <Trophy size={13} /> {property.size.toLocaleString()} اعتبار
           </span>
         </div>
 
         <div className="property-card__foot">
-          <span className="badge badge--emerald">{property.status}</span>
+          <span className="badge badge--emerald">{statusLabel(property.status)}</span>
           <Link to={`/listings/${property.id}`} className="property-card__link">
-            View Details <ArrowRight size={13} />
+            جزئیات <ArrowRight size={13} />
           </Link>
         </div>
       </div>

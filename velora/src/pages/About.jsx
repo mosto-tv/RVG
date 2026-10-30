@@ -7,10 +7,10 @@ import SectionHead from '../components/SectionHead.jsx';
 import { useFetch } from '../lib/useFetch.js';
 
 const PROCESS = [
-  { num: '01', title: 'Application', text: 'A short form about the character you want to play — not a quiz.' },
-  { num: '02', title: 'Interview', text: 'Twenty minutes in voice with staff, to talk through the rules and your story.' },
-  { num: '03', title: 'Whitelist', text: 'Access granted, identifier linked and onboarding handled end to end.' },
-  { num: '04', title: 'First shift', text: 'A job placement, a district tour and a staff member on call if anything breaks.' },
+  { num: '01', title: 'درخواست', text: 'یک فرم کوتاه درباره شخصیتی که می‌خواهید بازی کنید — نه یک آزمون.' },
+  { num: '02', title: 'مصاحبه', text: 'بیست دقیقه گفتگوی صوتی با تیم، درباره قوانین و داستان شما.' },
+  { num: '03', title: 'وایت‌لیست', text: 'دسترسی صادر می‌شود، شناسه شما متصل و آشناسازی کامل انجام می‌شود.' },
+  { num: '04', title: 'اولین شیفت', text: 'جایگاه شغلی، تور محله‌ها و یک عضو تیم در دسترس اگر مشکلی پیش آمد.' },
 ];
 
 export default function About() {
@@ -22,13 +22,13 @@ export default function About() {
       <div className="page-head">
         <div className="shell page-head__inner">
           <div>
-            <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>About</span>
+            <nav className="crumbs" aria-label="مسیر صفحه">
+              <Link to="/">خانه</Link> <span>/</span> <span>درباره ما</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>A standard set for serious roleplay</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>استانداردی برای رول‌پلی جدی</h1>
             <p className="lede" style={{ marginTop: '0.8rem' }}>
-              Ria Roleplay was founded in 2021 to build a city where the writing mattered more than the script
-              count. We run one server, keep the whitelist tight, and know most of the people who play here by name.
+              ریا رول‌پلی در سال ۲۰۲۱ تأسیس شد تا شهری بسازد که در آن نوشتن مهم‌تر از تعداد اسکریپت‌ها باشد. یک سرور
+              داریم، وایت‌لیست را محدود نگه می‌داریم و بیشتر کسانی را که اینجا بازی می‌کنند با نام می‌شناسیم.
             </p>
           </div>
         </div>
@@ -39,33 +39,33 @@ export default function About() {
           <Reveal className="editorial__media">
             <img
               src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=85"
-              alt="Los Santos skyline at dusk"
+              alt="خط آسمان لس سانتوس در غروب"
             />
           </Reveal>
           <Reveal className="editorial__body" delay={80}>
-            <span className="eyebrow">Our philosophy</span>
-            <h2>Fewer features, built completely</h2>
+            <span className="eyebrow">فلسفه ما</span>
+            <h2>امکانات کمتر، اما کامل</h2>
             <p className="lede">
-              Most servers stack systems until nothing works together. We ship less — because a job is only worth
-              playing if the economy behind it, the police response to it and the people affected by it all behave
-              properly. Every system on Ria is tested by players before it goes live.
+              بیشتر سرورها آن‌قدر سیستم روی هم می‌چینند که دیگر هیچ‌کدام با هم کار نمی‌کنند. ما کمتر منتشر می‌کنیم —
+              چون یک شغل تنها وقتی ارزش بازی کردن دارد که اقتصاد پشت آن، واکنش پلیس به آن و آدم‌هایی که از آن تأثیر
+              می‌گیرند، همه درست رفتار کنند. هر سیستم در ریا پیش از انتشار توسط بازیکنان تست می‌شود.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
-              Our players are adults with jobs and lives. They value consistency over novelty, and good stories over
-              grind. So do we.
+              بازیکنان ما انسان‌های بالغی با شغل و زندگی هستند. آن‌ها پیوستگی را به تازگی و داستان خوب را به تکرار
+              بی‌پایان ترجیح می‌دهند. ما هم همین‌طور.
             </p>
             <div className="stat-row">
               <div className="stat">
                 <b>5</b>
-                <span>Years online</span>
+                <span>سال فعالیت</span>
               </div>
               <div className="stat">
                 <b>4,800</b>
-                <span>Citizens registered</span>
+                <span>شهروند ثبت‌شده</span>
               </div>
               <div className="stat">
                 <b>1.8M</b>
-                <span>Hours roleplayed</span>
+                <span>ساعت رول‌پلی</span>
               </div>
             </div>
           </Reveal>
@@ -76,20 +76,20 @@ export default function About() {
         <div className="shell">
           <div className="split-form">
             <Reveal className="panel">
-              <span className="eyebrow">Mission</span>
-              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>To make good roleplay the default</h2>
+              <span className="eyebrow">مأموریت</span>
+              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>رول‌پلی خوب را به حالت پیش‌فرض تبدیل کنیم</h2>
               <p className="lede" style={{ marginTop: '0.8rem' }}>
-                A city only works when the rules are clear and the staff apply them evenly. We build systems that
-                reward character over grind, moderate consistently, and make the first hour on the server as good
-                as the hundredth.
+                یک شهر تنها وقتی کار می‌کند که قوانین روشن باشند و تیم آن‌ها را یکسان اجرا کند. ما سیستم‌هایی می‌سازیم
+                که شخصیت را بر تکرار پاداش می‌دهند، نظارت را یکدست نگه می‌دارند و ساعت اول در سرور را به‌اندازه
+                ساعت صدم خوب می‌کنند.
               </p>
             </Reveal>
             <Reveal className="panel panel--muted" delay={80}>
-              <span className="eyebrow">Vision</span>
-              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>The most respected city in FiveM</h2>
+              <span className="eyebrow">چشم‌انداز</span>
+              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>محترم‌ترین شهر دنیای فایوام</h2>
               <p className="lede" style={{ marginTop: '0.8rem' }}>
-                We are building a server that outlives trends: one standard of moderation across every time zone,
-                custom systems that hold up under load, and a community that comes back for the next chapter.
+                ما سروری می‌سازیم که از مدها عمر بیشتری دارد: یک استاندارد نظارت در همه مناطق زمانی، سیستم‌های
+                اختصاصی که زیر بار سنگین هم دوام می‌آورند و انجمنی که برای فصل بعدی برمی‌گردد.
               </p>
             </Reveal>
           </div>
@@ -109,9 +109,9 @@ export default function About() {
       <section className="section">
         <div className="shell">
           <SectionHead
-            eyebrow="Why players stay"
-            title="The Ria standard"
-            lede="Six commitments, applied to every session and every report we review."
+            eyebrow="چرا بازیکنان می‌مانند"
+            title="استاندارد ریا"
+            lede="شش تعهد که در هر سشن و هر گزارشی که بررسی می‌کنیم اعمال می‌شود."
             center
           />
           <ValueGrid items={[...VALUES, ...EXTRA_VALUES].slice(0, 6)} />
@@ -122,11 +122,11 @@ export default function About() {
         <section className="section section--cream">
           <div className="shell">
             <SectionHead
-              eyebrow="Our people"
-              title="The team behind the city"
+              eyebrow="آدم‌های ما"
+              title="تیمی که پشت این شهر است"
               action={
                 <Link to="/agents" className="link-arrow">
-                  All staff <ArrowRight size={14} />
+                  همه اعضای تیم <ArrowRight size={14} />
                 </Link>
               }
             />
@@ -141,11 +141,11 @@ export default function About() {
 
       <section className="final-cta">
         <div className="shell">
-          <span className="eyebrow">Ria Roleplay</span>
-          <h2>Begin with a conversation</h2>
-          <p>Tell us how you like to play. We will tell you honestly whether we are the right city for it.</p>
+          <span className="eyebrow">ریا رول‌پلی</span>
+          <h2>با یک گفتگو شروع کنید</h2>
+          <p>بگویید دوست دارید چطور بازی کنید. صادقانه می‌گوییم که ما شهر مناسبی برای آن هستیم یا نه.</p>
           <Link to="/contact" className="btn btn--gold">
-            Contact us <ArrowRight size={15} />
+            تماس با ما <ArrowRight size={15} />
           </Link>
         </div>
       </section>

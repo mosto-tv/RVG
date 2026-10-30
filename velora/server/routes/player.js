@@ -44,8 +44,8 @@ playerRouter.post('/support', requireAuth, (req, res, next) => {
     const message = clean(req.body?.message, 2000);
     const orderReference = clean(req.body?.orderReference, 40);
     const fields = {};
-    if (subject.length < 3) fields.subject = 'Add a short subject.';
-    if (message.length < 12) fields.message = 'Describe the issue in a little more detail.';
+    if (subject.length < 3) fields.subject = 'یک موضوع کوتاه بنویسید.';
+    if (message.length < 12) fields.message = 'مشکل را کمی با جزئیات بیشتر توضیح دهید.';
     if (Object.keys(fields).length) throw new ValidationError(fields);
 
     run(
@@ -57,7 +57,7 @@ playerRouter.post('/support', requireAuth, (req, res, next) => {
       subject,
       message,
     );
-    res.status(201).json({ ok: true, message: 'Support request received. The RIA team replies within 24 hours.' });
+    res.status(201).json({ ok: true, message: 'درخواست پشتیبانی دریافت شد. تیم ریا تا ۲۴ ساعت پاسخ می‌دهد.' });
   } catch (err) {
     next(err);
   }

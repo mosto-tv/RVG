@@ -19,16 +19,16 @@ export default function SignUp() {
   const submit = async (event) => {
     event.preventDefault();
     const next = {};
-    if (values.name.trim().length < 2) next.name = 'Please enter your full name.';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email)) next.email = 'Enter a valid email address.';
-    if (values.password.length < 8) next.password = 'Use at least 8 characters.';
+    if (values.name.trim().length < 2) next.name = 'نام و نام خانوادگی خود را وارد کنید.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email)) next.email = 'یک نشانی ایمیل معتبر وارد کنید.';
+    if (values.password.length < 8) next.password = 'گذرواژه باید حداقل ۸ کاراکتر باشد.';
     setErrors(next);
     if (Object.keys(next).length) return;
 
     setBusy(true);
     try {
       await signUp(values);
-      push('Account created. Welcome to Ria.', 'success');
+      push('حساب ساخته شد. به ریا خوش آمدید.', 'success');
       navigate('/account');
     } catch (err) {
       setErrors(err.fields || { email: err.message });
@@ -40,23 +40,23 @@ export default function SignUp() {
   return (
     <div className="auth-page">
       <div className="auth-page__media">
-        <img src={IMAGE} alt="Downtown Los Santos at dusk" />
+        <img src={IMAGE} alt="مرکز شهر لس سانتوس در غروب" />
         <div className="auth-page__quote">
-          <p>“Every detail was handled before we thought to ask.”</p>
-          <span>Whitelisted player, Blaine County</span>
+          <p>«هر جزئیاتی پیش از آنکه به فکر پرسیدنش بیفتیم، انجام شده بود.»</p>
+          <span>بازیکن وایت‌لیست‌شده، بلین کانتی</span>
         </div>
       </div>
       <div className="auth-page__form">
         <div className="auth-card">
-          <span className="eyebrow">Player access</span>
-          <h1>Create an account</h1>
+          <span className="eyebrow">دسترسی بازیکن</span>
+          <h1>ساخت حساب کاربری</h1>
           <p className="lede" style={{ marginTop: '-0.4rem' }}>
-            Save features, apply for whitelist and keep your RIA store purchases together.
+            امکانات را ذخیره کنید، برای وایت‌لیست درخواست بدهید و خریدهای فروشگاه ریا را یکجا نگه دارید.
           </p>
           <form onSubmit={submit} noValidate style={{ display: 'grid', gap: '0.9rem' }}>
             <div className="field">
               <label className="field__label" htmlFor="su-name">
-                Full name
+                نام و نام خانوادگی
               </label>
               <input
                 id="su-name"
@@ -70,7 +70,7 @@ export default function SignUp() {
             </div>
             <div className="field">
               <label className="field__label" htmlFor="su-email">
-                Email address
+                نشانی ایمیل
               </label>
               <input
                 id="su-email"
@@ -85,7 +85,7 @@ export default function SignUp() {
             </div>
             <div className="field">
               <label className="field__label" htmlFor="su-phone">
-                Phone (optional)
+                شماره تماس (اختیاری)
               </label>
               <input
                 id="su-phone"
@@ -97,7 +97,7 @@ export default function SignUp() {
             </div>
             <div className="field">
               <label className="field__label" htmlFor="su-password">
-                Password
+                گذرواژه
               </label>
               <input
                 id="su-password"
@@ -109,14 +109,14 @@ export default function SignUp() {
                 autoComplete="new-password"
               />
               {errors.password && <span className="field__error">{errors.password}</span>}
-              <span className="form-note">At least 8 characters.</span>
+              <span className="form-note">حداقل ۸ کاراکتر.</span>
             </div>
             <button className="btn btn--block" type="submit" disabled={busy}>
-              {busy ? <span className="btn__spinner" /> : <UserPlus size={15} />} Create account
+              {busy ? <span className="btn__spinner" /> : <UserPlus size={15} />} ساخت حساب
             </button>
           </form>
           <p className="auth-switch">
-            Already whitelisted? <Link to="/signin">Sign in</Link>
+            قبلاً وایت‌لیست گرفته‌اید؟ <Link to="/signin">ورود</Link>
           </p>
         </div>
       </div>

@@ -1,0 +1,146 @@
+/* ============================================================
+   RIA ROLEPLAY — Persian / RTL layer
+   Applies on top of the original stylesheets. It only adjusts what
+   Persian script and right-to-left reading order require: tracking,
+   line room for the Persian faces, italic synthesis and the handful
+   of directional details. No layout, colour, spacing, radius, shadow
+   or motion value from the original design is redefined here.
+   ============================================================ */
+
+body {
+  line-height: 1.85;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.4;
+  letter-spacing: 0;
+  word-spacing: 0.02em;
+}
+
+/* Arabic script cannot carry Latin tracking: keep the weight, case and
+   colour of each label, drop only the extra letter spacing. */
+.eyebrow {
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+}
+
+.btn,
+.nav__link,
+.link-arrow,
+.field__label,
+.badge,
+.store-badge,
+.chip,
+.search-panel__label,
+.search-panel__control,
+.filters__title,
+.filters__label,
+.filter-pill,
+.pill-tabs button,
+.footer__title,
+.footer__legal-links a,
+.crumbs,
+.price__note,
+.cart-legal,
+.ria-badge,
+.order-status,
+.delivery-pill,
+.status-pill,
+.data-table th {
+  letter-spacing: 0.015em;
+}
+
+/* Small stat labels keep their size and weight; only the Latin tracking,
+   which separates Persian letters, is reduced. */
+.hero__stat span,
+.store-stat span,
+.player-stat span,
+.stat span,
+.location-card__city,
+.footer__title {
+  letter-spacing: 0.02em;
+}
+
+/* Playfair's italic has no Persian counterpart; a synthesised oblique
+   would shear the script. The emphasis colour and weight remain. */
+em,
+.hero h1 em {
+  font-style: normal;
+}
+
+/* Directional glyphs follow the reading direction. */
+[dir='rtl'] .lucide-arrow-right,
+[dir='rtl'] .lucide-arrow-left,
+[dir='rtl'] .lucide-chevron-right,
+[dir='rtl'] .lucide-chevron-left,
+[dir='rtl'] .lucide-arrow-up-right {
+  transform: scaleX(-1);
+}
+
+/* Keep the animated underline and the hover nudge on the reading side. */
+[dir='rtl'] .nav__link::after {
+  transform-origin: right;
+}
+
+/* The hero block sits over the darkest part of the scrim, which in a
+   right-to-left page is the start side. */
+[dir='rtl'] .hero__inner {
+  justify-content: flex-start;
+}
+
+/* Persian ascenders and descenders need the extra leading the Latin
+   display line-height does not provide. */
+.hero h1 {
+  line-height: 1.32;
+}
+
+.hero h1 em {
+  display: block;
+  padding-bottom: 0.06em;
+}
+
+.hero__lede {
+  line-height: 1.95;
+}
+
+[dir='rtl'] .footer__links a:hover {
+  transform: translateX(-3px);
+}
+
+/* Machine-readable values stay left-to-right inside Persian text. */
+code,
+.data-table__mono,
+.cart-item__meta,
+input[type='email'],
+input[type='number'],
+input[inputmode='numeric'] {
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
+
+/* Persian needs a little more leading in the small print. */
+.form-note,
+.field__error,
+.lede,
+.aside-value__text,
+.value-item__text,
+.property-card__location {
+  line-height: 1.85;
+}
+
+/* Digits and prices keep the Latin display face, so they also keep the
+   original tabular rhythm inside the Persian layout. */
+.property-card__price,
+.detail__price,
+.spec__value,
+.hero__stats b,
+.stat b,
+.player-stat b,
+.admin-card b,
+.price {
+  font-feature-settings: 'tnum' 1;
+}

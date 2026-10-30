@@ -6,6 +6,7 @@ import ProductModal from '../components/ProductModal.jsx';
 import { useFetch } from '../lib/useFetch.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import { storeCategoryLabel } from '../lib/labels.js';
 
 const HERO = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=2000&q=85';
 
@@ -38,7 +39,7 @@ export default function Store() {
 
   const addToCart = (product) => {
     cart.add(product);
-    push(`${product.name} added to your selection.`, 'success');
+    push(`«${product.name}» به سبد شما اضافه شد.`, 'success');
     cart.openCart?.();
   };
 
@@ -47,9 +48,9 @@ export default function Store() {
     const token = stored ? JSON.parse(stored).token : '';
     try {
       await apiCancel(cancelledRef, token);
-      push('Checkout cancelled — no payment was taken.', 'info');
+      push('پرداخت لغو شد — مبلغی از شما کسر نشد.', 'info');
     } catch {
-      push('Checkout cancelled — no payment was taken.', 'info');
+      push('پرداخت لغو شد — مبلغی از شما کسر نشد.', 'info');
     }
     const next = new URLSearchParams(params);
     next.delete('cancelled');
@@ -65,19 +66,19 @@ export default function Store() {
         <div className="shell store-hero__inner">
           <div>
             <span className="ria-badge">
-              <Sparkles size={12} /> RIA ROLEPLAY · Official store
+              <Sparkles size={12} /> ریا رول‌پلی · فروشگاه رسمی
             </span>
-            <h1>The RIA Collection</h1>
+            <h1>مجموعه ریا</h1>
             <p>
-              Memberships, priority access and cosmetic packages for the RIA ROLEPLAY community. Every purchase is
-              completed on our official Tebex checkout and delivered automatically to your FiveM identifier.
+              عضویت‌ها، دسترسی اولویت‌دار و پکیج‌های ظاهری برای انجمن ریا رول‌پلی. هر خرید در درگاه رسمی Tebex ما
+              تکمیل و به‌صورت خودکار به شناسه فایوام شما تحویل می‌شود.
             </p>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '1.4rem' }}>
               <button className="btn btn--ria" onClick={cart.openCart}>
-                <ShoppingBag size={15} /> Your selection {cart.count > 0 ? `(${cart.count})` : ''}
+                <ShoppingBag size={15} /> سبد خرید شما {cart.count > 0 ? `(${cart.count})` : ''}
               </button>
               <Link to="/player" className="btn btn--store-ghost">
-                Purchase history <ArrowRight size={14} />
+                تاریخچه خرید <ArrowRight size={14} />
               </Link>
             </div>
           </div>
@@ -85,15 +86,15 @@ export default function Store() {
           <div className="store-hero__stats">
             <div className="store-stat">
               <b>{products.length}</b>
-              <span>Packages</span>
+              <span>پکیج</span>
             </div>
             <div className="store-stat">
               <b>Tebex</b>
-              <span>Secure checkout</span>
+              <span>پرداخت امن</span>
             </div>
             <div className="store-stat">
-              <b>Auto</b>
-              <span>Delivery</span>
+              <b>خودکار</b>
+              <span>تحویل</span>
             </div>
           </div>
         </div>
@@ -104,10 +105,14 @@ export default function Store() {
           <div className="store-notice" style={{ marginTop: 0, marginBottom: '1.2rem' }}>
             <ShieldCheck size={16} style={{ flex: '0 0 auto', marginTop: 2 }} />
             <div>
-              <strong>Checkout cancelled.</strong> No payment was taken for order {cancelledRef}. You can rebuild
-              your selection at any time.
-              <button className="link-arrow" style={{ display: 'inline-flex', marginLeft: '0.8rem' }} onClick={cancelOrder}>
-                Dismiss
+              <strong>پرداخت لغو شد.</strong> برای سفارش {cancelledRef} مبلغی کسر نشد. هر زمان بخواهید می‌توانید
+              سبد خود را دوباره بسازید.
+              <button
+                className="link-arrow"
+                style={{ display: 'inline-flex', marginInlineStart: '0.8rem' }}
+                onClick={cancelOrder}
+              >
+                بستن
               </button>
             </div>
           </div>
@@ -117,15 +122,15 @@ export default function Store() {
           <div className="store-notice" style={{ marginTop: 0, marginBottom: '1.4rem' }}>
             <ShieldCheck size={16} style={{ flex: '0 0 auto', marginTop: 2 }} />
             <div>
-              <strong>Tebex is not connected yet.</strong> The catalogue is live and browsable, but checkout stays
-              closed until the store administrator adds the RIA ROLEPLAY Tebex credentials:
+              <strong>Tebex هنوز متصل نشده است.</strong> فهرست پکیج‌ها فعال و قابل مرور است، اما پرداخت تا زمانی که
+              مدیر فروشگاه اطلاعات Tebex ریا رول‌پلی را اضافه نکند بسته می‌ماند:
               <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginTop: '0.45rem' }}>
                 {status.data.missing.map((key) => (
                   <code key={key}>{key}</code>
                 ))}
               </div>
               <span style={{ display: 'block', marginTop: '0.4rem', opacity: 0.85 }}>
-                No simulated or fake checkout is offered — payments only ever run through Tebex.
+                هیچ پرداخت شبیه‌سازی‌شده یا صوری ارائه نمی‌شود — پرداخت‌ها تنها از طریق Tebex انجام می‌شوند.
               </span>
             </div>
           </div>
@@ -134,8 +139,8 @@ export default function Store() {
         {featured.length > 0 && (
           <section style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
             <div className="store-section-title">
-              <h2>Featured Packages</h2>
-              <span>Curated by the RIA team</span>
+              <h2>پکیج‌های ویژه</h2>
+              <span>انتخاب‌شده توسط تیم ریا</span>
             </div>
             <div className="product-grid">
               {featured.map((product) => (
@@ -146,8 +151,8 @@ export default function Store() {
         )}
 
         <div className="store-section-title">
-          <h2>All Packages</h2>
-          <span>Memberships, access and cosmetics</span>
+          <h2>همه پکیج‌ها</h2>
+          <span>عضویت، دسترسی و اقلام ظاهری</span>
         </div>
 
         <div className="store-toolbar">
@@ -156,16 +161,16 @@ export default function Store() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search packages, memberships, cosmetics"
-              aria-label="Search store packages"
+              placeholder="جستجوی پکیج، عضویت یا اقلام ظاهری"
+              aria-label="جستجوی پکیج‌های فروشگاه"
             />
           </label>
-          <span style={{ fontSize: '0.78rem', color: 'rgba(247,245,237,.5)' }}>{visible.length} packages</span>
+          <span style={{ fontSize: '0.78rem', color: 'rgba(247,245,237,.5)' }}>{visible.length} پکیج</span>
         </div>
 
         <div className="category-scroll" style={{ marginBottom: '1.6rem' }}>
           <button className={`store-chip${category === '' ? ' is-active' : ''}`} onClick={() => setCategory('')}>
-            All categories
+            همه دسته‌ها
           </button>
           {categories.map((item) => (
             <button
@@ -173,7 +178,7 @@ export default function Store() {
               className={`store-chip${category === item ? ' is-active' : ''}`}
               onClick={() => setCategory(category === item ? '' : item)}
             >
-              {item}
+              {storeCategoryLabel(item)}
             </button>
           ))}
         </div>
@@ -181,7 +186,7 @@ export default function Store() {
         {loading && (
           <div className="loading-row" style={{ color: 'rgba(247,245,237,.5)' }}>
             <span className="loading-row__bar" />
-            Loading packages
+            در حال بارگذاری پکیج‌ها
           </div>
         )}
 
@@ -190,9 +195,9 @@ export default function Store() {
             <span className="empty-state__icon">
               <Search size={20} />
             </span>
-            <h3 style={{ color: 'var(--ivory)' }}>No packages match that search</h3>
+            <h3 style={{ color: 'var(--ivory)' }}>هیچ پکیجی با این جستجو پیدا نشد</h3>
             <p style={{ color: 'rgba(247,245,237,.6)' }}>
-              Try another category, or clear the search to see the full collection.
+              دسته دیگری را امتحان کنید یا جستجو را پاک کنید تا همه مجموعه را ببینید.
             </p>
             <button
               className="btn btn--ria btn--sm"
@@ -201,7 +206,7 @@ export default function Store() {
                 setCategory('');
               }}
             >
-              Clear search
+              پاک کردن جستجو
             </button>
           </div>
         )}
@@ -216,14 +221,30 @@ export default function Store() {
 
         <section style={{ marginTop: 'clamp(2.5rem, 5vw, 4rem)', display: 'grid', gap: '1.4rem' }}>
           <div className="store-section-title">
-            <h2>How delivery works</h2>
+            <h2>تحویل چگونه انجام می‌شود</h2>
           </div>
           <div className="process" style={{ gap: '1rem' }}>
             {[
-              { icon: ShoppingBag, title: 'Choose your packages', text: 'Build a selection of memberships, access or cosmetics.' },
-              { icon: ShieldCheck, title: 'Pay on Tebex', text: 'Card details are entered only on the official Tebex checkout.' },
-              { icon: Truck, title: 'Server-side verification', text: 'Tebex notifies our server; the payment is re-verified before anything ships.' },
-              { icon: PackageCheck, title: 'Delivered automatically', text: 'The entitlement is applied to your FiveM identifier and recorded.' },
+              {
+                icon: ShoppingBag,
+                title: 'پکیج‌های خود را انتخاب کنید',
+                text: 'سبدی از عضویت، دسترسی یا اقلام ظاهری بسازید.',
+              },
+              {
+                icon: ShieldCheck,
+                title: 'پرداخت در Tebex',
+                text: 'اطلاعات کارت تنها در درگاه رسمی Tebex وارد می‌شود.',
+              },
+              {
+                icon: Truck,
+                title: 'تأیید در سمت سرور',
+                text: 'Tebex به سرور ما اطلاع می‌دهد و پرداخت پیش از تحویل دوباره بررسی می‌شود.',
+              },
+              {
+                icon: PackageCheck,
+                title: 'تحویل خودکار',
+                text: 'مزایا روی شناسه فایوام شما اعمال و ثبت می‌شود.',
+              },
             ].map((step, index) => {
               const Icon = step.icon;
               return (
@@ -241,11 +262,14 @@ export default function Store() {
           </div>
 
           <p className="cart-legal" style={{ maxWidth: '75ch' }}>
-            <Check size={13} style={{ verticalAlign: '-2px', marginRight: 4, color: 'var(--ria-yellow)' }} />
-            All RIA ROLEPLAY packages are cosmetic, membership or access benefits. We do not sell in-game currency,
-            randomised rewards, loot boxes or gambling mechanics, and purchases never transfer real-world value back
-            to players. Sales follow the Cfx.re Platform License, the Rockstar Creator Platform License and the Tebex
-            Acceptable Use Policy. Read the <Link to="/legal/tebex" style={{ color: 'var(--ria-yellow)' }}>store terms</Link>.
+            <Check size={13} style={{ verticalAlign: '-2px', marginInlineEnd: 4, color: 'var(--ria-yellow)' }} />
+            همه پکیج‌های ریا رول‌پلی مزایای ظاهری، عضویت یا دسترسی هستند. ما ارز درون‌بازی، جایزه تصادفی، جعبه شانس
+            یا مکانیک قمار نمی‌فروشیم و خریدها هرگز ارزش واقعی به بازیکنان بازنمی‌گردانند. فروش تابع مجوز پلتفرم
+            Cfx.re، مجوز پلتفرم سازندگان Rockstar و سیاست پذیرش استفاده Tebex است.{' '}
+            <Link to="/legal/tebex" style={{ color: 'var(--ria-yellow)' }}>
+              قوانین فروشگاه
+            </Link>
+            .
           </p>
         </section>
       </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MessageCircle, Youtube, Mail, Globe } from 'lucide-react';
+import { cityLabel } from '../lib/labels.js';
 
 export default function AgentCard({ agent, compact = false }) {
   if (compact) {
@@ -13,8 +14,8 @@ export default function AgentCard({ agent, compact = false }) {
         <a
           href={`mailto:${agent.email}`}
           className="icon-btn"
-          style={{ marginLeft: 'auto', width: 32, height: 32 }}
-          aria-label={`Email ${agent.name}`}
+          style={{ marginInlineStart: 'auto', width: 32, height: 32 }}
+          aria-label={`ایمیل به ${agent.name}`}
         >
           <Mail size={14} />
         </a>
@@ -25,7 +26,7 @@ export default function AgentCard({ agent, compact = false }) {
   return (
     <article className="agent-card">
       <div className="agent-card__portrait">
-        <img src={agent.portrait} alt={`${agent.name}, ${agent.role}`} loading="lazy" />
+        <img src={agent.portrait} alt={`${agent.name}، ${agent.role}`} loading="lazy" />
       </div>
       <h3 className="agent-card__name">{agent.name}</h3>
       <span className="agent-card__role">{agent.role}</span>
@@ -37,7 +38,7 @@ export default function AgentCard({ agent, compact = false }) {
             <Link key={listing.id} to={`/listings/${listing.id}`} className="agent-listing">
               <img src={listing.image} alt="" loading="lazy" />
               <span>
-                <b>{listing.title}</b> · {listing.city}
+                <b>{listing.title}</b> · {cityLabel(listing.city)}
               </span>
             </Link>
           ))}
@@ -45,22 +46,22 @@ export default function AgentCard({ agent, compact = false }) {
       )}
 
       <div className="agent-card__actions">
-        <a href={`mailto:${agent.email}?subject=Server%20enquiry`} className="btn btn--sm">
-          <Mail size={13} /> Contact Staff
+        <a href={`mailto:${agent.email}?subject=${encodeURIComponent('درخواست از تیم سرور')}`} className="btn btn--sm">
+          <Mail size={13} /> تماس با تیم
         </a>
         <Link to={`/listings?agent=${agent.slug}`} className="btn btn--outline btn--sm">
-          View Features
+          مشاهده امکانات
         </Link>
       </div>
 
       <div className="agent-card__socials">
-        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} on Discord`}>
+        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} در دیسکورد`}>
           <MessageCircle size={14} />
         </a>
-        <a href={agent.socials?.linkedin || '#'} aria-label={`${agent.name} on the server`}>
+        <a href={agent.socials?.linkedin || '#'} aria-label={`${agent.name} در سرور`}>
           <Youtube size={14} />
         </a>
-        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} on the server`}>
+        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} در سرور`}>
           <Globe size={14} />
         </a>
       </div>

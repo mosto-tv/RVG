@@ -20,8 +20,11 @@
   --ria-panel: #1c1815;
   --ria-border: #2c2622;
 
-  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Latin display/sans faces stay first so the original typography is
+     untouched where it renders Latin; the Persian faces carry every
+     Persian glyph with the same serif/sans contrast. */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', 'Markazi Text', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope', 'Inter', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --fs-display: clamp(2.75rem, 5.6vw, 5rem);
   --fs-h1: clamp(2.2rem, 4vw, 3.5rem);
@@ -395,7 +398,7 @@ select.field__control {
   background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
-  padding-right: 2.4rem;
+  padding-inline-end: 2.4rem;
 }
 
 .form-grid {

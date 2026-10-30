@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { BadgeCheck, Copy, IdCard, LifeBuoy, PackageCheck, RefreshCw, ShoppingBag, Truck } from 'lucide-react';
 import { api, formatDateTime, money } from '../lib/api.js';
+import { statusLabel } from '../lib/labels.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 
@@ -11,6 +12,14 @@ const DELIVERY_CLASS = {
   queued: 'delivery-pill--pending',
   failed: 'delivery-pill--failed',
   not_started: 'delivery-pill--not_started',
+};
+
+const DELIVERY_LABEL = {
+  delivered: 'تحویل شده',
+  pending: 'در انتظار بررسی',
+  queued: 'در صف',
+  failed: 'ناموفق',
+  not_started: 'شروع نشده',
 };
 
 export default function Player() {
@@ -44,7 +53,7 @@ export default function Player() {
       <div className="shell">
         <div className="loading-row">
           <span className="loading-row__bar" />
-          Loading player account
+          در حال بارگذاری حساب بازیکن
         </div>
       </div>
     );
@@ -56,7 +65,7 @@ export default function Player() {
     setBusy(true);
     try {
       await api.patch('/auth/me', { name: user.name, phone: user.phone || '', fivemId: identifier });
-      push('FiveM identifier saved. Deliveries will now target it.', 'success');
+      push('شناسه فایوام ذخیره شد. از این پس تحویل‌ها روی آن انجام می‌شود.', 'success');
       load();
     } catch (err) {
       push(err.fields?.fivemId || err.message, 'error');
@@ -85,7 +94,7 @@ export default function Player() {
   const copyIdentifier = async () => {
     if (!summary?.user?.fivemId) return;
     await navigator.clipboard.writeText(summary.user.fivemId);
-    push('Identifier copied.', 'success');
+    push('شناسه کپی شد.', 'success');
   };
 
   return (
@@ -95,19 +104,19 @@ export default function Player() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span className="account-avatar">{user.name.slice(0, 1).toUpperCase()}</span>
             <div>
-              <span className="ria-badge">RIA ROLEPLAY · Player account</span>
+              <span className="ria-badge">ریا رول‌پلی · حساب بازیکن</span>
               <h1 style={{ marginTop: '0.5rem' }}>{user.name}</h1>
               <p className="muted" style={{ fontSize: '0.85rem' }}>
-                {summary?.user?.fivemId || 'No FiveM identifier linked yet'}
+                {summary?.user?.fivemId || 'هنوز شناسه فایوامی متصل نشده است'}
               </p>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button className="btn btn--ria btn--sm" onClick={load}>
-              <RefreshCw size={13} /> Refresh
+              <RefreshCw size={13} /> به‌روزرسانی
             </button>
             <Link to="/store" className="btn btn--store-ghost btn--sm">
-              <ShoppingBag size={13} /> Visit store
+              <ShoppingBag size={13} /> رفتن به فروشگاه
             </Link>
           </div>
         </div>
@@ -117,7 +126,7 @@ export default function Player() {
         {state.loading && !summary && (
           <div className="loading-row">
             <span className="loading-row__bar" />
-            Loading purchases
+            در حال بارگذاری خریدها
           </div>
         )}
 
@@ -126,52 +135,55 @@ export default function Player() {
             <div className="player-stats">
               <div className="player-stat">
                 <b>{summary.totals.orders}</b>
-                <span>Orders</span>
+                <span>سفارش</span>
               </div>
               <div className="player-stat">
                 <b>{summary.totals.paid}</b>
-                <span>Verified payments</span>
+                <span>پرداخت تأیید‌شده</span>
               </div>
               <div className="player-stat">
                 <b>{money(summary.totals.spentCents)}</b>
-                <span>Total spent</span>
+                <span>مجموع خرید</span>
               </div>
               <div className="player-stat">
                 <b>{summary.totals.pendingDeliveries}</b>
-                <span>Pending deliveries</span>
+                <span>تحویل در انتظار</span>
               </div>
             </div>
 
             <div className="split-form">
               <div className="panel">
-                <h2 className="panel__title">Purchase history</h2>
-                <p className="panel__sub">Every order, its payment status and delivery state.</p>
+                <h2 className="panel__title">تاریخچه خرید</h2>
+                <p className="panel__sub">هر سفارش، وضعیت پرداخت و حالت تحویل آن.</p>
 
                 {summary.orders.length === 0 && (
                   <div className="empty-state" style={{ padding: '2rem 1rem' }}>
                     <span className="empty-state__icon">
                       <ShoppingBag size={18} />
                     </span>
-                    <h3>No purchases yet</h3>
-                    <p>Packages you buy appear here with their delivery status.</p>
+                    <h3>هنوز خریدی ثبت نشده است</h3>
+                    <p>پکیج‌هایی که می‌خرید همراه با وضعیت تحویل اینجا نمایش داده می‌شوند.</p>
                     <Link to="/store" className="btn btn--sm">
-                      Browse the store
+                      مرور فروشگاه
                     </Link>
                   </div>
                 )}
 
                 {summary.orders.map((order) => (
-                  <div key={order.reference} style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem', marginTop: '1rem' }}>
+                  <div
+                    key={order.reference}
+                    style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem', marginTop: '1rem' }}
+                  >
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
                       <div>
-                        <div style={{ fontWeight: 600 }}>Order {order.reference}</div>
+                        <div style={{ fontWeight: 600 }}>سفارش {order.reference}</div>
                         <div className="form-note">{formatDateTime(order.createdAt)}</div>
                       </div>
                       <span
                         className={`order-status order-status--${order.status}`}
                         style={{ alignSelf: 'flex-start' }}
                       >
-                        {order.status}
+                        {statusLabel(order.status)}
                       </span>
                     </div>
                     <div className="order-lines" style={{ marginTop: '0.6rem' }}>
@@ -180,7 +192,7 @@ export default function Player() {
                           <div>
                             <div style={{ fontSize: '0.88rem' }}>{item.name}</div>
                             <span className={`delivery-pill ${DELIVERY_CLASS[item.delivery] || ''}`}>
-                              <Truck size={11} /> {item.delivery.replace('_', ' ')}
+                              <Truck size={11} /> {DELIVERY_LABEL[item.delivery] || item.delivery}
                             </span>
                           </div>
                           <span>{money(item.priceCents * item.quantity)}</span>
@@ -193,14 +205,14 @@ export default function Player() {
 
               <div style={{ display: 'grid', gap: '1rem' }}>
                 <form className="panel" onSubmit={saveIdentifier}>
-                  <h2 className="panel__title">FiveM identifier</h2>
+                  <h2 className="panel__title">شناسه فایوام</h2>
                   <p className="panel__sub">
-                    Required for automatic delivery. Use the identifier your server reports, for example{' '}
+                    برای تحویل خودکار لازم است. شناسه‌ای را وارد کنید که سرور شما گزارش می‌کند، مثلاً{' '}
                     <code>license:1a2b3c…</code>.
                   </p>
                   <div className="field">
                     <label className="field__label" htmlFor="pl-fivem">
-                      Identifier
+                      شناسه
                     </label>
                     <input
                       id="pl-fivem"
@@ -212,11 +224,11 @@ export default function Player() {
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.9rem', flexWrap: 'wrap' }}>
                     <button className="btn btn--sm" type="submit" disabled={busy}>
-                      <IdCard size={13} /> Save identifier
+                      <IdCard size={13} /> ذخیره شناسه
                     </button>
                     {summary.user?.fivemId && (
                       <button type="button" className="btn btn--outline btn--sm" onClick={copyIdentifier}>
-                        <Copy size={13} /> Copy
+                        <Copy size={13} /> کپی
                       </button>
                     )}
                   </div>
@@ -224,11 +236,11 @@ export default function Player() {
 
                 <div className="panel panel--muted">
                   <h2 className="panel__title" style={{ fontSize: '1.15rem' }}>
-                    Active memberships
+                    عضویت‌های فعال
                   </h2>
                   {summary.memberships.length === 0 ? (
                     <p className="panel__sub" style={{ marginBottom: 0 }}>
-                      No memberships delivered yet.
+                      هنوز عضویتی تحویل داده نشده است.
                     </p>
                   ) : (
                     <ul className="info-list" style={{ marginTop: '0.6rem' }}>
@@ -237,7 +249,7 @@ export default function Player() {
                           <span>
                             <BadgeCheck size={13} style={{ color: 'var(--forest)' }} /> {row.product_name}
                           </span>
-                          <span>{row.status === 'delivered' ? 'Active' : 'Pending'}</span>
+                          <span>{row.status === 'delivered' ? 'فعال' : 'در انتظار'}</span>
                         </li>
                       ))}
                     </ul>
@@ -246,12 +258,12 @@ export default function Player() {
 
                 <form className="panel" onSubmit={submitSupport}>
                   <h2 className="panel__title" style={{ fontSize: '1.15rem' }}>
-                    <LifeBuoy size={15} style={{ verticalAlign: '-2px' }} /> Support request
+                    <LifeBuoy size={15} style={{ verticalAlign: '-2px' }} /> درخواست پشتیبانی
                   </h2>
-                  <p className="panel__sub">Delivery issues are answered within 24 hours by the RIA team.</p>
+                  <p className="panel__sub">تیم ریا تا ۲۴ ساعت به مشکلات تحویل پاسخ می‌دهد.</p>
                   <div className="field" style={{ marginBottom: '0.6rem' }}>
                     <label className="field__label" htmlFor="sup-subject">
-                      Subject
+                      موضوع
                     </label>
                     <input
                       id="sup-subject"
@@ -264,7 +276,7 @@ export default function Player() {
                   </div>
                   <div className="field" style={{ marginBottom: '0.6rem' }}>
                     <label className="field__label" htmlFor="sup-order">
-                      Order reference (optional)
+                      شماره سفارش (اختیاری)
                     </label>
                     <input
                       id="sup-order"
@@ -276,7 +288,7 @@ export default function Player() {
                   </div>
                   <div className="field">
                     <label className="field__label" htmlFor="sup-message">
-                      Message
+                      متن پیام
                     </label>
                     <textarea
                       id="sup-message"
@@ -289,20 +301,20 @@ export default function Player() {
                     {supportErrors.message && <span className="field__error">{supportErrors.message}</span>}
                   </div>
                   <button className="btn btn--sm" type="submit" disabled={busy} style={{ marginTop: '0.8rem' }}>
-                    <PackageCheck size={13} /> Send request
+                    <PackageCheck size={13} /> ارسال درخواست
                   </button>
                 </form>
 
                 {summary.support.length > 0 && (
                   <div className="panel">
                     <h2 className="panel__title" style={{ fontSize: '1.15rem' }}>
-                      Your requests
+                      درخواست‌های شما
                     </h2>
                     <ul className="info-list" style={{ marginTop: '0.6rem' }}>
                       {summary.support.map((row) => (
                         <li key={row.id}>
                           <span>{row.subject}</span>
-                          <span className="status-pill status-pill--gold">{row.status.replace('_', ' ')}</span>
+                          <span className="status-pill status-pill--gold">{statusLabel(row.status)}</span>
                         </li>
                       ))}
                     </ul>

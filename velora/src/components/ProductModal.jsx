@@ -1,6 +1,7 @@
 import { Check, ShieldCheck, Plus } from 'lucide-react';
 import Modal from './Modal.jsx';
 import { money } from '../lib/api.js';
+import { storeCategoryLabel } from '../lib/labels.js';
 
 export default function ProductModal({ product, onClose, onAdd }) {
   if (!product) return null;
@@ -12,10 +13,10 @@ export default function ProductModal({ product, onClose, onAdd }) {
           <img src={product.image} alt={product.name} />
         </div>
         <div className="product-modal__body">
-          <span className="product-card__category">{product.category}</span>
+          <span className="product-card__category">{storeCategoryLabel(product.category)}</span>
           <h2 id="product-modal-title">{product.name}</h2>
           <p className="modal__sub">{product.tagline}</p>
-          <p style={{ fontSize: '0.88rem', lineHeight: 1.75, color: 'rgba(247,245,237,.72)' }}>
+          <p style={{ fontSize: '0.88rem', lineHeight: 1.85, color: 'rgba(247,245,237,.72)' }}>
             {product.description}
           </p>
 
@@ -42,14 +43,14 @@ export default function ProductModal({ product, onClose, onAdd }) {
                 onClose();
               }}
             >
-              <Plus size={14} /> Add to selection
+              <Plus size={14} /> افزودن به سبد
             </button>
           </div>
 
           <p className="cart-legal" style={{ display: 'flex', gap: '0.45rem' }}>
             <ShieldCheck size={14} style={{ flex: '0 0 auto', marginTop: 1 }} />
-            Payment is completed on the official RIA ROLEPLAY Tebex checkout. We never see or store your card
-            details.
+            پرداخت در صفحه رسمی Tebex سرور ریا رول‌پلی انجام می‌شود. اطلاعات کارت شما هرگز در این سایت دیده یا ذخیره
+            نمی‌شود.
           </p>
         </div>
       </div>

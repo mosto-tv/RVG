@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Briefcase, Store, Car, Swords, Flag, Sparkles } from 'lucide-react';
+import { categoryLabel } from '../lib/labels.js';
 
 const ICONS = {
   Careers: Briefcase,
@@ -25,13 +26,13 @@ export default function CategoryGrid({ types = [], activeType = '' }) {
             key={name}
             to={`/listings?type=${encodeURIComponent(name)}`}
             className={`category-card${activeType === name ? ' category-card--active' : ''}`}
-            aria-label={`Browse ${name}`}
+            aria-label={`مرور ${categoryLabel(name)}`}
           >
             <span className="category-card__icon">
               <Icon size={19} strokeWidth={1.4} />
             </span>
-            <span className="category-card__name">{name}</span>
-            <span className="category-card__count">{count} features</span>
+            <span className="category-card__name">{categoryLabel(name)}</span>
+            <span className="category-card__count">{count} امکان</span>
           </Link>
         );
       })}

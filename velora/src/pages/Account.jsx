@@ -8,9 +8,9 @@ import { useFetch } from '../lib/useFetch.js';
 import { useToast } from '../context/ToastContext.jsx';
 
 const TABS = [
-  { key: 'profile', label: 'Profile', icon: User },
-  { key: 'saved', label: 'Saved features', icon: Heart },
-  { key: 'store', label: 'RIA store account', icon: ShoppingBag },
+  { key: 'profile', label: 'پروفایل', icon: User },
+  { key: 'saved', label: 'امکانات ذخیره‌شده', icon: Heart },
+  { key: 'store', label: 'حساب فروشگاه ریا', icon: ShoppingBag },
 ];
 
 export default function Account() {
@@ -33,7 +33,7 @@ export default function Account() {
       <div className="shell">
         <div className="loading-row">
           <span className="loading-row__bar" />
-          Loading your account
+          در حال بارگذاری حساب شما
         </div>
       </div>
     );
@@ -48,7 +48,7 @@ export default function Account() {
     setErrors({});
     try {
       await updateProfile(values);
-      push('Profile updated.', 'success');
+      push('پروفایل به‌روزرسانی شد.', 'success');
     } catch (err) {
       if (err.fields) setErrors(err.fields);
       push(err.message, 'error');
@@ -59,7 +59,7 @@ export default function Account() {
 
   const logout = async () => {
     await signOut();
-    push('Signed out.', 'info');
+    push('از حساب خارج شدید.', 'info');
     navigate('/');
   };
 
@@ -68,34 +68,31 @@ export default function Account() {
       <div className="page-head">
         <div className="shell page-head__inner">
           <div>
-            <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Account</span>
+            <nav className="crumbs" aria-label="مسیر صفحه">
+              <Link to="/">خانه</Link> <span>/</span> <span>حساب کاربری</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Your Account</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>حساب کاربری شما</h1>
           </div>
           <button className="btn btn--outline btn--sm" onClick={logout}>
-            <LogOut size={14} /> Sign out
+            <LogOut size={14} /> خروج از حساب
           </button>
         </div>
       </div>
 
       <div className="shell account-grid">
-        <nav className="account-nav" aria-label="Account sections">
+        <nav className="account-nav" aria-label="بخش‌های حساب">
           {TABS.map((item) => {
             const Icon = item.icon;
             return (
               <button key={item.key} className={tab === item.key ? 'is-active' : ''} onClick={() => setTab(item.key)}>
                 <Icon size={15} /> {item.label}
-                {item.key === 'saved' && <span style={{ marginLeft: 'auto', opacity: 0.7 }}>{ids.length}</span>}
+                {item.key === 'saved' && <span style={{ marginInlineStart: 'auto', opacity: 0.7 }}>{ids.length}</span>}
               </button>
             );
           })}
-          <Link to="/player">
-            <ShoppingBag size={15} /> Purchases &amp; deliveries
-          </Link>
           {user.role === 'admin' && (
             <Link to="/admin">
-              <ShieldCheck size={15} /> Admin dashboard
+              <ShieldCheck size={15} /> داشبورد مدیریت
             </Link>
           )}
         </nav>
@@ -109,21 +106,25 @@ export default function Account() {
                 {user.email}
               </div>
             </div>
-            {user.role === 'admin' && <span className="chip chip--gold" style={{ marginLeft: 'auto' }}>Administrator</span>}
+            {user.role === 'admin' && (
+              <span className="chip chip--gold" style={{ marginInlineStart: 'auto' }}>
+                مدیر
+              </span>
+            )}
           </div>
 
           {tab === 'profile' && (
             <div className="panel" style={{ maxWidth: 620 }}>
-              <h2 className="panel__title">Personal details</h2>
+              <h2 className="panel__title">اطلاعات شخصی</h2>
               <p className="panel__sub">
-                Used for application confirmations and, for RIA players, to match store purchases to your FiveM
-                identifier.
+                برای تأیید درخواست‌ها استفاده می‌شود و برای بازیکنان ریا، برای تطبیق خریدهای فروشگاه با شناسه فایوام
+                شما.
               </p>
               <form onSubmit={save}>
                 <div className="form-grid">
                   <div className="field form-grid--full">
                     <label className="field__label" htmlFor="ac-name">
-                      Full name
+                      نام و نام خانوادگی
                     </label>
                     <input
                       id="ac-name"
@@ -134,25 +135,25 @@ export default function Account() {
                   </div>
                   <div className="field">
                     <label className="field__label" htmlFor="ac-email">
-                      Email
+                      ایمیل
                     </label>
                     <input id="ac-email" className="field__control" value={user.email} disabled />
                   </div>
                   <div className="field">
                     <label className="field__label" htmlFor="ac-phone">
-                      Phone
+                      شماره تماس
                     </label>
                     <input
                       id="ac-phone"
                       className="field__control"
                       value={values.phone}
                       onChange={(event) => setValues((prev) => ({ ...prev, phone: event.target.value }))}
-                      placeholder="+971 4 555 0100"
+                      placeholder="+98 912 555 0100"
                     />
                   </div>
                   <div className="field form-grid--full">
                     <label className="field__label" htmlFor="ac-fivem">
-                      FiveM identifier (optional)
+                      شناسه فایوام (اختیاری)
                     </label>
                     <input
                       id="ac-fivem"
@@ -164,12 +165,12 @@ export default function Account() {
                     />
                     {errors.fivemId && <span className="field__error">{errors.fivemId}</span>}
                     <span className="form-note">
-                      Used only to deliver RIA ROLEPLAY store purchases. Never shared publicly.
+                      تنها برای تحویل خریدهای فروشگاه ریا رول‌پلی استفاده می‌شود و هرگز به‌صورت عمومی منتشر نمی‌شود.
                     </span>
                   </div>
                 </div>
                 <button className="btn" type="submit" disabled={busy} style={{ marginTop: '1.2rem' }}>
-                  {busy ? <span className="btn__spinner" /> : <Check size={15} />} Save changes
+                  {busy ? <span className="btn__spinner" /> : <Check size={15} />} ذخیره تغییرات
                 </button>
               </form>
             </div>
@@ -182,10 +183,10 @@ export default function Account() {
                   <span className="empty-state__icon">
                     <Heart size={20} />
                   </span>
-                  <h3>No saved features yet</h3>
-                  <p>Save any feature from the city and it will appear here.</p>
+                  <h3>هنوز امکانی ذخیره نکرده‌اید</h3>
+                  <p>هر امکانی را از شهر ذخیره کنید تا اینجا نمایش داده شود.</p>
                   <Link to="/listings" className="btn btn--sm">
-                    Explore features
+                    مرور امکانات
                   </Link>
                 </div>
               ) : (
@@ -200,27 +201,27 @@ export default function Account() {
 
           {tab === 'store' && (
             <div className="panel" style={{ maxWidth: 620 }}>
-              <h2 className="panel__title">RIA ROLEPLAY store</h2>
+              <h2 className="panel__title">فروشگاه ریا رول‌پلی</h2>
               <p className="panel__sub">
-                Store purchases are matched to your FiveM identifier. Your purchase history, memberships and delivery
-                status live in the player area.
+                خریدهای فروشگاه با شناسه فایوام شما تطبیق داده می‌شوند. تاریخچه خرید، عضویت‌ها و وضعیت تحویل در بخش
+                بازیکن قرار دارد.
               </p>
               <div className="info-list">
                 <li>
-                  <span>FiveM identifier</span>
-                  <span>{user.fivemId || 'Not set'}</span>
+                  <span>شناسه فایوام</span>
+                  <span>{user.fivemId || 'ثبت نشده'}</span>
                 </li>
                 <li>
-                  <span>Store status</span>
-                  <span>{user.fivemId ? 'Ready for automatic delivery' : 'Add an identifier to enable delivery'}</span>
+                  <span>وضعیت فروشگاه</span>
+                  <span>{user.fivemId ? 'آماده تحویل خودکار' : 'برای فعال‌سازی تحویل، شناسه را اضافه کنید'}</span>
                 </li>
               </div>
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '1.2rem' }}>
                 <Link to="/store" className="btn btn--sm">
-                  Visit the store
+                  رفتن به فروشگاه
                 </Link>
                 <Link to="/player" className="btn btn--outline btn--sm">
-                  Purchase history
+                  تاریخچه خرید
                 </Link>
               </div>
             </div>

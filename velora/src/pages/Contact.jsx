@@ -8,13 +8,13 @@ export default function Contact() {
       <div className="page-head">
         <div className="shell page-head__inner">
           <div>
-            <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Contact</span>
+            <nav className="crumbs" aria-label="مسیر صفحه">
+              <Link to="/">خانه</Link> <span>/</span> <span>تماس</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Contact Ria Roleplay</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>تماس با ریا رول‌پلی</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              Our staff team replies within one day. For whitelist interviews, use the application form so we can
-              hold a slot with the right department.
+              تیم مدیریت ما در کمتر از یک روز پاسخ می‌دهد. برای مصاحبه وایت‌لیست از فرم درخواست استفاده کنید تا
+              زمان را با بخش مربوطه هماهنگ کنیم.
             </p>
           </div>
         </div>
@@ -27,11 +27,11 @@ export default function Contact() {
               <MessageCircle size={16} />
             </span>
             <div>
-              <b>Discord</b>
+              <b>دیسکورد</b>
               <a href="https://discord.gg/riaroleplay" target="_blank" rel="noreferrer">
                 discord.gg/riaroleplay
               </a>
-              <div className="form-note">Announcements, support tickets and events</div>
+              <div className="form-note">اطلاعیه‌ها، تیکت‌های پشتیبانی و رویدادها</div>
             </div>
           </div>
           <div className="contact-item">
@@ -39,9 +39,9 @@ export default function Contact() {
               <Mail size={16} />
             </span>
             <div>
-              <b>Email</b>
+              <b>ایمیل</b>
               <a href="mailto:support@riaroleplay.com">support@riaroleplay.com</a>
-              <div className="form-note">Replies within one business day</div>
+              <div className="form-note">پاسخ حداکثر تا یک روز کاری</div>
             </div>
           </div>
           <div className="contact-item">
@@ -49,9 +49,9 @@ export default function Contact() {
               <Link2 size={16} />
             </span>
             <div>
-              <b>Server address</b>
+              <b>نشانی سرور</b>
               cfx.re/join/riaroleplay
-              <div className="form-note">Whitelist required · connect through FiveM</div>
+              <div className="form-note">نیازمند وایت‌لیست · اتصال از طریق FiveM</div>
             </div>
           </div>
           <div className="contact-item">
@@ -59,15 +59,15 @@ export default function Contact() {
               <Clock size={16} />
             </span>
             <div>
-              <b>Staff coverage</b>
-              EU · NA · APAC
-              <div className="form-note">Moderators online around the clock</div>
+              <b>پوشش تیم</b>
+              اروپا · آمریکای شمالی · آسیا-اقیانوسیه
+              <div className="form-note">ناظران در تمام ساعات شبانه‌روز آنلاین هستند</div>
             </div>
           </div>
 
           <div className="map-frame" style={{ marginTop: '1.4rem', minHeight: 280 }}>
             <iframe
-              title="Map of downtown Los Angeles, the reference for Los Santos"
+              title="نقشه منطقه مرکزی لس آنجلس، مرجع طراحی لس سانتوس"
               src="https://www.openstreetmap.org/export/embed.html?bbox=-118.2730%2C34.0360%2C-118.2230%2C34.0650&layer=mapnik&marker=34.0505%2C-118.2487"
               loading="lazy"
             />
@@ -75,9 +75,9 @@ export default function Contact() {
         </div>
 
         <div className="panel">
-          <h2 className="panel__title">Send a message</h2>
+          <h2 className="panel__title">ارسال پیام</h2>
           <p className="panel__sub">
-            Tell us what you are looking for in a city. We will reply with a straight answer, not a sales pitch.
+            بگویید در یک شهر دنبال چه هستید. ما با پاسخ صریح جواب می‌دهیم، نه با تبلیغ.
           </p>
           <ContactForm />
         </div>

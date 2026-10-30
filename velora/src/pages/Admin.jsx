@@ -13,17 +13,18 @@ import {
   Inbox,
 } from 'lucide-react';
 import { api, formatDateTime, money } from '../lib/api.js';
+import { statusLabel } from '../lib/labels.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 
 const TABS = [
-  { key: 'overview', label: 'Overview', icon: BarChart3 },
-  { key: 'products', label: 'Products', icon: Boxes },
-  { key: 'orders', label: 'Orders', icon: ReceiptText },
-  { key: 'deliveries', label: 'Deliveries', icon: Truck },
-  { key: 'players', label: 'Player lookup', icon: Users },
-  { key: 'support', label: 'Support', icon: LifeBuoy },
-  { key: 'inbox', label: 'Inbox', icon: Inbox },
+  { key: 'overview', label: 'نمای کلی', icon: BarChart3 },
+  { key: 'products', label: 'محصولات', icon: Boxes },
+  { key: 'orders', label: 'سفارش‌ها', icon: ReceiptText },
+  { key: 'deliveries', label: 'تحویل‌ها', icon: Truck },
+  { key: 'players', label: 'جستجوی بازیکن', icon: Users },
+  { key: 'support', label: 'پشتیبانی', icon: LifeBuoy },
+  { key: 'inbox', label: 'صندوق پیام', icon: Inbox },
 ];
 
 const statusClass = (status) =>
@@ -82,7 +83,7 @@ export default function Admin() {
       <div className="shell">
         <div className="loading-row">
           <span className="loading-row__bar" />
-          Verifying access
+          در حال بررسی دسترسی
         </div>
       </div>
     );
@@ -96,10 +97,10 @@ export default function Admin() {
           <span className="empty-state__icon">
             <ShieldAlert size={20} />
           </span>
-          <h3>Administrator access required</h3>
-          <p>This dashboard is restricted to RIA ROLEPLAY administrators. Your account does not have that role.</p>
+          <h3>دسترسی مدیر لازم است</h3>
+          <p>این داشبورد تنها در اختیار مدیران ریا رول‌پلی است. حساب شما این نقش را ندارد.</p>
           <Link to="/store" className="btn btn--sm">
-            Back to the store
+            بازگشت به فروشگاه
           </Link>
         </div>
       </div>
@@ -110,7 +111,7 @@ export default function Admin() {
     try {
       const data = await api.patch(`/admin/products/${product.id}`, { [key]: !product[key] });
       setProducts((prev) => prev.map((item) => (item.id === product.id ? { ...item, ...data.product } : item)));
-      push(`${product.name} updated.`, 'success');
+      push(`${product.name} به‌روزرسانی شد.`, 'success');
     } catch (err) {
       push(err.message, 'error');
     }
@@ -120,7 +121,10 @@ export default function Admin() {
     setSyncing(true);
     try {
       const data = await api.post('/admin/sync-tebex', {});
-      push(`Tebex sync complete — ${data.linked} packages linked, ${data.updatedPrices} prices updated.`, 'success');
+      push(
+        `همگام‌سازی Tebex کامل شد — ${data.linked} پکیج متصل و ${data.updatedPrices} قیمت به‌روزرسانی شد.`,
+        'success',
+      );
       loadTab('products');
     } catch (err) {
       push(err.message, 'error');
@@ -132,7 +136,7 @@ export default function Admin() {
   const redeliver = async (reference) => {
     try {
       await api.post(`/admin/orders/${reference}/resend-delivery`, {});
-      push('Delivery attempt recorded.', 'success');
+      push('تلاش برای تحویل ثبت شد.', 'success');
       loadTab('orders');
     } catch (err) {
       push(err.message, 'error');
@@ -142,7 +146,7 @@ export default function Admin() {
   const setDelivery = async (row, status) => {
     try {
       await api.patch(`/admin/deliveries/${row.id}`, { status });
-      push(`Delivery marked ${status}.`, 'success');
+      push(`وضعیت تحویل به «${statusLabel(status)}» تغییر کرد.`, 'success');
       loadTab('deliveries');
     } catch (err) {
       push(err.message, 'error');
@@ -152,7 +156,7 @@ export default function Admin() {
   const setSupportStatus = async (row, status) => {
     try {
       await api.patch(`/admin/support/${row.id}`, { status });
-      push('Support request updated.', 'success');
+      push('درخواست پشتیبانی به‌روزرسانی شد.', 'success');
       loadTab('support');
     } catch (err) {
       push(err.message, 'error');
@@ -178,26 +182,26 @@ export default function Admin() {
       <div className="page-head">
         <div className="page-head__inner">
           <div>
-            <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <Link to="/store">Store</Link> <span>/</span>{' '}
-              <span>Admin</span>
+            <nav className="crumbs" aria-label="مسیر صفحه">
+              <Link to="/">خانه</Link> <span>/</span> <Link to="/store">فروشگاه</Link> <span>/</span>{' '}
+              <span>مدیریت</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem', fontSize: '2.1rem' }}>Store administration</h1>
+            <h1 style={{ marginTop: '0.7rem', fontSize: '2.1rem' }}>مدیریت فروشگاه</h1>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button className="btn btn--outline btn--sm" onClick={() => loadTab(tab)} disabled={busy}>
-              <RefreshCw size={13} /> Refresh
+              <RefreshCw size={13} /> به‌روزرسانی
             </button>
             <button className="btn btn--sm" onClick={syncTebex} disabled={syncing}>
-              {syncing ? <span className="btn__spinner" /> : <RefreshCw size={13} />} Sync Tebex packages
+              {syncing ? <span className="btn__spinner" /> : <RefreshCw size={13} />} همگام‌سازی پکیج‌های Tebex
             </button>
           </div>
         </div>
       </div>
 
       <div className="admin-shell">
-        <nav className="admin-nav" aria-label="Admin sections">
-          <span className="admin-nav__title">RIA ROLEPLAY</span>
+        <nav className="admin-nav" aria-label="بخش‌های مدیریت">
+          <span className="admin-nav__title">ریا رول‌پلی</span>
           {TABS.map((item) => {
             const Icon = item.icon;
             return (
@@ -209,74 +213,74 @@ export default function Admin() {
         </nav>
 
         <div className="admin-main">
-          {tab === 'overview' && !overview && <div className="admin-empty">Loading dashboard…</div>}
+          {tab === 'overview' && !overview && <div className="admin-empty">در حال بارگذاری داشبورد…</div>}
 
           {tab === 'overview' && overview && (
             <>
               <div className="admin-cards">
                 <div className="admin-card">
                   <b>{money(overview.revenueCents)}</b>
-                  <span>Verified revenue</span>
+                  <span>درآمد تأییدشده</span>
                 </div>
                 <div className="admin-card">
                   <b>{overview.ordersByStatus.find((row) => row.status === 'paid')?.count || 0}</b>
-                  <span>Paid orders</span>
+                  <span>سفارش پرداخت‌شده</span>
                 </div>
                 <div className="admin-card admin-card--alert">
                   <b>{overview.pendingDeliveries}</b>
-                  <span>Deliveries needing attention</span>
+                  <span>تحویل نیازمند بررسی</span>
                 </div>
                 <div className="admin-card">
                   <b>{overview.newsletter}</b>
-                  <span>Newsletter subscribers</span>
+                  <span>عضو خبرنامه</span>
                 </div>
               </div>
 
               <div className="panel">
-                <h2 className="panel__title">Tebex connection</h2>
+                <h2 className="panel__title">اتصال Tebex</h2>
                 <p className="panel__sub">
                   {overview.tebex.configured
-                    ? 'Connected. Checkout, webhooks and verification are active.'
-                    : `Not connected — missing ${overview.tebex.missing.join(', ')}.`}
+                    ? 'متصل است. پرداخت، وب‌هوک‌ها و تأیید تراکنش فعال هستند.'
+                    : `متصل نیست — موارد ناموجود: ${overview.tebex.missing.join('، ')}.`}
                 </p>
                 <ul className="info-list">
                   <li>
-                    <span>Checkout (public token)</span>
-                    <span>{overview.tebex.configured ? 'Configured' : 'Missing'}</span>
+                    <span>درگاه پرداخت (توکن عمومی)</span>
+                    <span>{overview.tebex.configured ? 'تنظیم شده' : 'ناموجود'}</span>
                   </li>
                   <li>
-                    <span>Webhook signature secret</span>
-                    <span>{overview.tebex.missing.includes('TEBEX_WEBHOOK_SECRET') ? 'Missing' : 'Configured'}</span>
+                    <span>کلید امضای وب‌هوک</span>
+                    <span>{overview.tebex.missing.includes('TEBEX_WEBHOOK_SECRET') ? 'ناموجود' : 'تنظیم شده'}</span>
                   </li>
                   <li>
-                    <span>FiveM delivery endpoint</span>
-                    <span>{overview.tebex.deliveryConfigured ? 'Configured' : 'Manual delivery'}</span>
+                    <span>نقطه تحویل فایوام</span>
+                    <span>{overview.tebex.deliveryConfigured ? 'تنظیم شده' : 'تحویل دستی'}</span>
                   </li>
                   <li>
-                    <span>Store URL</span>
-                    <span>{overview.tebex.storeUrl || 'Not set'}</span>
+                    <span>نشانی فروشگاه</span>
+                    <span>{overview.tebex.storeUrl || 'تنظیم نشده'}</span>
                   </li>
                 </ul>
               </div>
 
               <div className="split-form">
                 <div className="panel">
-                  <h2 className="panel__title">Recent orders</h2>
+                  <h2 className="panel__title">سفارش‌های اخیر</h2>
                   <div className="table-wrap">
                     <table className="data-table">
                       <thead>
                         <tr>
-                          <th>Reference</th>
-                          <th>Player</th>
-                          <th>Total</th>
-                          <th>Status</th>
+                          <th>شماره</th>
+                          <th>بازیکن</th>
+                          <th>مبلغ</th>
+                          <th>وضعیت</th>
                         </tr>
                       </thead>
                       <tbody>
                         {overview.recentOrders.length === 0 && (
                           <tr>
                             <td colSpan={4} className="admin-empty">
-                              No orders yet.
+                              هنوز سفارشی ثبت نشده است.
                             </td>
                           </tr>
                         )}
@@ -286,7 +290,7 @@ export default function Admin() {
                             <td className="data-table__mono">{order.playerIdentifier}</td>
                             <td>{money(order.totalCents)}</td>
                             <td>
-                              <span className={statusClass(order.status)}>{order.status}</span>
+                              <span className={statusClass(order.status)}>{statusLabel(order.status)}</span>
                             </td>
                           </tr>
                         ))}
@@ -296,9 +300,9 @@ export default function Admin() {
                 </div>
 
                 <div className="panel">
-                  <h2 className="panel__title">Top packages</h2>
+                  <h2 className="panel__title">پرفروش‌ترین پکیج‌ها</h2>
                   {overview.topProducts.length === 0 ? (
-                    <p className="panel__sub">No paid packages yet.</p>
+                    <p className="panel__sub">هنوز پکیج پرداخت‌شده‌ای نیست.</p>
                   ) : (
                     <ul className="info-list">
                       {overview.topProducts.map((row) => (
@@ -310,14 +314,18 @@ export default function Admin() {
                     </ul>
                   )}
                   <h2 className="panel__title" style={{ marginTop: '1.4rem' }}>
-                    Webhook activity
+                    فعالیت وب‌هوک
                   </h2>
                   <ul className="info-list">
-                    {overview.webhooks.length === 0 && <li><span>No events received yet.</span></li>}
+                    {overview.webhooks.length === 0 && (
+                      <li>
+                        <span>هنوز رویدادی دریافت نشده است.</span>
+                      </li>
+                    )}
                     {overview.webhooks.map((event) => (
                       <li key={event.id}>
                         <span className="data-table__mono">{event.event_type}</span>
-                        <span>{event.signature_valid ? 'verified' : 'rejected'}</span>
+                        <span>{event.signature_valid ? 'تأیید‌شده' : 'ردشده'}</span>
                       </li>
                     ))}
                   </ul>
@@ -328,21 +336,21 @@ export default function Admin() {
 
           {tab === 'products' && (
             <div className="panel">
-              <h2 className="panel__title">Products &amp; Tebex packages</h2>
+              <h2 className="panel__title">محصولات و پکیج‌های Tebex</h2>
               <p className="panel__sub">
-                Prices shown on the storefront. Use “Sync Tebex packages” to link live packages and import real
-                prices from Tebex.
+                قیمت‌هایی که در فروشگاه نمایش داده می‌شود. با «همگام‌سازی پکیج‌های Tebex» پکیج‌های فعال را متصل و
+                قیمت‌های واقعی را از Tebex وارد کنید.
               </p>
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th>Package</th>
-                      <th>Category</th>
-                      <th>Price</th>
-                      <th>Tebex ID</th>
-                      <th>Visible</th>
-                      <th>Featured</th>
+                      <th>پکیج</th>
+                      <th>دسته</th>
+                      <th>قیمت</th>
+                      <th>شناسه Tebex</th>
+                      <th>نمایش</th>
+                      <th>ویژه</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -357,12 +365,12 @@ export default function Admin() {
                         <td className="data-table__mono">{product.tebexPackageId || '—'}</td>
                         <td>
                           <button className="btn btn--outline btn--sm" onClick={() => toggleProduct(product, 'visible')}>
-                            {product.visible ? 'Visible' : 'Hidden'}
+                            {product.visible ? 'نمایان' : 'پنهان'}
                           </button>
                         </td>
                         <td>
                           <button className="btn btn--outline btn--sm" onClick={() => toggleProduct(product, 'featured')}>
-                            {product.featured ? 'Featured' : 'Standard'}
+                            {product.featured ? 'ویژه' : 'عادی'}
                           </button>
                         </td>
                       </tr>
@@ -375,18 +383,18 @@ export default function Admin() {
 
           {tab === 'orders' && (
             <div className="panel">
-              <h2 className="panel__title">Orders</h2>
-              <p className="panel__sub">Payment status comes from Tebex webhooks that are re-verified server-side.</p>
+              <h2 className="panel__title">سفارش‌ها</h2>
+              <p className="panel__sub">وضعیت پرداخت از وب‌هوک‌های Tebex می‌آید که در سمت سرور دوباره بررسی می‌شوند.</p>
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th>Reference</th>
-                      <th>Placed</th>
-                      <th>Player</th>
-                      <th>Items</th>
-                      <th>Total</th>
-                      <th>Status</th>
+                      <th>شماره</th>
+                      <th>تاریخ</th>
+                      <th>بازیکن</th>
+                      <th>اقلام</th>
+                      <th>مبلغ</th>
+                      <th>وضعیت</th>
                       <th />
                     </tr>
                   </thead>
@@ -394,7 +402,7 @@ export default function Admin() {
                     {orders.length === 0 && (
                       <tr>
                         <td colSpan={7} className="admin-empty">
-                          No orders recorded yet.
+                          هنوز سفارشی ثبت نشده است.
                         </td>
                       </tr>
                     )}
@@ -403,15 +411,15 @@ export default function Admin() {
                         <td className="data-table__mono">{order.reference}</td>
                         <td>{formatDateTime(order.createdAt)}</td>
                         <td className="data-table__mono">{order.playerIdentifier}</td>
-                        <td>{order.items.map((item) => item.name).join(', ')}</td>
+                        <td>{order.items.map((item) => item.name).join('، ')}</td>
                         <td>{money(order.totalCents)}</td>
                         <td>
-                          <span className={statusClass(order.status)}>{order.status}</span>
+                          <span className={statusClass(order.status)}>{statusLabel(order.status)}</span>
                         </td>
                         <td>
                           {order.status === 'paid' && (
                             <button className="btn btn--outline btn--sm" onClick={() => redeliver(order.reference)}>
-                              Re-deliver
+                              تحویل دوباره
                             </button>
                           )}
                         </td>
@@ -425,21 +433,21 @@ export default function Admin() {
 
           {tab === 'deliveries' && (
             <div className="panel">
-              <h2 className="panel__title">Deliveries</h2>
+              <h2 className="panel__title">تحویل‌ها</h2>
               <p className="panel__sub">
-                Failed hand-offs are parked as <b>pending</b> and never retried automatically. Confirm manually only
-                after applying the entitlement in-game.
+                تحویل‌های ناموفق به‌صورت <b>در انتظار</b> نگه داشته می‌شوند و هرگز خودکار دوباره تلاش نمی‌شوند. تنها
+                پس از اعمال مزایا در بازی، به‌صورت دستی تأیید کنید.
               </p>
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th>Order</th>
-                      <th>Package</th>
-                      <th>Player</th>
-                      <th>Attempts</th>
-                      <th>Status</th>
-                      <th>Last error</th>
+                      <th>سفارش</th>
+                      <th>پکیج</th>
+                      <th>بازیکن</th>
+                      <th>تلاش‌ها</th>
+                      <th>وضعیت</th>
+                      <th>آخرین خطا</th>
                       <th />
                     </tr>
                   </thead>
@@ -447,7 +455,7 @@ export default function Admin() {
                     {deliveries.length === 0 && (
                       <tr>
                         <td colSpan={7} className="admin-empty">
-                          No deliveries recorded yet.
+                          هنوز تحویلی ثبت نشده است.
                         </td>
                       </tr>
                     )}
@@ -458,7 +466,7 @@ export default function Admin() {
                         <td className="data-table__mono">{row.player_identifier}</td>
                         <td>{row.attempts}</td>
                         <td>
-                          <span className={statusClass(row.status)}>{row.status}</span>
+                          <span className={statusClass(row.status)}>{statusLabel(row.status)}</span>
                         </td>
                         <td className="form-note" style={{ maxWidth: 240 }}>
                           {row.last_error || '—'}
@@ -466,16 +474,16 @@ export default function Admin() {
                         <td style={{ whiteSpace: 'nowrap' }}>
                           {row.status !== 'delivered' && (
                             <button className="btn btn--outline btn--sm" onClick={() => setDelivery(row, 'delivered')}>
-                              Mark delivered
+                              ثبت به‌عنوان تحویل‌شده
                             </button>
                           )}
                           {row.status !== 'failed' && (
                             <button
                               className="btn btn--outline btn--sm"
-                              style={{ marginLeft: 4 }}
+                              style={{ marginInlineStart: 4 }}
                               onClick={() => setDelivery(row, 'failed')}
                             >
-                              Mark failed
+                              ثبت به‌عنوان ناموفق
                             </button>
                           )}
                         </td>
@@ -489,39 +497,39 @@ export default function Admin() {
 
           {tab === 'players' && (
             <div className="panel">
-              <h2 className="panel__title">Player purchase lookup</h2>
-              <p className="panel__sub">Search by FiveM identifier, email or name.</p>
+              <h2 className="panel__title">جستجوی خرید بازیکن</h2>
+              <p className="panel__sub">جستجو بر اساس شناسه فایوام، ایمیل یا نام.</p>
               <form className="admin-toolbar" onSubmit={runLookup}>
                 <input
                   className="input"
                   value={lookup.q}
                   onChange={(event) => setLookup((prev) => ({ ...prev, q: event.target.value }))}
-                  placeholder="license:1a2b3c… or player@email.com"
-                  aria-label="Player identifier or email"
+                  placeholder="license:1a2b3c… یا player@email.com"
+                  aria-label="شناسه یا ایمیل بازیکن"
                 />
                 <button className="btn btn--sm" type="submit" disabled={busy}>
-                  <Search size={13} /> Search
+                  <Search size={13} /> جستجو
                 </button>
               </form>
 
               {lookup.result && (
                 <>
-                  <h3 style={{ fontSize: '1.05rem', marginBlock: '1rem 0.5rem' }}>Accounts</h3>
+                  <h3 style={{ fontSize: '1.05rem', marginBlock: '1rem 0.5rem' }}>حساب‌ها</h3>
                   <div className="table-wrap">
                     <table className="data-table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>FiveM identifier</th>
-                          <th>Role</th>
+                          <th>نام</th>
+                          <th>ایمیل</th>
+                          <th>شناسه فایوام</th>
+                          <th>نقش</th>
                         </tr>
                       </thead>
                       <tbody>
                         {lookup.result.users.length === 0 && (
                           <tr>
                             <td colSpan={4} className="admin-empty">
-                              No matching accounts.
+                              حسابی مطابق جستجو پیدا نشد.
                             </td>
                           </tr>
                         )}
@@ -530,29 +538,29 @@ export default function Admin() {
                             <td>{row.name}</td>
                             <td>{row.email}</td>
                             <td className="data-table__mono">{row.fivem_id || '—'}</td>
-                            <td>{row.role}</td>
+                            <td>{row.role === 'admin' ? 'مدیر' : 'کاربر'}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
 
-                  <h3 style={{ fontSize: '1.05rem', marginBlock: '1.2rem 0.5rem' }}>Orders</h3>
+                  <h3 style={{ fontSize: '1.05rem', marginBlock: '1.2rem 0.5rem' }}>سفارش‌ها</h3>
                   <div className="table-wrap">
                     <table className="data-table">
                       <thead>
                         <tr>
-                          <th>Reference</th>
-                          <th>Player</th>
-                          <th>Total</th>
-                          <th>Status</th>
+                          <th>شماره</th>
+                          <th>بازیکن</th>
+                          <th>مبلغ</th>
+                          <th>وضعیت</th>
                         </tr>
                       </thead>
                       <tbody>
                         {lookup.result.orders.length === 0 && (
                           <tr>
                             <td colSpan={4} className="admin-empty">
-                              No orders for this player.
+                              سفارشی برای این بازیکن ثبت نشده است.
                             </td>
                           </tr>
                         )}
@@ -562,7 +570,7 @@ export default function Admin() {
                             <td className="data-table__mono">{order.playerIdentifier}</td>
                             <td>{money(order.totalCents)}</td>
                             <td>
-                              <span className={statusClass(order.status)}>{order.status}</span>
+                              <span className={statusClass(order.status)}>{statusLabel(order.status)}</span>
                             </td>
                           </tr>
                         ))}
@@ -576,16 +584,16 @@ export default function Admin() {
 
           {tab === 'support' && (
             <div className="panel">
-              <h2 className="panel__title">Support requests</h2>
+              <h2 className="panel__title">درخواست‌های پشتیبانی</h2>
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th>Received</th>
-                      <th>From</th>
-                      <th>Order</th>
-                      <th>Subject</th>
-                      <th>Status</th>
+                      <th>دریافت</th>
+                      <th>فرستنده</th>
+                      <th>سفارش</th>
+                      <th>موضوع</th>
+                      <th>وضعیت</th>
                       <th />
                     </tr>
                   </thead>
@@ -593,7 +601,7 @@ export default function Admin() {
                     {support.length === 0 && (
                       <tr>
                         <td colSpan={6} className="admin-empty">
-                          No support requests.
+                          درخواست پشتیبانی‌ای وجود ندارد.
                         </td>
                       </tr>
                     )}
@@ -609,18 +617,21 @@ export default function Admin() {
                           </div>
                         </td>
                         <td>
-                          <span className={statusClass(row.status)}>{row.status.replace('_', ' ')}</span>
+                          <span className={statusClass(row.status)}>{statusLabel(row.status)}</span>
                         </td>
                         <td style={{ whiteSpace: 'nowrap' }}>
-                          <button className="btn btn--outline btn--sm" onClick={() => setSupportStatus(row, 'in_progress')}>
-                            In progress
+                          <button
+                            className="btn btn--outline btn--sm"
+                            onClick={() => setSupportStatus(row, 'in_progress')}
+                          >
+                            در حال بررسی
                           </button>
                           <button
                             className="btn btn--outline btn--sm"
-                            style={{ marginLeft: 4 }}
+                            style={{ marginInlineStart: 4 }}
                             onClick={() => setSupportStatus(row, 'closed')}
                           >
-                            Close
+                            بستن
                           </button>
                         </td>
                       </tr>
@@ -634,21 +645,21 @@ export default function Admin() {
           {tab === 'inbox' && (
             <div className="split-form">
               <div className="panel">
-                <h2 className="panel__title">Whitelist applications</h2>
+                <h2 className="panel__title">درخواست‌های وایت‌لیست</h2>
                 <div className="table-wrap">
                   <table className="data-table">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Feature</th>
-                        <th>When</th>
+                        <th>نام</th>
+                        <th>امکان</th>
+                        <th>زمان</th>
                       </tr>
                     </thead>
                     <tbody>
                       {(inbox?.bookings || []).length === 0 && (
                         <tr>
                           <td colSpan={3} className="admin-empty">
-                            No applications.
+                            درخواستی وجود ندارد.
                           </td>
                         </tr>
                       )}
@@ -658,7 +669,7 @@ export default function Admin() {
                             {row.name}
                             <div className="form-note">{row.email}</div>
                           </td>
-                          <td>{row.property_title || 'General application'}</td>
+                          <td>{row.property_title || 'درخواست عمومی'}</td>
                           <td>
                             {row.preferred_date} · {row.preferred_time}
                           </td>
@@ -670,20 +681,20 @@ export default function Admin() {
               </div>
 
               <div className="panel">
-                <h2 className="panel__title">Messages</h2>
+                <h2 className="panel__title">پیام‌ها</h2>
                 <div className="table-wrap">
                   <table className="data-table">
                     <thead>
                       <tr>
-                        <th>From</th>
-                        <th>Subject</th>
+                        <th>فرستنده</th>
+                        <th>موضوع</th>
                       </tr>
                     </thead>
                     <tbody>
                       {(inbox?.messages || []).length === 0 && (
                         <tr>
                           <td colSpan={2} className="admin-empty">
-                            No messages.
+                            پیامی وجود ندارد.
                           </td>
                         </tr>
                       )}
@@ -694,7 +705,7 @@ export default function Admin() {
                             <div className="form-note">{row.email}</div>
                           </td>
                           <td>
-                            {row.subject || 'Enquiry'}
+                            {row.subject || 'پرسش'}
                             <div className="form-note">{row.message.slice(0, 90)}…</div>
                           </td>
                         </tr>
@@ -704,9 +715,9 @@ export default function Admin() {
                 </div>
 
                 <h2 className="panel__title" style={{ marginTop: '1.4rem' }}>
-                  Newsletter
+                  خبرنامه
                 </h2>
-                <p className="panel__sub">{inbox?.newsletter?.length || 0} subscribers</p>
+                <p className="panel__sub">{inbox?.newsletter?.length || 0} عضو</p>
               </div>
             </div>
           )}

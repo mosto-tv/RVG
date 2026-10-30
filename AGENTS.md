@@ -79,3 +79,35 @@ docker compose -f docker-compose.base44.yml logs -f api web
 - Search: `/api/properties?q=vinewood`. Favourites need a session cookie.
 - Clean test data by deleting only records you created (a test signup, its favourites and
   sessions). Removing the only account makes the next signup an administrator again.
+
+## Persian interface and RTL (Phase 1)
+- The site is Persian and right-to-left: `velora/index.html` sets `<html lang="fa" dir="rtl">`.
+  Every user-facing string in `velora/src/` and the API responses is Persian.
+- Typography keeps the original pairing. The Latin faces stay first in the stack, so Persian
+  glyphs fall through to the Persian faces loaded from Google Fonts:
+  `--font-serif: 'Playfair Display', …, 'Markazi Text', …` and
+  `--font-sans: 'Manrope', …, 'Vazirmatn', …` (see `velora/src/styles/base.css`). Persian
+  headings need `line-height ≥ 1.3`; the Latin display leading clips their descenders.
+- `velora/src/styles/rtl.css` loads **after** every other stylesheet and holds only the
+  Persian/RTL adjustments (tracking, leading, italic suppression, icon mirroring, hero side).
+  Keep it that way instead of rewriting the original values in place.
+- The original stylesheets were converted to logical properties (`margin-inline-start`,
+  `inset-inline-end`, `border-inline-start`, `text-align: start`). Two places stay physical on
+  purpose: the signature cursor (`.cursor-dot`) and the cart drawer (`.cart-drawer`), which
+  still slides in from the physical right edge.
+- Data keys remain English on purpose — `type`, `status`, `city` and the store `category` are
+  what filters, URLs and API queries compare. Only the display text goes through
+  `velora/src/lib/labels.js` (`categoryLabel`, `statusLabel`, `cityLabel`,
+  `storeCategoryLabel`). Add new values there rather than translating the data.
+
+## Store copy lives in SQLite
+- `server/data/storeProducts.js` seeds the store, so editing a name/tagline/description only
+  affects a fresh database. To push new copy into a running one, run a one-off script inside the
+  `api` service that updates each row by `slug` (never delete the `velora-data` volume).
+
+## Imagery
+- `server/data/media.js` is the single source of art direction: `IMAGES` for fixed slots and
+  `SHOTS` keys used by the catalogue (`shot('downtown')`). To swap in the official in-game
+  captures, drop the files in `velora/public/media/` and point the slot at `/media/<file>.jpg`.
+- The district blocks still embed an OpenStreetMap iframe; it is the interactive map, not
+  decorative photography, and has no GTA equivalent to swap to yet.

@@ -63,7 +63,7 @@ adminRouter.post('/products', (req, res) => {
   const category = STORE_CATEGORIES.includes(req.body?.category) ? req.body.category : STORE_CATEGORIES[0];
   const price = toCents(req.body?.priceCents);
   if (!name || price === null) {
-    return res.status(422).json({ error: 'A name and price are required.', code: 'VALIDATION_ERROR' });
+    return res.status(422).json({ error: 'نام و قیمت الزامی است.', code: 'VALIDATION_ERROR' });
   }
   const result = run(
     `INSERT INTO store_products (slug, name, category, tagline, description, features, price_cents,
@@ -89,7 +89,7 @@ adminRouter.post('/products', (req, res) => {
 
 adminRouter.patch('/products/:id', (req, res) => {
   const row = one('SELECT * FROM store_products WHERE id = ?', req.params.id);
-  if (!row) return res.status(404).json({ error: 'Product not found.', code: 'NOT_FOUND' });
+  if (!row) return res.status(404).json({ error: 'محصول پیدا نشد.', code: 'NOT_FOUND' });
 
   const fields = [];
   const values = [];
@@ -126,7 +126,7 @@ adminRouter.post('/sync-tebex', async (_req, res) => {
   const status = tebexStatus();
   if (!status.configured) {
     return res.status(503).json({
-      error: 'Tebex is not connected. Add the RIA ROLEPLAY store credentials first.',
+      error: 'Tebex متصل نیست. ابتدا اطلاعات فروشگاه ریا رول‌پلی را اضافه کنید.',
       code: 'TEBEX_NOT_CONFIGURED',
       missing: status.missing,
     });
@@ -187,9 +187,9 @@ adminRouter.get('/orders', (req, res) => {
 
 adminRouter.post('/orders/:reference/resend-delivery', async (req, res) => {
   const order = one('SELECT * FROM orders WHERE reference = ?', req.params.reference);
-  if (!order) return res.status(404).json({ error: 'Order not found.', code: 'NOT_FOUND' });
+  if (!order) return res.status(404).json({ error: 'سفارش پیدا نشد.', code: 'NOT_FOUND' });
   if (order.status !== 'paid') {
-    return res.status(409).json({ error: 'Only paid orders can be delivered.', code: 'NOT_PAID' });
+    return res.status(409).json({ error: 'تنها سفارش‌های پرداخت‌شده قابل تحویل هستند.', code: 'NOT_PAID' });
   }
   const deliveries = await deliverOrder(order);
   res.json({ ok: true, deliveries });
@@ -207,11 +207,11 @@ adminRouter.get('/deliveries', (req, res) => {
 
 adminRouter.patch('/deliveries/:id', (req, res) => {
   const row = one('SELECT * FROM deliveries WHERE id = ?', req.params.id);
-  if (!row) return res.status(404).json({ error: 'Delivery not found.', code: 'NOT_FOUND' });
+  if (!row) return res.status(404).json({ error: 'تحویل پیدا نشد.', code: 'NOT_FOUND' });
   const status = ['delivered', 'pending', 'failed', 'queued'].includes(req.body?.status)
     ? req.body.status
     : null;
-  if (!status) return res.status(422).json({ error: 'Unknown delivery status.', code: 'VALIDATION_ERROR' });
+  if (!status) return res.status(422).json({ error: 'وضعیت تحویل نامشخص است.', code: 'VALIDATION_ERROR' });
   run(
     `UPDATE deliveries SET status = ?, last_error = ?, delivered_at = CASE WHEN ? = 'delivered' THEN datetime('now') ELSE delivered_at END
      WHERE id = ?`,
@@ -248,7 +248,7 @@ adminRouter.get('/support', (req, res) => {
 
 adminRouter.patch('/support/:id', (req, res) => {
   const row = one('SELECT * FROM support_requests WHERE id = ?', req.params.id);
-  if (!row) return res.status(404).json({ error: 'Request not found.', code: 'NOT_FOUND' });
+  if (!row) return res.status(404).json({ error: 'درخواست پیدا نشد.', code: 'NOT_FOUND' });
   const status = ['open', 'in_progress', 'closed'].includes(req.body?.status) ? req.body.status : 'open';
   run('UPDATE support_requests SET status = ? WHERE id = ?', status, row.id);
   res.json({ request: one('SELECT * FROM support_requests WHERE id = ?', row.id) });
