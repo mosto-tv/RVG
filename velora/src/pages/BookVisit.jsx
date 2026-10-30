@@ -16,12 +16,12 @@ export default function BookVisit() {
         <div className="shell page-head__inner">
           <div>
             <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Book a visit</span>
+              <Link to="/">Home</Link> <span>/</span> <span>Apply</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Book a private visit</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>Apply for the city</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              Viewings are arranged by appointment, accompanied by the residence advisor. Choose a date and we will
-              confirm within one business day.
+              Every application is read by a member of staff and followed by a short voice interview. Choose a date
+              and we will confirm within one business day.
             </p>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function BookVisit() {
 
       <div className="shell split-form" style={{ paddingBottom: 'clamp(3rem, 6vw, 5rem)' }}>
         <div className="panel">
-          <h2 className="panel__title">Viewing request</h2>
+          <h2 className="panel__title">Whitelist application</h2>
           <p className="panel__sub">All fields marked are required. Your details stay private.</p>
           <BookingForm property={property} />
         </div>
@@ -52,7 +52,7 @@ export default function BookVisit() {
                   {priceFmt(property.price)}
                 </p>
                 <Link to={`/listings/${property.id}`} className="link-arrow" style={{ marginTop: '0.7rem' }}>
-                  View residence
+                  View feature
                 </Link>
               </div>
             </div>
@@ -71,19 +71,20 @@ export default function BookVisit() {
               </li>
               <li>
                 <span>
-                  <Clock size={13} /> Duration
+                  <Clock size={13} /> Interview
                 </span>
-                <span>45–60 minutes</span>
+                <span>20–30 minutes</span>
               </li>
               <li>
                 <span>
-                  <ShieldCheck size={13} /> Discretion
+                  <ShieldCheck size={13} /> Reviewed by
                 </span>
-                <span>Private, no open house</span>
+                <span>Staff, in private</span>
               </li>
             </ul>
             <p className="form-note" style={{ marginTop: '0.9rem' }}>
-              Travelling? Ask for a live virtual walkthrough instead — our advisors can host a video viewing.
+              Applying with friends? Add their Discord handles in the message and we will schedule a group
+              interview.
             </p>
           </div>
         </aside>

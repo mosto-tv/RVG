@@ -9,7 +9,7 @@ import { useToast } from '../context/ToastContext.jsx';
 
 const TABS = [
   { key: 'profile', label: 'Profile', icon: User },
-  { key: 'saved', label: 'Saved residences', icon: Heart },
+  { key: 'saved', label: 'Saved features', icon: Heart },
   { key: 'store', label: 'RIA store account', icon: ShoppingBag },
 ];
 
@@ -116,7 +116,7 @@ export default function Account() {
             <div className="panel" style={{ maxWidth: 620 }}>
               <h2 className="panel__title">Personal details</h2>
               <p className="panel__sub">
-                Used for viewing confirmations and, for RIA players, to match store purchases to your FiveM
+                Used for application confirmations and, for RIA players, to match store purchases to your FiveM
                 identifier.
               </p>
               <form onSubmit={save}>
@@ -182,10 +182,10 @@ export default function Account() {
                   <span className="empty-state__icon">
                     <Heart size={20} />
                   </span>
-                  <h3>No saved residences yet</h3>
-                  <p>Save any residence from the collection and it will appear here.</p>
+                  <h3>No saved features yet</h3>
+                  <p>Save any feature from the city and it will appear here.</p>
                   <Link to="/listings" className="btn btn--sm">
-                    Explore listings
+                    Explore features
                   </Link>
                 </div>
               ) : (

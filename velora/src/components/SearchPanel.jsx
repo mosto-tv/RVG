@@ -1,36 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Home, Wallet, BedDouble } from 'lucide-react';
+import { Search, MapPin, Gamepad2, Coins, Users } from 'lucide-react';
 import { shortPrice } from '../lib/api.js';
 
-const LOCATIONS = ['Dubai', 'London', 'Miami', 'New York', 'Monaco', 'Los Angeles'];
-const TYPES = ['Villas', 'Penthouses', 'Apartments', 'Waterfront Homes', 'Commercial Spaces', 'Smart Homes'];
-const BEDS = ['Any', '1+', '2+', '3+', '4+', '5+'];
+const LOCATIONS = ['Los Santos', 'Vinewood', 'Vespucci', 'Del Perro', 'Sandy Shores', 'Paleto Bay'];
+const TYPES = ['Careers', 'Businesses', 'Vehicles', 'Crime & Heists', 'Racing', 'Lifestyle'];
+const PLAYERS = ['Any', '2+', '4+', '8+', '16+', '32+'];
+const MAX_PAYOUT = 25000;
 
 export default function SearchPanel({ compact = false }) {
   const navigate = useNavigate();
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const [minM, setMinM] = useState(1);
-  const [maxM, setMaxM] = useState(20);
-  const [beds, setBeds] = useState('Any');
+  const [minPayout, setMinPayout] = useState(1000);
+  const [maxPayout, setMaxPayout] = useState(MAX_PAYOUT);
+  const [players, setPlayers] = useState('Any');
 
   const submit = (event) => {
     event.preventDefault();
     const params = new URLSearchParams();
     if (location) params.set('location', location);
     if (type) params.set('type', type);
-    if (minM > 1) params.set('minPrice', String(minM * 1_000_000));
-    if (maxM < 20) params.set('maxPrice', String(maxM * 1_000_000));
-    if (beds !== 'Any') params.set('beds', beds.replace('+', ''));
+    if (minPayout > 1000) params.set('minPrice', String(minPayout));
+    if (maxPayout < MAX_PAYOUT) params.set('maxPrice', String(maxPayout));
+    if (players !== 'Any') params.set('beds', players.replace('+', ''));
     navigate(`/listings${params.toString() ? `?${params.toString()}` : ''}`);
   };
 
   return (
-    <form className="search-panel" onSubmit={submit} aria-label="Search properties">
+    <form className="search-panel" onSubmit={submit} aria-label="Search features">
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-location">
-          <MapPin size={12} /> Location
+          <MapPin size={12} /> District
         </label>
         <select
           id="hero-location"
@@ -38,7 +39,7 @@ export default function SearchPanel({ compact = false }) {
           value={location}
           onChange={(event) => setLocation(event.target.value)}
         >
-          <option value="">All destinations</option>
+          <option value="">All districts</option>
           {LOCATIONS.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -49,7 +50,7 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-type">
-          <Home size={12} /> Property Type
+          <Gamepad2 size={12} /> Category
         </label>
         <select
           id="hero-type"
@@ -57,7 +58,7 @@ export default function SearchPanel({ compact = false }) {
           value={type}
           onChange={(event) => setType(event.target.value)}
         >
-          <option value="">Any residence</option>
+          <option value="">Any category</option>
           {TYPES.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -68,37 +69,37 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <span className="search-panel__label">
-          <Wallet size={12} /> Budget
+          <Coins size={12} /> Payout
         </span>
         <div className="budget">
           <span className="budget__value">
-            {shortPrice(minM * 1_000_000)} – {maxM >= 20 ? 'No limit' : shortPrice(maxM * 1_000_000)}
+            {shortPrice(minPayout)} – {maxPayout >= MAX_PAYOUT ? 'No limit' : shortPrice(maxPayout)}
           </span>
           <div className="range-row">
             <input
               type="range"
-              min="1"
-              max="20"
-              step="0.5"
-              value={minM}
-              aria-label="Minimum budget"
+              min="1000"
+              max={MAX_PAYOUT}
+              step="500"
+              value={minPayout}
+              aria-label="Minimum payout"
               onChange={(event) => {
                 const value = Number(event.target.value);
-                setMinM(value);
-                if (value > maxM) setMaxM(value);
+                setMinPayout(value);
+                if (value > maxPayout) setMaxPayout(value);
               }}
             />
             <input
               type="range"
-              min="1"
-              max="20"
-              step="0.5"
-              value={maxM}
-              aria-label="Maximum budget"
+              min="1000"
+              max={MAX_PAYOUT}
+              step="500"
+              value={maxPayout}
+              aria-label="Maximum payout"
               onChange={(event) => {
                 const value = Number(event.target.value);
-                setMaxM(value);
-                if (value < minM) setMinM(value);
+                setMaxPayout(value);
+                if (value < minPayout) setMinPayout(value);
               }}
             />
           </div>
@@ -107,17 +108,17 @@ export default function SearchPanel({ compact = false }) {
 
       <div className="search-panel__field">
         <label className="search-panel__label" htmlFor="hero-beds">
-          <BedDouble size={12} /> Bedrooms
+          <Users size={12} /> Players
         </label>
         <select
           id="hero-beds"
           className="search-panel__control"
-          value={beds}
-          onChange={(event) => setBeds(event.target.value)}
+          value={players}
+          onChange={(event) => setPlayers(event.target.value)}
         >
-          {BEDS.map((option) => (
+          {PLAYERS.map((option) => (
             <option key={option} value={option}>
-              {option === 'Any' ? 'Any' : `${option} bedrooms`}
+              {option === 'Any' ? 'Any' : `${option} players`}
             </option>
           ))}
         </select>

@@ -4,7 +4,7 @@ import { UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 
-const IMAGE = 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=85';
+const IMAGE = 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=85';
 
 export default function SignUp() {
   const { user, signUp } = useAuth();
@@ -28,7 +28,7 @@ export default function SignUp() {
     setBusy(true);
     try {
       await signUp(values);
-      push('Account created. Welcome to Velora.', 'success');
+      push('Account created. Welcome to Ria.', 'success');
       navigate('/account');
     } catch (err) {
       setErrors(err.fields || { email: err.message });
@@ -40,18 +40,18 @@ export default function SignUp() {
   return (
     <div className="auth-page">
       <div className="auth-page__media">
-        <img src={IMAGE} alt="Contemporary residence interior" />
+        <img src={IMAGE} alt="Downtown Los Santos at dusk" />
         <div className="auth-page__quote">
           <p>“Every detail was handled before we thought to ask.”</p>
-          <span>Private client, Dubai</span>
+          <span>Whitelisted player, Blaine County</span>
         </div>
       </div>
       <div className="auth-page__form">
         <div className="auth-card">
-          <span className="eyebrow">Client access</span>
+          <span className="eyebrow">Player access</span>
           <h1>Create an account</h1>
           <p className="lede" style={{ marginTop: '-0.4rem' }}>
-            Save residences, request viewings and keep your RIA store purchases together.
+            Save features, apply for whitelist and keep your RIA store purchases together.
           </p>
           <form onSubmit={submit} noValidate style={{ display: 'grid', gap: '0.9rem' }}>
             <div className="field">
@@ -116,7 +116,7 @@ export default function SignUp() {
             </button>
           </form>
           <p className="auth-switch">
-            Already a client? <Link to="/signin">Sign in</Link>
+            Already whitelisted? <Link to="/signin">Sign in</Link>
           </p>
         </div>
       </div>

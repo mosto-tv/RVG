@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Clock } from 'lucide-react';
+import { Mail, Link2, MessageCircle, Clock } from 'lucide-react';
 import { ContactForm } from '../components/Forms.jsx';
 
 export default function Contact() {
@@ -11,10 +11,10 @@ export default function Contact() {
             <nav className="crumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link> <span>/</span> <span>Contact</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Contact Velora Estates</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>Contact Ria Roleplay</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              Our advisory desk replies within one business day. For viewings, use the booking form so we can hold a
-              slot with the residence team.
+              Our staff team replies within one day. For whitelist interviews, use the application form so we can
+              hold a slot with the right department.
             </p>
           </div>
         </div>
@@ -24,12 +24,14 @@ export default function Contact() {
         <div>
           <div className="contact-item">
             <span className="contact-item__icon">
-              <Phone size={16} />
+              <MessageCircle size={16} />
             </span>
             <div>
-              <b>Telephone</b>
-              <a href="tel:+97145550100">+971 4 555 0100</a>
-              <div className="form-note">Private client line · 08:00–20:00 GST</div>
+              <b>Discord</b>
+              <a href="https://discord.gg/riaroleplay" target="_blank" rel="noreferrer">
+                discord.gg/riaroleplay
+              </a>
+              <div className="form-note">Announcements, support tickets and events</div>
             </div>
           </div>
           <div className="contact-item">
@@ -38,18 +40,18 @@ export default function Contact() {
             </span>
             <div>
               <b>Email</b>
-              <a href="mailto:private@veloraestates.com">private@veloraestates.com</a>
+              <a href="mailto:support@riaroleplay.com">support@riaroleplay.com</a>
               <div className="form-note">Replies within one business day</div>
             </div>
           </div>
           <div className="contact-item">
             <span className="contact-item__icon">
-              <MapPin size={16} />
+              <Link2 size={16} />
             </span>
             <div>
-              <b>Head office</b>
-              Level 42, Index Tower, DIFC
-              <div className="form-note">Dubai, United Arab Emirates</div>
+              <b>Server address</b>
+              cfx.re/join/riaroleplay
+              <div className="form-note">Whitelist required · connect through FiveM</div>
             </div>
           </div>
           <div className="contact-item">
@@ -57,16 +59,16 @@ export default function Contact() {
               <Clock size={16} />
             </span>
             <div>
-              <b>Other desks</b>
-              London · Miami · Monaco · New York
-              <div className="form-note">By appointment only</div>
+              <b>Staff coverage</b>
+              EU · NA · APAC
+              <div className="form-note">Moderators online around the clock</div>
             </div>
           </div>
 
           <div className="map-frame" style={{ marginTop: '1.4rem', minHeight: 280 }}>
             <iframe
-              title="Velora Estates head office map"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=55.2650%2C25.2080%2C55.2850%2C25.2220&layer=mapnik&marker=25.2150%2C55.2750"
+              title="Map of downtown Los Angeles, the reference for Los Santos"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-118.2730%2C34.0360%2C-118.2230%2C34.0650&layer=mapnik&marker=34.0505%2C-118.2487"
               loading="lazy"
             />
           </div>
@@ -75,7 +77,7 @@ export default function Contact() {
         <div className="panel">
           <h2 className="panel__title">Send a message</h2>
           <p className="panel__sub">
-            Tell us the city, the horizon and the budget. We will reply with a short, considered shortlist.
+            Tell us what you are looking for in a city. We will reply with a straight answer, not a sales pitch.
           </p>
           <ContactForm />
         </div>

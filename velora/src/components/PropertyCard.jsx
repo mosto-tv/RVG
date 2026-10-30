@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, BedDouble, Heart, MapPin, Maximize, Bath, Star } from 'lucide-react';
+import { ArrowRight, Users, Heart, MapPin, Clock, Trophy, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { priceFmt } from '../lib/api.js';
 import { useFavorites } from '../context/FavoritesContext.jsx';
@@ -61,13 +61,13 @@ export default function PropertyCard({ property, variant = 'default', showFavori
 
         <div className="property-card__meta">
           <span>
-            <BedDouble size={13} /> {property.beds} Beds
+            <Users size={13} /> {property.beds} Players
           </span>
           <span>
-            <Bath size={13} /> {property.baths} Baths
+            <Clock size={13} /> {property.baths} min
           </span>
           <span>
-            <Maximize size={13} /> {property.size.toLocaleString()} sq ft
+            <Trophy size={13} /> {property.size.toLocaleString()} rep
           </span>
         </div>
 

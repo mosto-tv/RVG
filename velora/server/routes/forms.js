@@ -47,8 +47,8 @@ formsRouter.post('/bookings', (req, res, next) => {
 
     res.status(201).json({
       ok: true,
-      reference: `VISIT-${String(result.lastInsertRowid).padStart(5, '0')}`,
-      message: 'Your viewing request has been received. An advisor will confirm within one business day.',
+      reference: `APP-${String(result.lastInsertRowid).padStart(5, '0')}`,
+      message: 'Your application has been received. Our staff team will confirm within one business day.',
     });
   } catch (err) {
     next(err);
@@ -77,7 +77,7 @@ formsRouter.post('/contact', (req, res, next) => {
       subject || null,
       message,
     );
-    res.status(201).json({ ok: true, message: 'Thank you \u2014 your message has reached our advisory desk.' });
+    res.status(201).json({ ok: true, message: 'Thank you \u2014 your message has reached our staff team.' });
   } catch (err) {
     next(err);
   }
@@ -92,7 +92,7 @@ formsRouter.post('/newsletter', (req, res, next) => {
       return res.json({ ok: true, alreadySubscribed: true, message: 'You are already on the list.' });
     }
     run('INSERT INTO newsletter (email) VALUES (?)', email);
-    res.status(201).json({ ok: true, message: 'You are on the list. Market insights arrive monthly.' });
+    res.status(201).json({ ok: true, message: 'You are on the list. Server news arrives monthly.' });
   } catch (err) {
     next(err);
   }

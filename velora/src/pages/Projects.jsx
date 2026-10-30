@@ -6,9 +6,9 @@ import { useFetch } from '../lib/useFetch.js';
 import { priceFmt } from '../lib/api.js';
 
 const STATUS_CLASS = {
-  'New Construction': 'status-dot',
-  Upcoming: 'status-dot status-dot--soon',
-  Completed: 'status-dot status-dot--done',
+  Live: 'status-dot',
+  'In Development': 'status-dot status-dot--soon',
+  Released: 'status-dot status-dot--done',
 };
 
 export default function Projects() {
@@ -26,15 +26,15 @@ export default function Projects() {
     <>
       <header className="banner-head" style={{ marginTop: 'calc(var(--header-h) * -1)', paddingTop: 'var(--header-h)' }}>
         <img
-          src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=85"
-          alt="New architectural development"
+          src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=85"
+          alt="Los Santos skyline at dusk"
         />
         <div className="shell banner-head__inner">
-          <span className="eyebrow">Developments</span>
-          <h1>Projects</h1>
+          <span className="eyebrow">Roadmap</span>
+          <h1>Server Updates</h1>
           <p>
-            Exclusive developments, new construction and completed collections — from a fifty-two storey tower
-            above the Marina to twelve stone houses around a Cotswold garden.
+            Every chapter we have shipped and everything currently in development — from the Uptown Stories season
+            to the Cayo Perico expansion.
           </p>
         </div>
       </header>
@@ -42,7 +42,7 @@ export default function Projects() {
       <section className="section section--tight">
         <div className="shell">
           <div className="section-head" style={{ alignItems: 'center' }}>
-            <div className="pill-tabs" role="tablist" aria-label="Filter projects by status">
+            <div className="pill-tabs" role="tablist" aria-label="Filter updates by status">
               {['All', ...statuses].map((option) => (
                 <button
                   key={option}
@@ -55,13 +55,13 @@ export default function Projects() {
                 </button>
               ))}
             </div>
-            <span className="form-note">{filtered.length} projects</span>
+            <span className="form-note">{filtered.length} updates</span>
           </div>
 
           {loading && (
             <div className="loading-row">
               <span className="loading-row__bar" />
-              Loading projects
+              Loading updates
             </div>
           )}
 
@@ -70,10 +70,10 @@ export default function Projects() {
               <span className="empty-state__icon">
                 <Building2 size={20} />
               </span>
-              <h3>No projects in this stage</h3>
-              <p>New developments are added each quarter. Ask our advisory desk about upcoming launches.</p>
+              <h3>No updates at this stage</h3>
+              <p>New chapters are added every season. Ask our staff what is being worked on next.</p>
               <Link to="/contact" className="btn btn--sm">
-                Register interest
+                Ask staff
               </Link>
             </div>
           )}
@@ -98,9 +98,9 @@ export default function Projects() {
                       {project.description}
                     </p>
                     <div className="project-card__meta">
-                      <span className="project-card__price">From {priceFmt(project.startingPrice)}</span>
+                      <span className="project-card__price">{priceFmt(project.startingPrice)} starter bonus</span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                        <Building2 size={13} /> {project.units} residences
+                        <Building2 size={13} /> {project.units} new features
                       </span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
                         <CalendarClock size={13} /> {project.delivery}
@@ -118,10 +118,10 @@ export default function Projects() {
                     )}
                     <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.8rem', flexWrap: 'wrap' }}>
                       <Link to="/contact" className="btn btn--sm">
-                        Request brochure
+                        Release notes
                       </Link>
                       <Link to="/book-visit" className="btn btn--outline btn--sm">
-                        Arrange a viewing
+                        Join the playtest
                       </Link>
                     </div>
                   </div>
@@ -135,8 +135,8 @@ export default function Projects() {
       <section className="final-cta">
         <div className="shell">
           <span className="eyebrow">Early access</span>
-          <h2>Register for the next launch</h2>
-          <p>Launch allocations are released to registered buyers before the public campaign.</p>
+          <h2>Register for the next chapter</h2>
+          <p>Beta access opens to our Discord community before every release goes live.</p>
           <Link to="/contact" className="btn btn--gold">
             Register interest <ArrowRight size={15} />
           </Link>

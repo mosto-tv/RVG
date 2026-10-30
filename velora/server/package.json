@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "VELORA ESTATES + RIA ROLEPLAY API (properties, accounts, Tebex store)",
+  "description": "RIA ROLEPLAY API (server features, accounts, Tebex store)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

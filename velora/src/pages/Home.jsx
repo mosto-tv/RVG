@@ -9,12 +9,11 @@ import ValueGrid, { VALUES } from '../components/ValueGrid.jsx';
 import SectionHead from '../components/SectionHead.jsx';
 import Reveal from '../components/Reveal.jsx';
 import { useFetch } from '../lib/useFetch.js';
-import { priceFmt } from '../lib/api.js';
 
 const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2200&q=85';
+  'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2200&q=85';
 const BANNER_IMAGE =
-  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2000&q=85';
+  'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=2000&q=85';
 
 const ASIDE_VALUES = VALUES.slice(0, 4);
 
@@ -33,41 +32,41 @@ export default function Home() {
     <>
       <section className="hero" style={{ marginTop: 'calc(var(--header-h) * -1)' }}>
         <div className="hero__media">
-          <img src={HERO_IMAGE} alt="Contemporary glass villa with an infinity pool at dusk" />
+          <img src={HERO_IMAGE} alt="Downtown Los Santos at golden hour" />
         </div>
         <div className="hero__scrim" />
 
         <div className="shell hero__inner">
           <div className="hero__content">
-            <span className="eyebrow hero__eyebrow">Private client advisory since 2009</span>
+            <span className="eyebrow hero__eyebrow">Serious roleplay since 2021</span>
             <h1>
-              Discover Exceptional
-              <em>Living Spaces</em>
+              Step Into Another
+              <em>Life In Los Santos</em>
             </h1>
             <p className="hero__lede">
-              Explore curated luxury properties designed for extraordinary lifestyles — quietly, and by
-              appointment.
+              A premium FiveM roleplay city built for stories with weight — whitelisted, hand-modded, and
+              running every night.
             </p>
             <div className="hero__actions">
               <Link to="/listings" className="btn btn--gold">
-                Explore Properties <ArrowRight size={15} />
+                Explore Features <ArrowRight size={15} />
               </Link>
               <Link to="/book-visit" className="btn btn--ghost-light">
-                Schedule Tour
+                Apply For Whitelist
               </Link>
             </div>
             <div className="hero__stats">
               <div className="hero__stat">
-                <b>1,240</b>
-                <span>Curated residences</span>
+                <b>4,800</b>
+                <span>Registered citizens</span>
               </div>
               <div className="hero__stat">
-                <b>18</b>
-                <span>Countries</span>
+                <b>32</b>
+                <span>Custom scripts</span>
               </div>
               <div className="hero__stat">
-                <b>$4.2B</b>
-                <span>Transacted</span>
+                <b>24/7</b>
+                <span>City uptime</span>
               </div>
             </div>
           </div>
@@ -81,12 +80,12 @@ export default function Home() {
       <section className="section section--tight">
         <div className="shell">
           <SectionHead
-            eyebrow="Browse by type"
-            title="Property Categories"
-            lede="Six ways into the collection — each opened with a single click."
+            eyebrow="Browse by category"
+            title="Server Categories"
+            lede="Six ways into the city — each opened with a single click."
             action={
               <Link to="/listings" className="link-arrow">
-                All listings <ArrowRight size={14} />
+                All features <ArrowRight size={14} />
               </Link>
             }
           />
@@ -100,9 +99,9 @@ export default function Home() {
         <div className="shell home-split">
           <div>
             <SectionHead
-              eyebrow="Selected residences"
-              title="Featured Residences"
-              lede="A short list of the most considered homes currently available through Velora."
+              eyebrow="Selected features"
+              title="Featured Experiences"
+              lede="A short list of the most played systems live on Ria right now."
               action={
                 <Link to="/listings" className="link-arrow">
                   View all <ArrowRight size={14} />
@@ -113,13 +112,13 @@ export default function Home() {
             {featured.loading && (
               <div className="loading-row">
                 <span className="loading-row__bar" />
-                Loading the collection
+                Loading features
               </div>
             )}
 
             {featured.error && (
               <div className="form-alert form-alert--error">
-                The collection could not be loaded. Please refresh, or call our advisory desk.
+                The feature list could not be loaded. Please refresh, or ask in our Discord.
               </div>
             )}
 
@@ -148,8 +147,8 @@ export default function Home() {
 
           <aside className="home-split__aside">
             <Reveal className="aside-card">
-              <h3 className="aside-card__title">Why Choose Velora Estates</h3>
-              <p className="aside-card__lede">Discretion, diligence and a collection curated by hand.</p>
+              <h3 className="aside-card__title">Why Choose Ria Roleplay</h3>
+              <p className="aside-card__lede">Performance, fairness and a city curated by hand.</p>
               <div className="aside-values">
                 {ASIDE_VALUES.map((item) => {
                   const Icon = item.icon;
@@ -167,19 +166,19 @@ export default function Home() {
             </Reveal>
 
             <Reveal className="callout-card" delay={60}>
-              <img src={BANNER_IMAGE} alt="Infinity pool overlooking the ocean at golden hour" loading="lazy" />
+              <img src={BANNER_IMAGE} alt="Neon-lit street in Vinewood at night" loading="lazy" />
               <div>
-                <h3>Own Your Dream Property Today</h3>
-                <p>Exceptional homes. Extraordinary lifestyles. Personalised service.</p>
+                <h3>Start Your Story Tonight</h3>
+                <p>Custom scripts. Fair economy. A city that answers.</p>
                 <Link to="/contact" className="btn btn--gold btn--sm">
-                  Check Availability
+                  Join The City
                 </Link>
               </div>
             </Reveal>
 
             <Reveal className="aside-card" delay={120}>
-              <h3 className="aside-card__title">Meet Our Agents</h3>
-              <p className="aside-card__lede">Three desks. One standard of care.</p>
+              <h3 className="aside-card__title">Meet Our Staff</h3>
+              <p className="aside-card__lede">Three departments. One standard of care.</p>
               {(agents.data?.items || []).map((agent) => (
                 <AgentCard key={agent.slug} agent={agent} compact />
               ))}
@@ -194,19 +193,19 @@ export default function Home() {
       <section className="section section--cream">
         <div className="shell">
           <SectionHead
-            eyebrow="Prime locations"
-            title="Prime Locations"
-            lede="Five addresses that define the collection — from Palm Jumeirah to the Cotswolds."
+            eyebrow="Prime districts"
+            title="Prime Districts"
+            lede="Five districts that define the city — from Vinewood Hills to Paleto Bay."
             action={
               <Link to="/listings" className="link-arrow">
-                Browse all destinations <ArrowRight size={14} />
+                Browse all districts <ArrowRight size={14} />
               </Link>
             }
           />
           {locations.loading ? (
             <div className="loading-row">
               <span className="loading-row__bar" />
-              Loading destinations
+              Loading districts
             </div>
           ) : (
             <Reveal>
@@ -219,9 +218,9 @@ export default function Home() {
       <section className="section">
         <div className="shell">
           <SectionHead
-            eyebrow="The Velora standard"
-            title="Why Choose Velora Estates"
-            lede="Six commitments that shape every acquisition we advise on."
+            eyebrow="The Ria standard"
+            title="Why Choose Ria Roleplay"
+            lede="Six commitments that shape every hour you spend in the city."
             center
           />
           <Reveal>
@@ -233,15 +232,15 @@ export default function Home() {
       <section className="section section--tight" style={{ paddingTop: 0 }}>
         <div className="shell">
           <Reveal className="cta-banner">
-            <img src={BANNER_IMAGE} alt="Waterfront villa pool at sunset" loading="lazy" />
+            <img src={BANNER_IMAGE} alt="Night-time boulevard lights in Vinewood" loading="lazy" />
             <div className="cta-banner__inner">
               <span className="eyebrow" style={{ color: 'var(--gold-soft)' }}>
-                By appointment
+                Whitelist open
               </span>
-              <h2>Own Your Dream Property Today</h2>
-              <p>Exceptional homes. Extraordinary lifestyles. Personalised service.</p>
+              <h2>Your Story Starts Tonight</h2>
+              <p>Custom scripts. Fair economy. A city that answers.</p>
               <Link to="/contact" className="btn btn--gold">
-                Check Availability <ArrowRight size={15} />
+                Apply Now <ArrowRight size={15} />
               </Link>
             </div>
           </Reveal>
@@ -251,12 +250,12 @@ export default function Home() {
       <section className="section section--cream">
         <div className="shell">
           <SectionHead
-            eyebrow="Your advisors"
-            title="Meet Our Agents"
-            lede="Senior advisors with deep local knowledge in each of our markets."
+            eyebrow="Your team"
+            title="Meet Our Staff"
+            lede="Senior staff with deep knowledge of every system in the city."
             action={
               <Link to="/agents" className="link-arrow">
-                All agents <ArrowRight size={14} />
+                All staff <ArrowRight size={14} />
               </Link>
             }
           />
@@ -272,9 +271,9 @@ export default function Home() {
 
       <section className="final-cta">
         <div className="shell">
-          <span className="eyebrow">Velora Estates</span>
-          <h2>Luxury Living Starts Here</h2>
-          <p>Discover exceptional properties and find the perfect place to call home.</p>
+          <span className="eyebrow">Ria Roleplay</span>
+          <h2>Your City Is Waiting</h2>
+          <p>Join thousands of players in a city built for stories worth telling.</p>
           <Link to="/listings" className="btn btn--gold">
             Get Started <ArrowRight size={15} />
           </Link>
@@ -292,19 +291,19 @@ export default function Home() {
             }}
           >
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <ShieldCheck size={13} /> Verified listings
+              <ShieldCheck size={13} /> Verified players
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Star size={13} /> 4.9 average client rating
+              <Star size={13} /> 4.9 community rating
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <TrendingUp size={13} /> 18 countries
+              <TrendingUp size={13} /> 24/7 uptime
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <CalendarDays size={13} /> Viewings in 48 hours
+              <CalendarDays size={13} /> Applications in 48h
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Sparkles size={13} /> Off-market access
+              <Sparkles size={13} /> Whitelist access
             </span>
           </div>
         </div>

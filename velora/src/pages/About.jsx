@@ -7,10 +7,10 @@ import SectionHead from '../components/SectionHead.jsx';
 import { useFetch } from '../lib/useFetch.js';
 
 const PROCESS = [
-  { num: '01', title: 'Private brief', text: 'A conversation about how you want to live — not a filter form.' },
-  { num: '02', title: 'Curated shortlist', text: 'Four to six residences, each walked and verified by us first.' },
-  { num: '03', title: 'Diligence', text: 'Titles, surveys, planning and service charges reviewed by counsel.' },
-  { num: '04', title: 'Completion', text: 'Negotiation, escrow and handover coordinated end to end.' },
+  { num: '01', title: 'Application', text: 'A short form about the character you want to play — not a quiz.' },
+  { num: '02', title: 'Interview', text: 'Twenty minutes in voice with staff, to talk through the rules and your story.' },
+  { num: '03', title: 'Whitelist', text: 'Access granted, identifier linked and onboarding handled end to end.' },
+  { num: '04', title: 'First shift', text: 'A job placement, a district tour and a staff member on call if anything breaks.' },
 ];
 
 export default function About() {
@@ -25,11 +25,10 @@ export default function About() {
             <nav className="crumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link> <span>/</span> <span>About</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>A quiet standard in luxury real estate</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>A standard set for serious roleplay</h1>
             <p className="lede" style={{ marginTop: '0.8rem' }}>
-              Velora Estates was founded in 2009 to advise private clients on the acquisition of architecturally
-              significant homes. We represent a small number of residences at any time, and we know each of them
-              intimately.
+              Ria Roleplay was founded in 2021 to build a city where the writing mattered more than the script
+              count. We run one server, keep the whitelist tight, and know most of the people who play here by name.
             </p>
           </div>
         </div>
@@ -39,34 +38,34 @@ export default function About() {
         <div className="shell editorial">
           <Reveal className="editorial__media">
             <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
-              alt="Modern villa facade at dusk"
+              src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=85"
+              alt="Los Santos skyline at dusk"
             />
           </Reveal>
           <Reveal className="editorial__body" delay={80}>
             <span className="eyebrow">Our philosophy</span>
-            <h2>Fewer residences, understood completely</h2>
+            <h2>Fewer features, built completely</h2>
             <p className="lede">
-              Most portals show everything. We show very little — because a home is not a search result. Every
-              residence in the collection has been visited, photographed and assessed by an advisor who can answer
-              questions about its structure, its light and its neighbours.
+              Most servers stack systems until nothing works together. We ship less — because a job is only worth
+              playing if the economy behind it, the police response to it and the people affected by it all behave
+              properly. Every system on Ria is tested by players before it goes live.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
-              Our clients are typically buying a second or third home, often across borders. They value discretion
-              over scale, and judgement over inventory.
+              Our players are adults with jobs and lives. They value consistency over novelty, and good stories over
+              grind. So do we.
             </p>
             <div className="stat-row">
               <div className="stat">
-                <b>16</b>
-                <span>Years advising</span>
+                <b>5</b>
+                <span>Years online</span>
               </div>
               <div className="stat">
-                <b>1,240</b>
-                <span>Residences placed</span>
+                <b>4,800</b>
+                <span>Citizens registered</span>
               </div>
               <div className="stat">
-                <b>$4.2B</b>
-                <span>Transacted value</span>
+                <b>1.8M</b>
+                <span>Hours roleplayed</span>
               </div>
             </div>
           </Reveal>
@@ -78,19 +77,19 @@ export default function About() {
           <div className="split-form">
             <Reveal className="panel">
               <span className="eyebrow">Mission</span>
-              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>To make exceptional homes legible</h2>
+              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>To make good roleplay the default</h2>
               <p className="lede" style={{ marginTop: '0.8rem' }}>
-                Buying well requires more than a good address. We translate architecture, provenance and
-                neighbourhood into clear advice, so a decision of this size is made with confidence rather than
-                urgency.
+                A city only works when the rules are clear and the staff apply them evenly. We build systems that
+                reward character over grind, moderate consistently, and make the first hour on the server as good
+                as the hundredth.
               </p>
             </Reveal>
             <Reveal className="panel panel--muted" delay={80}>
               <span className="eyebrow">Vision</span>
-              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>The most trusted private desk in five cities</h2>
+              <h2 style={{ fontSize: '1.7rem', marginTop: '0.6rem' }}>The most respected city in FiveM</h2>
               <p className="lede" style={{ marginTop: '0.8rem' }}>
-                We are building a practice that outlives trends: one standard of representation in Dubai, London,
-                Miami, Monaco and New York, and a record of clients who return for their next home.
+                We are building a server that outlives trends: one standard of moderation across every time zone,
+                custom systems that hold up under load, and a community that comes back for the next chapter.
               </p>
             </Reveal>
           </div>
@@ -110,9 +109,9 @@ export default function About() {
       <section className="section">
         <div className="shell">
           <SectionHead
-            eyebrow="Why clients trust us"
-            title="The Velora standard"
-            lede="Six commitments, applied to every residence and every transaction."
+            eyebrow="Why players stay"
+            title="The Ria standard"
+            lede="Six commitments, applied to every session and every report we review."
             center
           />
           <ValueGrid items={[...VALUES, ...EXTRA_VALUES].slice(0, 6)} />
@@ -124,10 +123,10 @@ export default function About() {
           <div className="shell">
             <SectionHead
               eyebrow="Our people"
-              title="Professional team"
+              title="The team behind the city"
               action={
                 <Link to="/agents" className="link-arrow">
-                  All agents <ArrowRight size={14} />
+                  All staff <ArrowRight size={14} />
                 </Link>
               }
             />
@@ -142,9 +141,9 @@ export default function About() {
 
       <section className="final-cta">
         <div className="shell">
-          <span className="eyebrow">Velora Estates</span>
+          <span className="eyebrow">Ria Roleplay</span>
           <h2>Begin with a conversation</h2>
-          <p>Tell us what you are looking for. We will tell you honestly whether we can help.</p>
+          <p>Tell us how you like to play. We will tell you honestly whether we are the right city for it.</p>
           <Link to="/contact" className="btn btn--gold">
             Contact us <ArrowRight size={15} />
           </Link>

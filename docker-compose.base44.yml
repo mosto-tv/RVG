@@ -1,4 +1,4 @@
-# Base44 development environment for VELORA ESTATES + the RIA ROLEPLAY store.
+# Base44 development environment for RIA ROLEPLAY (site + Tebex store).
 # Runs the cloned source with live reload; never a prebuilt production image.
 name: velora-estates
 
@@ -71,7 +71,7 @@ services:
       start_period: 90s
     restart: on-failure
     labels:
-      base44.project: "VELORA ESTATES"
+      base44.project: "RIA ROLEPLAY"
       base44.kind: "web"
       base44.port: "3000"
 

@@ -6,19 +6,19 @@ import { useFetch } from '../lib/useFetch.js';
 import { api, priceFmt, shortPrice } from '../lib/api.js';
 import { CATEGORY_ORDER } from '../components/CategoryGrid.jsx';
 
-const BED_OPTIONS = ['Any', '1+', '2+', '3+', '4+', '5+'];
-const BATH_OPTIONS = ['Any', '1+', '2+', '3+', '4+'];
+const BED_OPTIONS = ['Any', '2+', '4+', '8+', '16+', '32+'];
+const BATH_OPTIONS = ['Any', '15+', '30+', '45+', '60+'];
 const SORTS = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
-  { value: 'price-asc', label: 'Price: low to high' },
-  { value: 'price-desc', label: 'Price: high to low' },
+  { value: 'price-asc', label: 'Payout: low to high' },
+  { value: 'price-desc', label: 'Payout: high to low' },
   { value: 'popularity', label: 'Most popular' },
 ];
 const PRICE_BANDS = [
-  { label: 'Under $5M', min: '', max: '5000000' },
-  { label: '$5M – $10M', min: '5000000', max: '10000000' },
-  { label: '$10M+', min: '10000000', max: '' },
+  { label: 'Under $5K', min: '', max: '5000' },
+  { label: '$5K – $15K', min: '5000', max: '15000' },
+  { label: '$15K+', min: '15000', max: '' },
 ];
 
 const PAGE_SIZE = 6;
@@ -89,9 +89,9 @@ export default function Listings() {
         label: `${min ? shortPrice(Number(min)) : 'Any'} – ${max ? shortPrice(Number(max)) : 'No limit'}`,
       });
     }
-    if (params.get('beds')) chips.push({ key: 'beds', label: `${params.get('beds')}+ beds` });
-    if (params.get('baths')) chips.push({ key: 'baths', label: `${params.get('baths')}+ baths` });
-    if (params.get('minSize')) chips.push({ key: 'minSize', label: `${Number(params.get('minSize')).toLocaleString()}+ sq ft` });
+    if (params.get('beds')) chips.push({ key: 'beds', label: `${params.get('beds')}+ players` });
+    if (params.get('baths')) chips.push({ key: 'baths', label: `${params.get('baths')}+ min` });
+    if (params.get('minSize')) chips.push({ key: 'minSize', label: `${Number(params.get('minSize')).toLocaleString()}+ rep` });
     if (agentName) chips.push({ key: 'agent', label: agentName });
     return chips;
   }, [params, agentName]);
@@ -121,7 +121,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Destination</span>
+        <span className="filters__label">District</span>
         <div className="filters__options">
           {(meta.data?.cities || []).map((city) => (
             <button
@@ -136,7 +136,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Property type</span>
+        <span className="filters__label">Category</span>
         <div className="filters__options">
           {CATEGORY_ORDER.map((type) => (
             <button
@@ -151,7 +151,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Price</span>
+        <span className="filters__label">Payout</span>
         <div className="filters__options">
           {PRICE_BANDS.map((band) => {
             const active = params.get('minPrice') === band.min && params.get('maxPrice') === band.max;
@@ -198,7 +198,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Bedrooms</span>
+        <span className="filters__label">Players</span>
         <div className="filters__options">
           {BED_OPTIONS.map((option) => {
             const value = option === 'Any' ? '' : option.replace('+', '');
@@ -216,7 +216,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Bathrooms</span>
+        <span className="filters__label">Session length</span>
         <div className="filters__options">
           {BATH_OPTIONS.map((option) => {
             const value = option === 'Any' ? '' : option.replace('+', '');
@@ -234,7 +234,7 @@ export default function Listings() {
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">Minimum size (sq ft)</span>
+        <span className="filters__label">Minimum rep reward</span>
         <input
           className="input"
           type="number"
@@ -242,14 +242,14 @@ export default function Listings() {
           placeholder="e.g. 4000"
           value={params.get('minSize') || ''}
           onChange={(event) => update('minSize', event.target.value)}
-          aria-label="Minimum size in square feet"
+          aria-label="Minimum reputation reward"
         />
       </div>
 
       {meta.data && (
         <p className="form-note">
-          Collection range {priceFmt(meta.data.price.min)} – {priceFmt(meta.data.price.max)} ·{' '}
-          {meta.data.total} residences
+          Payout range {priceFmt(meta.data.price.min)} – {priceFmt(meta.data.price.max)} ·{' '}
+          {meta.data.total} features
         </p>
       )}
     </div>
@@ -261,12 +261,12 @@ export default function Listings() {
         <div className="shell page-head__inner">
           <div>
             <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Listings</span>
+              <Link to="/">Home</Link> <span>/</span> <span>Features</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>The Collection</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>Life in Los Santos</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              {total > 0 ? `${total} residences currently available` : 'Refine the collection to your brief'} —
-              private viewings arranged within 48 hours.
+              {total > 0 ? `${total} features live on the server` : 'Refine the city to your playstyle'} —
+              whitelist applications reviewed within 48 hours.
             </p>
           </div>
           <div className="results-bar__tools">
@@ -277,7 +277,7 @@ export default function Listings() {
               className="input"
               value={sort}
               onChange={(event) => update('sort', event.target.value)}
-              aria-label="Sort residences"
+              aria-label="Sort features"
               style={{ maxWidth: 200 }}
             >
               {SORTS.map((option) => (
@@ -329,7 +329,7 @@ export default function Listings() {
           {loading && (
             <div className="loading-row">
               <span className="loading-row__bar" />
-              Curating results
+              Loading features
             </div>
           )}
 
@@ -344,17 +344,17 @@ export default function Listings() {
               <span className="empty-state__icon">
                 <SlidersHorizontal size={20} />
               </span>
-              <h3>No residences match this brief</h3>
+              <h3>No features match this brief</h3>
               <p>
-                Try widening the budget or removing a filter. Our advisory desk can also search off-market
-                residences privately.
+                Try widening the payout range or removing a filter. Our staff can also suggest systems that suit
+                the way you like to play.
               </p>
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <button className="btn btn--sm" onClick={clearAll}>
                   Clear all filters
                 </button>
                 <Link to="/contact" className="btn btn--outline btn--sm">
-                  Ask an advisor
+                  Ask staff
                 </Link>
               </div>
             </div>
@@ -371,7 +371,7 @@ export default function Listings() {
           {hasMore && (
             <div className="load-more">
               <button className="btn btn--outline" onClick={() => setPage((prev) => prev + 1)} disabled={loading}>
-                {loading ? 'Loading' : 'Load more residences'}
+                {loading ? 'Loading' : 'Load more features'}
               </button>
               <span className="form-note">
                 Showing {items.length} of {total}

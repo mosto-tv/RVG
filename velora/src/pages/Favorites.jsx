@@ -15,7 +15,7 @@ export default function Favorites() {
       <div className="shell">
         <div className="loading-row">
           <span className="loading-row__bar" />
-          Loading your collection
+          Loading your list
         </div>
       </div>
     );
@@ -31,15 +31,15 @@ export default function Favorites() {
         <div className="shell page-head__inner">
           <div>
             <nav className="crumbs" aria-label="Breadcrumb">
-              <Link to="/">Home</Link> <span>/</span> <span>Saved residences</span>
+              <Link to="/">Home</Link> <span>/</span> <span>Saved features</span>
             </nav>
-            <h1 style={{ marginTop: '0.7rem' }}>Saved Residences</h1>
+            <h1 style={{ marginTop: '0.7rem' }}>Saved Features</h1>
             <p className="lede" style={{ marginTop: '0.7rem' }}>
-              A private collection, visible only to you. {ids.length} residence{ids.length === 1 ? '' : 's'} saved.
+              A private list, visible only to you. {ids.length} feature{ids.length === 1 ? '' : 's'} saved.
             </p>
           </div>
           <Link to="/listings" className="btn btn--outline">
-            Browse the collection
+            Browse the city
           </Link>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function Favorites() {
         {loadingProperties && (
           <div className="loading-row">
             <span className="loading-row__bar" />
-            Loading residences
+            Loading features
           </div>
         )}
 
@@ -57,10 +57,10 @@ export default function Favorites() {
             <span className="empty-state__icon">
               <Heart size={20} />
             </span>
-            <h3>Your collection is empty</h3>
-            <p>Tap the heart on any residence to keep it here for later consideration.</p>
+            <h3>Nothing saved yet</h3>
+            <p>Tap the heart on any feature to keep it here for later.</p>
             <Link to="/listings" className="btn btn--sm">
-              Explore listings
+              Explore features
             </Link>
           </div>
         )}

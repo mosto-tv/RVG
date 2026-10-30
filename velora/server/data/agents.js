@@ -1,0 +1,40 @@
+import { IMAGES, photo } from './media.js';
+
+export const agents = [
+  {
+    slug: 'marcus-vale',
+    name: 'Marcus Vale',
+    role: 'Server Owner',
+    email: 'marcus@riaroleplay.com',
+    phone: '+1 (305) 555 0142',
+    bio: 'Marcus founded Ria in 2021 and still writes code most weeks. He owns the long-term direction of the city, the economy balance and the standard every other department is held to.',
+    portrait: photo(IMAGES.agents.marcus, 900),
+    languages: ['English', 'Spanish'],
+    listings: 42,
+    socials: { instagram: '#', linkedin: '#' },
+  },
+  {
+    slug: 'elena-ruiz',
+    name: 'Elena Ruiz',
+    role: 'Head Administrator',
+    email: 'elena@riaroleplay.com',
+    phone: '+44 20 7946 0813',
+    bio: 'Elena runs the staff team and every player report that reaches it. Two years of community moderation before Ria, and the person who decides whether a story is roleplay or just noise.',
+    portrait: photo(IMAGES.agents.elena, 900),
+    languages: ['English', 'Spanish'],
+    listings: 28,
+    socials: { instagram: '#', linkedin: '#' },
+  },
+  {
+    slug: 'kai-nakamura',
+    name: 'Kai Nakamura',
+    role: 'Community Manager',
+    email: 'kai@riaroleplay.com',
+    phone: '+81 3 5555 0198',
+    bio: 'Kai looks after the Discord, the events calendar and the whitelist interviews. If you have applied to Ria, the person who reads it first is probably Kai.',
+    portrait: photo(IMAGES.agents.kai, 900),
+    languages: ['English', 'Japanese'],
+    listings: 36,
+    socials: { instagram: '#', linkedin: '#' },
+  },
+];

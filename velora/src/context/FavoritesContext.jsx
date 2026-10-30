@@ -25,7 +25,7 @@ export const FavoritesProvider = ({ children }) => {
   const toggle = useCallback(
     async (propertyId) => {
       if (!user) {
-        push('Sign in to keep a private wishlist of residences.', 'info');
+        push('Sign in to keep a private list of features.', 'info');
         return false;
       }
       if (busy) return false;
@@ -34,11 +34,11 @@ export const FavoritesProvider = ({ children }) => {
         if (ids.includes(propertyId)) {
           const data = await api.del(`/favorites/${propertyId}`);
           setIds(data.ids || []);
-          push('Removed from your saved residences.', 'info');
+          push('Removed from your saved features.', 'info');
         } else {
           const data = await api.post('/favorites', { propertyId });
           setIds(data.ids || []);
-          push('Saved to your private collection.', 'success');
+          push('Saved to your private list.', 'success');
         }
         return true;
       } catch (err) {

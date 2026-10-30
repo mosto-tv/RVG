@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Building2 } from 'lucide-react';
+import { ArrowUpRight, Users } from 'lucide-react';
 
 export default function LocationsGrid({ items = [] }) {
   return (
@@ -19,7 +19,7 @@ export default function LocationsGrid({ items = [] }) {
           </div>
           <div className="location-card__foot">
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-              <Building2 size={12} /> {location.properties} properties
+              <Users size={12} /> {location.properties} players online
             </span>
             <span className="location-card__link">
               Explore <ArrowUpRight size={13} />

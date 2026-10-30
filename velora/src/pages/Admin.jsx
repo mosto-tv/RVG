@@ -634,13 +634,13 @@ export default function Admin() {
           {tab === 'inbox' && (
             <div className="split-form">
               <div className="panel">
-                <h2 className="panel__title">Viewing requests</h2>
+                <h2 className="panel__title">Whitelist applications</h2>
                 <div className="table-wrap">
                   <table className="data-table">
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Residence</th>
+                        <th>Feature</th>
                         <th>When</th>
                       </tr>
                     </thead>
@@ -648,7 +648,7 @@ export default function Admin() {
                       {(inbox?.bookings || []).length === 0 && (
                         <tr>
                           <td colSpan={3} className="admin-empty">
-                            No viewing requests.
+                            No applications.
                           </td>
                         </tr>
                       )}
@@ -658,7 +658,7 @@ export default function Admin() {
                             {row.name}
                             <div className="form-note">{row.email}</div>
                           </td>
-                          <td>{row.property_title || 'General tour'}</td>
+                          <td>{row.property_title || 'General application'}</td>
                           <td>
                             {row.preferred_date} · {row.preferred_time}
                           </td>

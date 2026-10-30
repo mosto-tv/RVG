@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Mail, Phone } from 'lucide-react';
+import { MessageCircle, Youtube, Mail, Globe } from 'lucide-react';
 
 export default function AgentCard({ agent, compact = false }) {
   if (compact) {
@@ -45,23 +45,23 @@ export default function AgentCard({ agent, compact = false }) {
       )}
 
       <div className="agent-card__actions">
-        <a href={`mailto:${agent.email}?subject=Property%20enquiry`} className="btn btn--sm">
-          <Mail size={13} /> Contact Agent
+        <a href={`mailto:${agent.email}?subject=Server%20enquiry`} className="btn btn--sm">
+          <Mail size={13} /> Contact Staff
         </a>
         <Link to={`/listings?agent=${agent.slug}`} className="btn btn--outline btn--sm">
-          View Listings
+          View Features
         </Link>
       </div>
 
       <div className="agent-card__socials">
-        <a href={agent.socials?.instagram || '#'} aria-label={`${agent.name} on Instagram`}>
-          <Instagram size={14} />
+        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} on Discord`}>
+          <MessageCircle size={14} />
         </a>
-        <a href={agent.socials?.linkedin || '#'} aria-label={`${agent.name} on LinkedIn`}>
-          <Linkedin size={14} />
+        <a href={agent.socials?.linkedin || '#'} aria-label={`${agent.name} on the server`}>
+          <Youtube size={14} />
         </a>
-        <a href={`tel:${agent.phone.replace(/\s/g, '')}`} aria-label={`Call ${agent.name}`}>
-          <Phone size={14} />
+        <a href="https://discord.gg/riaroleplay" aria-label={`${agent.name} on the server`}>
+          <Globe size={14} />
         </a>
       </div>
     </article>

@@ -14,8 +14,10 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+# Anchored to the repo root: this is the Python packaging rule. Unanchored it also
+# swallowed velora/src/lib/ and velora/server/lib/, which are application source.
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -217,9 +219,10 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# VELORA ESTATES workspace (React + Vite frontend, Node API)
+# RIA ROLEPLAY workspace (React + Vite frontend, Node API)
 velora/node_modules/
 velora/dist/
 velora/server/node_modules/
-velora/server/data/
+# velora/server/data/ holds the catalogue source modules (features, districts, staff,
+# roadmap, store products) and MUST stay tracked. Only the SQLite directory is ignored.
 velora/server/.data/

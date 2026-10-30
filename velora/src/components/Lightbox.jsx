@@ -26,7 +26,7 @@ export default function Lightbox({ images = [], index = 0, onClose }) {
   if (!images.length) return null;
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label="Property gallery">
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label="Image gallery">
       <div className="lightbox__bar">
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
           <Expand size={13} /> {current + 1} / {images.length}

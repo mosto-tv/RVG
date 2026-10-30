@@ -52,7 +52,7 @@ export function BookingForm({ property = null, onDone }) {
         propertyTitle: property?.title || selected?.title || '',
       });
       setConfirmation(receipt);
-      push('Viewing request received.', 'success');
+      push('Application received.', 'success');
       onDone?.(receipt);
     } catch (err) {
       if (err.fields) setErrors(err.fields);
@@ -66,13 +66,13 @@ export function BookingForm({ property = null, onDone }) {
     return (
       <div className="form-alert form-alert--success" style={{ display: 'grid', gap: '0.5rem' }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700 }}>
-          <CheckCircle2 size={17} /> Viewing requested
+          <CheckCircle2 size={17} /> Application received
         </span>
         <span>
           {confirmation.message} Your reference is <b>{confirmation.reference}</b>.
         </span>
         <button type="button" className="link-arrow" onClick={() => setConfirmation(null)}>
-          Arrange another viewing
+          Submit another application
         </button>
       </div>
     );
@@ -130,7 +130,7 @@ export function BookingForm({ property = null, onDone }) {
 
         <div className="field">
           <label className="field__label" htmlFor="bk-property">
-            Residence
+            Feature of interest
           </label>
           <select
             id="bk-property"
@@ -139,7 +139,7 @@ export function BookingForm({ property = null, onDone }) {
             onChange={update('propertyId')}
             disabled={Boolean(property)}
           >
-            <option value="">Any residence / general tour</option>
+            <option value="">Any feature / general application</option>
             {(property ? [{ id: property.id, title: `${property.title} — ${property.city}` }] : options).map(
               (item) => (
                 <option key={item.id} value={item.id}>
@@ -152,7 +152,7 @@ export function BookingForm({ property = null, onDone }) {
 
         <div className="field">
           <label className="field__label" htmlFor="bk-date">
-            Preferred date
+            Interview date
           </label>
           <input
             id="bk-date"
@@ -168,7 +168,7 @@ export function BookingForm({ property = null, onDone }) {
 
         <div className="field">
           <label className="field__label" htmlFor="bk-time">
-            Preferred time
+            Interview time
           </label>
           <select
             id="bk-time"
@@ -196,7 +196,7 @@ export function BookingForm({ property = null, onDone }) {
             className="field__control"
             value={values.message}
             onChange={update('message')}
-            placeholder="Anything we should prepare before your visit?"
+            placeholder="Your roleplay experience, previous cities and friends applying with you."
           />
         </div>
       </div>
@@ -204,9 +204,9 @@ export function BookingForm({ property = null, onDone }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1.2rem', flexWrap: 'wrap' }}>
         <button type="submit" className="btn" disabled={busy}>
           {busy ? <span className="btn__spinner" /> : <CalendarCheck size={15} />}
-          {busy ? 'Sending' : 'Request viewing'}
+          {busy ? 'Sending' : 'Submit application'}
         </button>
-        <span className="form-note">Private viewings are confirmed within one business day.</span>
+        <span className="form-note">Applications are reviewed within one business day.</span>
       </div>
     </form>
   );
@@ -219,7 +219,7 @@ export function ContactForm() {
     name: user?.name || '',
     email: user?.email || '',
     phone: '',
-    subject: 'Buying a residence',
+    subject: 'Joining the server',
     message: '',
   });
   const [errors, setErrors] = useState({});
@@ -259,7 +259,7 @@ export function ContactForm() {
         <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700 }}>
           <CheckCircle2 size={17} /> Message received
         </span>
-        <span>An advisor will reply within one business day. For urgent matters call +971 4 555 0100.</span>
+        <span>Our staff team will reply within one business day. For anything urgent, join our Discord.</span>
         <button type="button" className="link-arrow" onClick={() => setSent(false)}>
           Send another message
         </button>
@@ -299,7 +299,7 @@ export function ContactForm() {
         </div>
         <div className="field">
           <label className="field__label" htmlFor="ct-phone">
-            Phone (optional)
+            Discord username (optional)
           </label>
           <input id="ct-phone" className="field__control" value={values.phone} onChange={update('phone')} />
         </div>
@@ -308,11 +308,11 @@ export function ContactForm() {
             I am interested in
           </label>
           <select id="ct-subject" className="field__control" value={values.subject} onChange={update('subject')}>
-            <option>Buying a residence</option>
-            <option>Selling a residence</option>
-            <option>Private viewings</option>
-            <option>Investment advisory</option>
-            <option>Press &amp; partnerships</option>
+            <option>Joining the server</option>
+            <option>Whitelist applications</option>
+            <option>Reporting a player</option>
+            <option>Business partnerships</option>
+            <option>Press &amp; content creators</option>
           </select>
         </div>
         <div className="field form-grid--full">
@@ -325,7 +325,7 @@ export function ContactForm() {
             value={values.message}
             onChange={update('message')}
             aria-invalid={Boolean(errors.message)}
-            placeholder="Tell us about the residence you are looking for."
+            placeholder="Tell us about the character or the city you are looking for."
           />
           {errors.message && <span className="field__error">{errors.message}</span>}
         </div>

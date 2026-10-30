@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Building2, Crown, Landmark, Waves, Store, Cpu } from 'lucide-react';
+import { Briefcase, Store, Car, Swords, Flag, Sparkles } from 'lucide-react';
 
 const ICONS = {
-  Villas: Building2,
-  Penthouses: Crown,
-  Apartments: Landmark,
-  'Waterfront Homes': Waves,
-  'Commercial Spaces': Store,
-  'Smart Homes': Cpu,
+  Careers: Briefcase,
+  Businesses: Store,
+  Vehicles: Car,
+  'Crime & Heists': Swords,
+  Racing: Flag,
+  Lifestyle: Sparkles,
 };
 
-const ORDER = ['Villas', 'Penthouses', 'Apartments', 'Waterfront Homes', 'Commercial Spaces', 'Smart Homes'];
+const ORDER = ['Careers', 'Businesses', 'Vehicles', 'Crime & Heists', 'Racing', 'Lifestyle'];
 
 export { ORDER as CATEGORY_ORDER, ICONS as CATEGORY_ICONS };
 
@@ -31,7 +31,7 @@ export default function CategoryGrid({ types = [], activeType = '' }) {
               <Icon size={19} strokeWidth={1.4} />
             </span>
             <span className="category-card__name">{name}</span>
-            <span className="category-card__count">{count} listings</span>
+            <span className="category-card__count">{count} features</span>
           </Link>
         );
       })}

@@ -3,11 +3,17 @@
 ## What lives here
 - The repository root is **RVG Gateway**, a Python/FastAPI proxy panel (`main.py`, `pages.py`,
   `protocol/`). It is unrelated to the app described below and is left untouched.
-- **`velora/`** is a self-contained product that runs independently: the VELORA ESTATES luxury
-  real-estate site plus the RIA ROLEPLAY Tebex store.
+- **`velora/`** is a self-contained product that runs independently: the RIA ROLEPLAY FiveM
+  community site (server features, staff, roadmap) plus the Tebex store.
   - `velora/` — React 18 + Vite 6 frontend (dev server on 5173, proxied to host port 3000).
   - `velora/server/` — Node 24 Express API on 4000, using the built-in `node:sqlite` module
     (no native build step, no ORM). Catalogue data is plain ES modules in `velora/server/data/`.
+  - The catalogue is **server content, not real estate**. `data/properties.js` keeps the original
+    field names because routes, filters and CSS are built on them; read them as:
+    `beds` = players, `baths` = session minutes, `size` = rep reward, `price` = in-game payout,
+    `city` = district, `neighborhood` = area, `country` = region, `agent` = staff slug.
+    `data/locations.js` slugs (`dubai`, `maldives`, …) are grid-area CSS hooks — keep them, but its
+    `city` values must match `data/properties.js` so district links filter correctly.
 
 ## Running it
 ```bash
@@ -28,7 +34,9 @@ docker compose -f docker-compose.base44.yml logs -f api web
 - **Edits under `velora/server/` need an API restart** — the API runs without a file watcher:
   `docker compose -f docker-compose.base44.yml restart api`. Frontend edits hot-reload.
 - SQLite lives in the `velora-data` volume. Deleting it resets accounts, orders and deliveries;
-  the store catalogue is re-seeded on first boot only when `store_products` is empty.
+  the store catalogue is re-seeded on first boot only when `store_products` is empty, so a copy
+  change in `server/data/storeProducts.js` does **not** reach an existing database — update the
+  row too (a one-off script in `/tmp`, run inside the `api` container).
 - The seed catalogue carries **catalog prices**. Live Tebex prices are imported by
   `POST /api/admin/sync-tebex` (requires `TEBEX_SECRET_KEY`); until then `tebex_package_id` is
   null and checkout refuses to open rather than pretending to charge.
@@ -67,7 +75,7 @@ docker compose -f docker-compose.base44.yml logs -f api web
 
 ## How to verify
 - `curl -s localhost:3000/api/health` → `{"ok":true,...}` plus Tebex configuration state.
-- Filters: `/api/properties?location=Dubai&type=Penthouses&minPrice=2000000&sort=price-desc`.
-- Search: `/api/properties?q=mayfair`. Favourites need a session cookie.
+- Filters: `/api/properties?location=Sandy%20Shores&type=Racing&minPrice=5000&sort=price-desc`.
+- Search: `/api/properties?q=vinewood`. Favourites need a session cookie.
 - Clean test data by deleting only records you created (a test signup, its favourites and
   sessions). Removing the only account makes the next signup an administrator again.

@@ -1,41 +1,41 @@
-import { BadgeCheck, Headset, TrendingUp, Box, Lock, Gem, ShieldCheck, KeyRound } from 'lucide-react';
+import { BadgeCheck, Headset, TrendingUp, Code2, Lock, Gem, ShieldCheck, KeyRound } from 'lucide-react';
 
 export const VALUES = [
   {
-    title: 'Verified Listings',
-    text: 'Every property is carefully reviewed, title-checked and verified before it reaches the collection.',
+    title: 'Verified Community',
+    text: 'Every applicant is reviewed by hand, so the people you meet are here to roleplay — not to troll.',
     icon: BadgeCheck,
   },
   {
-    title: 'Expert Agents',
-    text: 'Experienced professionals with deep local market knowledge across five global cities.',
+    title: 'Expert Staff',
+    text: 'An experienced team online across time zones, with clear escalation and real accountability.',
     icon: Headset,
   },
   {
-    title: 'Smart Investments',
-    text: 'Carefully selected opportunities with genuine long-term capital potential.',
+    title: 'Balanced Economy',
+    text: 'Prices, wages and payouts tuned so a night of honest work still means something.',
     icon: TrendingUp,
   },
   {
-    title: '3D Virtual Tours',
-    text: 'Explore properties through immersive virtual walkthroughs before you travel.',
-    icon: Box,
+    title: 'Custom Scripts',
+    text: 'Purpose-built systems for jobs, businesses and crime — not a stock framework with a new logo.',
+    icon: Code2,
   },
   {
-    title: 'Secure Transactions',
-    text: 'Professional legal and escrow guidance throughout the purchasing process.',
+    title: 'Secure & Monitored',
+    text: 'Anti-cheat, logging and active moderation on every session, around the clock.',
     icon: Lock,
   },
   {
-    title: 'Bespoke Service',
-    text: 'Personalised assistance tailored to every client, from search to keys.',
+    title: 'Bespoke Roleplay',
+    text: 'Story-first design: fewer scripted set pieces, more room for the character you want to play.',
     icon: Gem,
   },
 ];
 
 export const EXTRA_VALUES = [
-  { title: 'Security Investments', text: 'Ownership structures reviewed by counsel in each jurisdiction.', icon: ShieldCheck },
-  { title: 'Discreet Access', text: 'Off-market residences shared privately with qualified buyers.', icon: KeyRound },
+  { title: 'Fair Play', text: 'No pay-to-win. Store purchases never grant in-game advantage.', icon: ShieldCheck },
+  { title: 'Private Whitelist', text: 'Applications reviewed privately, with a direct line to staff.', icon: KeyRound },
 ];
 
 export function ValueList({ items = VALUES }) {

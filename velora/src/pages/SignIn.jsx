@@ -4,7 +4,7 @@ import { ArrowRight, LogIn } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 
-const IMAGE = 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=85';
+const IMAGE = 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1400&q=85';
 
 export default function SignIn() {
   const { user, signIn } = useAuth();
@@ -35,18 +35,18 @@ export default function SignIn() {
   return (
     <div className="auth-page">
       <div className="auth-page__media">
-        <img src={IMAGE} alt="Interior of a Velora residence" />
+        <img src={IMAGE} alt="Los Santos skyline at golden hour" />
         <div className="auth-page__quote">
-          <p>“The house found us before we knew what we were looking for.”</p>
-          <span>Private client, London</span>
+          <p>“Three years in and the city still surprises me.”</p>
+          <span>Whitelisted player, Los Santos</span>
         </div>
       </div>
       <div className="auth-page__form">
         <div className="auth-card">
-          <span className="eyebrow">Client access</span>
+          <span className="eyebrow">Player access</span>
           <h1>Sign in</h1>
           <p className="lede" style={{ marginTop: '-0.4rem' }}>
-            Your saved residences, viewing requests and RIA store purchases in one place.
+            Your saved features, whitelist applications and RIA store purchases in one place.
           </p>
           <form onSubmit={submit} noValidate style={{ display: 'grid', gap: '0.9rem' }}>
             <div className="field">
@@ -84,7 +84,7 @@ export default function SignIn() {
             </button>
           </form>
           <p className="auth-switch">
-            New to Velora? <Link to="/signup">Create an account</Link>
+            New to Ria? <Link to="/signup">Create an account</Link>
           </p>
           <Link to="/store" className="link-arrow" style={{ justifyContent: 'center' }}>
             RIA store <ArrowRight size={13} />

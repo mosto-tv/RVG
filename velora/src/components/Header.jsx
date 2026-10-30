@@ -7,17 +7,17 @@ import { useCart } from '../context/CartContext.jsx';
 
 const NAV = [
   { to: '/', label: 'Home' },
-  { to: '/listings', label: 'Listings' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/agents', label: 'Agents' },
+  { to: '/listings', label: 'Features' },
+  { to: '/projects', label: 'Roadmap' },
+  { to: '/agents', label: 'Staff' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ];
 
 export const Brand = ({ light = false, onClick }) => (
-  <Link to="/" className={`brand${light ? ' brand--light' : ''}`} onClick={onClick} aria-label="VELORA ESTATES home">
-    <span className="brand__main">VELORA</span>
-    <span className="brand__sub">ESTATES</span>
+  <Link to="/" className={`brand${light ? ' brand--light' : ''}`} onClick={onClick} aria-label="RIA ROLEPLAY home">
+    <span className="brand__main">RIA</span>
+    <span className="brand__sub">ROLEPLAY</span>
   </Link>
 );
 
@@ -117,7 +117,7 @@ export default function Header() {
             <button
               className="icon-btn"
               onClick={() => setSearchOpen((open) => !open)}
-              aria-label="Search residences"
+              aria-label="Search features"
               aria-expanded={searchOpen}
             >
               <Search size={18} />
@@ -136,7 +136,7 @@ export default function Header() {
               </button>
             )}
             <Link to="/book-visit" className="btn btn--gold btn--sm header__cta">
-              Book a Visit
+              Apply Now
             </Link>
             <button
               className="icon-btn hamburger"
@@ -158,16 +158,16 @@ export default function Header() {
                   ref={inputRef}
                   value={term}
                   onChange={(event) => setTerm(event.target.value)}
-                  placeholder="Search by city, neighbourhood or residence name"
-                  aria-label="Search properties"
+                  placeholder="Search by district, category or feature name"
+                  aria-label="Search features"
                 />
                 <button type="submit" className="btn btn--sm">
                   Search
                 </button>
               </form>
-              {searching && <p className="form-note">Searching the collection…</p>}
+              {searching && <p className="form-note">Searching the city…</p>}
               {!searching && term.trim().length >= 2 && results.length === 0 && (
-                <p className="form-note">No residences match “{term.trim()}”. Try a city or property type.</p>
+                <p className="form-note">No features match “{term.trim()}”. Try a district or category.</p>
               )}
               {results.length > 0 && (
                 <div className="search-flyout__results">
@@ -177,7 +177,7 @@ export default function Header() {
                       <span>
                         <span className="search-result__title">{item.title}</span>
                         <span className="search-result__meta">
-                          {item.city} · {priceFmt(item.price)} · {item.beds} beds
+                          {item.city} · {priceFmt(item.price)} payout · {item.beds} players
                         </span>
                       </span>
                       <ArrowRight size={15} style={{ marginLeft: 'auto', color: 'var(--muted)' }} />
@@ -187,7 +187,7 @@ export default function Header() {
               )}
               {term.trim().length < 2 && (
                 <p className="form-note">
-                  Try “Dubai”, “Penthouse”, “Mayfair” or a residence name — results update as you type.
+                  Try “Vinewood”, “Racing”, “Careers” or a feature name — results update as you type.
                 </p>
               )}
             </div>
@@ -209,7 +209,7 @@ export default function Header() {
           </NavLink>
           <div className="mobile-nav__footer">
             <Link to="/book-visit" className="btn btn--gold btn--block" onClick={() => setMenuOpen(false)}>
-              Book a Visit
+              Apply Now
             </Link>
             <Link
               to={user ? '/account' : '/signin'}
@@ -219,7 +219,7 @@ export default function Header() {
               {user ? 'My Account' : 'Sign In'}
             </Link>
             <p className="form-note" style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
-              <MapPin size={14} /> Dubai · London · Miami · Monaco · New York
+              <MapPin size={14} /> Los Santos · Sandy Shores · Paleto Bay · Grapeseed · Cayo Perico
             </p>
           </div>
         </div>

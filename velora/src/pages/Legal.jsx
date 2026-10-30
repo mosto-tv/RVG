@@ -4,15 +4,15 @@ const CONTENT = {
   privacy: {
     title: 'Privacy Policy',
     intro:
-      'Velora Estates collects only the information required to answer an enquiry, arrange a viewing or deliver a store purchase. This policy explains what we hold and why.',
+      'Ria Roleplay collects only the information required to answer a ticket, review a whitelist application or deliver a store purchase. This policy explains what we hold and why.',
     sections: [
       {
         heading: 'What we collect',
-        body: 'Name, email address, telephone number and the residences you have saved or asked to view. For RIA ROLEPLAY store purchases we also hold your FiveM identifier, so that entitlements can be delivered to the correct player.',
+        body: 'Name, email address, telephone or Discord handle and the features you have saved or applied for. For RIA ROLEPLAY store purchases we also hold your FiveM identifier, so that entitlements can be delivered to the correct player.',
       },
       {
         heading: 'How it is used',
-        body: 'To respond to enquiries, confirm viewings, keep a private wishlist for your account, and — for store purchases — to deliver the package you bought and to keep a transaction record. We do not sell your data.',
+        body: 'To respond to enquiries, schedule whitelist interviews, keep a private list for your account, and — for store purchases — to deliver the package you bought and to keep a transaction record. We do not sell your data.',
       },
       {
         heading: 'Payments',
@@ -20,29 +20,30 @@ const CONTENT = {
       },
       {
         heading: 'Your rights',
-        body: 'You may request a copy of the data held about you, ask for it to be corrected, or ask for your account to be deleted. Write to private@veloraestates.com and we will respond within 30 days.',
+        body: 'You may request a copy of the data held about you, ask for it to be corrected, or ask for your account to be deleted. Write to support@riaroleplay.com and we will respond within 30 days.',
       },
     ],
   },
   terms: {
     title: 'Terms & Conditions',
-    intro: 'These terms govern use of this website and the advisory services offered by Velora Estates.',
+    intro:
+      'These terms govern use of this website, the Ria Roleplay FiveM server and the community services offered here.',
     sections: [
       {
-        heading: 'Property information',
-        body: 'Residence details, measurements and imagery are provided in good faith for guidance. Guide prices and availability are subject to change and do not constitute an offer or contract.',
+        heading: 'Server information',
+        body: 'Feature descriptions, payouts, session lengths and availability are provided in good faith for guidance. Systems change between updates and nothing on this site constitutes a guarantee of access, earnings or uptime.',
       },
       {
-        heading: 'Viewings',
-        body: 'Viewings are arranged by appointment and are accompanied. Requests submitted through this site are confirmed by an advisor; a request alone does not create a booking.',
+        heading: 'Whitelist applications',
+        body: 'Applications are reviewed by staff and followed by a voice interview. A submitted application is not confirmation of whitelist, and access may be withheld or withdrawn under the community rules.',
       },
       {
         heading: 'Accounts',
-        body: 'You are responsible for keeping your account credentials confidential. Saved residences and viewing history are private to your account.',
+        body: 'You are responsible for keeping your account credentials confidential. Saved features and application history are private to your account.',
       },
       {
         heading: 'Liability',
-        body: 'Nothing on this site constitutes legal, tax or investment advice. Independent professional advice should be obtained before any acquisition.',
+        body: 'Nothing on this site constitutes legal or financial advice. Server access is a licence to play under the community rules and can be withdrawn independently of any purchase.',
       },
     ],
   },
@@ -96,8 +97,8 @@ export default function Legal() {
       ))}
       <p className="form-note" style={{ marginTop: '2rem' }}>
         Last updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}. Questions:{' '}
-        <a href="mailto:private@veloraestates.com" style={{ color: 'var(--emerald)' }}>
-          private@veloraestates.com
+        <a href="mailto:support@riaroleplay.com" style={{ color: 'var(--emerald)' }}>
+          support@riaroleplay.com
         </a>
         .
       </p>
