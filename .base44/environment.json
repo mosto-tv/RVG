@@ -1,0 +1,27 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/api/health",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d --build",
+  "secrets": [
+    {
+      "name": "TEBEX_PUBLIC_TOKEN",
+      "description": "RIA ROLEPLAY Tebex headless/public token (Tebex dashboard → Developers → Headless API). Required for checkout to open.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "TEBEX_SECRET_KEY",
+      "description": "Tebex plugin API secret (Tebex dashboard → Developers → Plugin API). Used to sync packages and to re-verify payments server-side.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "TEBEX_WEBHOOK_SECRET",
+      "description": "Tebex webhook secret used to verify the X-Tebex-Signature HMAC on payment notifications.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "FIVEM_DELIVERY_WEBHOOK_URL",
+      "description": "Optional HTTPS endpoint on the RIA FiveM server that applies a purchased entitlement. Without it, deliveries are parked as pending for an administrator.",
+      "requiredAtBoot": false
+    }
+  ]
+}

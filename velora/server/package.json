@@ -1,0 +1,18 @@
+{
+  "name": "velora-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "VELORA ESTATES + RIA ROLEPLAY API (properties, accounts, Tebex store)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.19.2"
+  }
+}

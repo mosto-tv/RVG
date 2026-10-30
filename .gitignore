@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# VELORA ESTATES workspace (React + Vite frontend, Node API)
+velora/node_modules/
+velora/dist/
+velora/server/node_modules/
+velora/server/data/
+velora/server/.data/
